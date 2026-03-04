@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 require "open3"
+require "net/http"
+require "uri"
+require "json"
 
 class GenerateAssetJob < ApplicationJob
   queue_as :default

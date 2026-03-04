@@ -10,6 +10,8 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <memory>
+#include <functional>
 
 #include "httplib.h"
 #include <vips/vips8>
