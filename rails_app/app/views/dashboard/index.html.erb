@@ -29,6 +29,7 @@
       <% @recent_jobs.each do |job| %>
         <li>
           <strong><%= job.prompt.truncate(80) %></strong>
+          — <%= link_to "View job", job_path(job) %>
           — <span><%= job.status %></span>
           <% if job.status == "failed" && job.error_message.present? %>
             — <span role="alert"><%= job.error_message.truncate(100) %></span>

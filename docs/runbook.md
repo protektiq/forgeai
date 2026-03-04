@@ -15,7 +15,17 @@ To verify prompt submission produces an image stored by Rails and visible in the
 3. **Start Rails** and **Sidekiq** (Redis must be running): In `rails_app/`, run `bundle exec rails s` in one terminal and `bundle exec sidekiq` in another.
 4. In the browser: sign in, open the dashboard, submit a prompt, click Generate. Refresh until the job status is completed, then open "View asset" or the Asset library; the new asset should appear with file and generator metadata (seed, model).
 
-## Per-service commands
+## 10-prompt batch (exit criteria)
+
+To verify the demo runs a small batch without silent failures:
+
+1. **Start all services** (Rails, Sidekiq, Python gen; optionally C++ media, Rust index, dotnet_api).
+2. **Rate limit:** Prompt creation (POST `/api/v1/generate` and POST `/dashboard`) is limited to **30 requests per minute per IP** by default. For a 10-prompt batch, stay under that limit or set `RACK_ATTACK_THROTTLE_LIMIT=40` (or higher) in the Rails env before starting.
+3. **Run 10 prompts** either:
+   - From the dashboard: submit 10 different prompts (one at a time or in quick succession), then refresh; or
+   - Via API: `for i in 1 2 3 4 5 6 7 8 9 10; do curl -s -X POST http://localhost:3000/api/v1/generate -H "Content-Type: application/json" -H "X-Internal-Api-Key: YOUR_KEY" -d "{\"prompt\":\"test prompt $i\"}"; done` (omit the header if `RAILS_INTERNAL_API_KEY` is not set).
+4. **Check results:** Use the dashboard "Recent jobs" and open **View job** on any job to see full status and error message. Failed jobs show the full error on the Job details page (`/jobs/:id`). API clients can poll `GET /api/v1/jobs/:id` for status and `error_message`.
+5. **Correlation in logs:** Each job has a `correlation_id` (from the request that created it). Rails logs it at job start; outbound calls to Python, C++, and Rust send `X-Correlation-Id`. Grep logs by that id to trace a single job across services.
 
 ### Rails app (`rails_app/`)
 
@@ -28,8 +38,7 @@ bundle exec rails s
 - **Port:** 3000  
 - **Logs:** stdout; also `rails_app/log/development.log` if present  
 - **Common issues:** Port 3000 in use → change with `-p 3001` or stop the other process.
-
-### Python gen (`python_gen/`)
+- **Rate limiting:** Prompt creation (dashboard and API) is throttled per IP (default 30/min). Set `RACK_ATTACK_THROTTLE_LIMIT` to adjust. See [.env.example](../.env.example) for timeout/retry and rate-limit env vars. (`python_gen/`)
 
 ```bash
 cd python_gen

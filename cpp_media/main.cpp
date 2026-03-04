@@ -206,6 +206,12 @@ int main(int argc, char* argv[]) {
   svr.Post("/process", [](const httplib::Request& req, httplib::Response& res) {
     res.set_header("Content-Type", "application/json");
 
+    std::string corr = req.get_header_value("X-Correlation-Id");
+    if (corr.empty()) corr = req.get_header_value("X-Request-Id");
+    if (!corr.empty()) {
+      std::cerr << "[cpp_media] correlation_id=" << corr << " processing /process" << std::endl;
+    }
+
     ProcessParams params;
     const unsigned char* image_data = nullptr;
     size_t image_size = 0;

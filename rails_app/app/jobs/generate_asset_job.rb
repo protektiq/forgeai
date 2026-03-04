@@ -18,6 +18,18 @@ class GenerateAssetJob < ApplicationJob
   MAX_ERROR_MESSAGE_LENGTH = 1000
   ALLOWED_IMAGE_CONTENT_TYPES = %w[image/jpeg image/png].freeze
 
+  # Errors that warrant a retry (transient network/connection issues)
+  RETRYABLE_HTTP_ERRORS = [
+    Timeout::Error,
+    Net::OpenTimeout,
+    Net::ReadTimeout,
+    Errno::ECONNRESET,
+    Errno::ECONNREFUSED,
+    Errno::ETIMEDOUT,
+    SocketError,
+    EOFError
+  ].freeze
+
   discard_on(ActiveRecord::RecordNotFound) {}
 
   def perform(generation_job_id)
@@ -25,6 +37,7 @@ class GenerateAssetJob < ApplicationJob
     return unless job
 
     job.update!(status: "running", started_at: Time.current, error_message: nil)
+    Rails.logger.info("[GenerateAssetJob] job_id=#{job.id} correlation_id=#{job.correlation_id}")
 
     image_body = call_python_generator(job)
     return if job.reload.status == "failed"
@@ -46,17 +59,45 @@ class GenerateAssetJob < ApplicationJob
 
   private
 
+  def set_correlation_header(req, job)
+    req["X-Correlation-Id"] = job.correlation_id if job.correlation_id.present?
+  end
+
+  def with_http_retries(job, service_name, max_retries)
+    last_error = nil
+    (max_retries + 1).times do |attempt|
+      return yield
+    rescue *RETRYABLE_HTTP_ERRORS => e
+      last_error = e
+      Rails.logger.warn("[#{service_name}] attempt #{attempt + 1}/#{max_retries + 1} failed: #{e.class} #{e.message}")
+      raise if attempt == max_retries
+      sleep(0.5 * (attempt + 1)) # brief backoff
+    end
+  rescue *RETRYABLE_HTTP_ERRORS => e
+    mark_failed(job, "#{service_name} connection error after #{max_retries + 1} attempts: #{e.message}")
+    nil
+  end
+
   def call_python_generator(job)
     url = URI.join(Rails.application.config.generator_url, GENERATOR_PATH)
+    open_t = Rails.application.config.generator_open_timeout
+    read_t = Rails.application.config.generator_read_timeout
+    max_retries = Rails.application.config.generator_retries
+
     req = Net::HTTP::Post.new(url)
     req["Content-Type"] = "application/json"
     req["Accept"] = "application/json"
     req.body = { prompt: job.prompt }.to_json
+    set_correlation_header(req, job)
 
-    res = nil
-    Net::HTTP.start(url.host, url.port, open_timeout: 10, read_timeout: 60) do |http|
-      res = http.request(req)
+    res = with_http_retries(job, "Generator", max_retries) do
+      r = nil
+      Net::HTTP.start(url.host, url.port, open_timeout: open_t, read_timeout: read_t) do |http|
+        r = http.request(req)
+      end
+      r
     end
+    return nil if res.nil?
 
     unless res.is_a?(Net::HTTPSuccess)
       mark_failed(job, "Generator returned #{res.code}: #{res.message}")
@@ -166,15 +207,24 @@ class GenerateAssetJob < ApplicationJob
       operations: "thumbnail,resize"
     }.to_json
 
+    open_t = Rails.application.config.media_open_timeout
+    read_t = Rails.application.config.media_read_timeout
+    max_retries = Rails.application.config.media_retries
+
     req = Net::HTTP::Post.new(process_url)
     req["Content-Type"] = "application/json"
     req["Accept"] = "application/json"
     req.body = body
+    set_correlation_header(req, job)
 
-    res = nil
-    Net::HTTP.start(process_url.host, process_url.port, open_timeout: 10, read_timeout: 60) do |http|
-      res = http.request(req)
+    res = with_http_retries(job, "Media service", max_retries) do
+      r = nil
+      Net::HTTP.start(process_url.host, process_url.port, open_timeout: open_t, read_timeout: read_t) do |http|
+        r = http.request(req)
+      end
+      r
     end
+    return if res.nil?
 
     unless res.is_a?(Net::HTTPSuccess)
       mark_failed(job, "Media service returned #{res.code}: #{res.message}")
@@ -246,15 +296,24 @@ class GenerateAssetJob < ApplicationJob
       tags: []
     }.to_json
 
+    open_t = Rails.application.config.index_open_timeout
+    read_t = Rails.application.config.index_read_timeout
+    max_retries = Rails.application.config.index_retries
+
     req = Net::HTTP::Post.new(index_url)
     req["Content-Type"] = "application/json"
     req["Accept"] = "application/json"
     req.body = body
+    set_correlation_header(req, job)
 
-    res = nil
-    Net::HTTP.start(index_url.host, index_url.port, open_timeout: 10, read_timeout: 10) do |http|
-      res = http.request(req)
+    res = with_http_retries(job, "Index service", max_retries) do
+      r = nil
+      Net::HTTP.start(index_url.host, index_url.port, open_timeout: open_t, read_timeout: read_t) do |http|
+        r = http.request(req)
+      end
+      r
     end
+    return if res.nil?
 
     unless res.is_a?(Net::HTTPSuccess)
       mark_failed(job, "Index service returned #{res.code}: #{res.message}")

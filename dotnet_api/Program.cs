@@ -4,6 +4,8 @@ using System.Text.Json;
 
 const string ApiKeyHeader = "X-Api-Key";
 const string InternalApiKeyHeader = "X-Internal-Api-Key";
+const string CorrelationIdHeader = "X-Correlation-Id";
+const string RequestIdHeader = "X-Request-Id";
 const int PromptMaxLength = 10_000;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -54,6 +56,12 @@ app.MapGet("/health", () => Results.Ok(new { status = "ok", service = "dotnet_ap
 
 app.MapPost("/api/generate", async (HttpContext context, IHttpClientFactory httpClientFactory) =>
 {
+    var correlationId = context.Request.Headers[CorrelationIdHeader].FirstOrDefault()
+        ?? context.Request.Headers[RequestIdHeader].FirstOrDefault()
+        ?? Guid.NewGuid().ToString();
+    var logger = context.RequestServices.GetRequiredService<ILogger<Program>>();
+    logger.LogInformation("dotnet_api request correlation_id={CorrelationId} path={Path}", correlationId, context.Request.Path);
+
     GenerateRequest? body;
     try
     {
@@ -73,10 +81,12 @@ app.MapPost("/api/generate", async (HttpContext context, IHttpClientFactory http
 
     var rails = httpClientFactory.CreateClient("Rails");
     var payload = new StringContent(JsonSerializer.Serialize(new { prompt }), Encoding.UTF8, "application/json");
+    var request = new HttpRequestMessage(HttpMethod.Post, "api/v1/generate") { Content = payload };
+    request.Headers.TryAddWithoutValidation(CorrelationIdHeader, correlationId);
     HttpResponseMessage response;
     try
     {
-        response = await rails.PostAsync("api/v1/generate", payload);
+        response = await rails.SendAsync(request);
     }
     catch (HttpRequestException ex)
     {

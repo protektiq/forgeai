@@ -8,6 +8,7 @@ class DashboardController < ApplicationController
   def create
     @job = current_user.generation_jobs.build(job_params)
     @job.status = "queued"
+    @job.correlation_id = request.request_id.presence || SecureRandom.uuid
 
     if @job.save
       GenerateAssetJob.perform_later(@job.id)

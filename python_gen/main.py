@@ -9,6 +9,7 @@ Endpoints:
 """
 
 import base64
+import logging
 import re
 import secrets
 from io import BytesIO
@@ -16,6 +17,13 @@ from io import BytesIO
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import Response
 from pydantic import BaseModel, Field
+
+# ---------------------------------------------------------------------------
+# Logging
+# ---------------------------------------------------------------------------
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("python_gen")
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -135,6 +143,18 @@ app = FastAPI(
     description="Image generation service (Pillow placeholder MVP).",
     version="0.1.0",
 )
+
+
+@app.middleware("http")
+async def log_correlation_id(request: Request, call_next):
+    """Log X-Correlation-Id or X-Request-Id for request tracing."""
+    correlation_id = (
+        request.headers.get("X-Correlation-Id") or request.headers.get("X-Request-Id") or ""
+    )
+    if correlation_id:
+        logger.info("python_gen request correlation_id=%s path=%s", correlation_id, request.url.path)
+    response = await call_next(request)
+    return response
 
 
 @app.get("/health")

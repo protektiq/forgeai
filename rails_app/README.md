@@ -48,7 +48,7 @@ Clicking **Generate** on the dashboard creates a `GenerationJob` with status `qu
    - **CLI** (when `INDEX_SERVICE_COMMAND` is set and `INDEX_SERVICE_URL` is blank): runs the command with env `ASSET_ID`, `PROMPT` (no HTTP indexing)
 6. Marks the job `completed` or `failed` (with `error_message`)
 
-**Environment variables (optional):**
+**Environment variables (optional):** See the repo root [.env.example](../../.env.example) for a single reference of all env vars (Rails, dotnet_api, timeouts, retries, rate limit).
 
 | Variable | Default | Description |
 |----------|---------|-------------|
@@ -58,6 +58,10 @@ Clicking **Generate** on the dashboard creates a `GenerationJob` with status `qu
 | `MEDIA_SERVICE_COMMAND` | (blank) | Fallback: command to run for C++ post-processing when `CPP_MEDIA_URL` is not set; skipped if blank |
 | `INDEX_SERVICE_URL` | (blank) | Base URL of the Rust index HTTP service (e.g. `http://localhost:3132`). When set, the job POSTs to `/index` after each asset creation and the asset library search box uses GET `/search?q=...` to filter assets by prompt/metadata. |
 | `INDEX_SERVICE_COMMAND` | (blank) | Fallback: command to run for Rust indexing when `INDEX_SERVICE_URL` is not set; skipped if blank |
+| `GENERATOR_OPEN_TIMEOUT`, `GENERATOR_READ_TIMEOUT`, `GENERATOR_RETRIES` | 10, 60, 2 | Timeouts (seconds) and retry count for generator HTTP calls. |
+| `MEDIA_OPEN_TIMEOUT`, `MEDIA_READ_TIMEOUT`, `MEDIA_RETRIES` | 10, 60, 2 | Timeouts and retries for C++ media HTTP. |
+| `INDEX_OPEN_TIMEOUT`, `INDEX_READ_TIMEOUT`, `INDEX_RETRIES` | 10, 10, 2 | Timeouts and retries for Rust index HTTP. |
+| `RACK_ATTACK_THROTTLE_LIMIT` | 30 | Max prompt-create requests per IP per minute (dashboard and API). |
 
 The Python service must implement `POST /generate` returning image bytes (e.g. `Content-Type: image/png`). If the generator is not running or returns an error, the job is marked `failed` with an error message. When `CPP_MEDIA_URL` is set, start the cpp_media service (see `cpp_media/README.md`); the job will send the generated image there and attach the returned thumbnail to the Asset. The asset library displays thumbnails when attached; the asset detail page shows both the original image and the thumbnail. When `INDEX_SERVICE_URL` is set, start the Rust index service (see `rust_index/README.md`); the job will POST each new asset to `/index`, and the asset library search box will call GET `/search?q=...` to show matching assets. C++ CLI and Rust CLI steps are used only when their URL is not set but their command is set.
 
@@ -65,7 +69,8 @@ The Python service must implement `POST /generate` returning image bytes (e.g. `
 
 - **Root (/)** — Redirects to dashboard when signed in, or to sign-in when not.
 - **Sign up / Sign in** — Devise routes (e.g. `/users/sign_up`, `/users/sign_in`). After sign-in you are redirected to the dashboard.
-- **Dashboard** — Submit a prompt and click **Generate** to create a queued job and start the background pipeline. Recent jobs show status: queued, running, completed, or failed (with error message). Refresh the page to see updates.
+- **Dashboard** — Submit a prompt and click **Generate** to create a queued job and start the background pipeline. Recent jobs show status: queued, running, completed, or failed (with error message). Click **View job** to open the Job details page (full error when failed). Refresh the page to see updates.
+- **Job details** (`/jobs/:id`) — Full job status, prompt, timestamps, and full error message when failed; link to asset when completed.
 - **Asset library** — List of your assets (after completed generations). Use the search box to filter by prompt or metadata when the Rust index service is configured (`INDEX_SERVICE_URL`). When the C++ media service is used, thumbnails are shown for each asset when available; otherwise a "No preview" placeholder is shown.
 - **Asset detail** — View metadata, linked job prompt/status, the main image and thumbnail (when attached), and download the stored file.
 

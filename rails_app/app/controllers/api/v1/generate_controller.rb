@@ -16,7 +16,11 @@ module Api
           return
         end
 
-        job = api_user.generation_jobs.build(prompt: prompt, status: "queued")
+        job = api_user.generation_jobs.build(
+          prompt: prompt,
+          status: "queued",
+          correlation_id: request.request_id.presence || SecureRandom.uuid
+        )
         unless job.save
           render json: { error: job.errors.full_messages.join(", ") }, status: :unprocessable_entity
           return

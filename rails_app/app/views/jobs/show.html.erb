@@ -1,0 +1,28 @@
+<% content_for :title, "Job ##{@job.id} – ForgeAI" %>
+
+<div class="card">
+  <h1>Job #<%= @job.id %></h1>
+
+  <p><strong>Status:</strong> <span><%= @job.status %></span></p>
+  <p><strong>Created:</strong> <time datetime="<%= @job.created_at.iso8601 %>"><%= @job.created_at.strftime("%Y-%m-%d %H:%M") %></time></p>
+  <% if @job.started_at %>
+    <p><strong>Started:</strong> <time datetime="<%= @job.started_at.iso8601 %>"><%= @job.started_at.strftime("%Y-%m-%d %H:%M") %></time></p>
+  <% end %>
+  <% if @job.completed_at %>
+    <p><strong>Completed:</strong> <time datetime="<%= @job.completed_at.iso8601 %>"><%= @job.completed_at.strftime("%Y-%m-%d %H:%M") %></time></p>
+  <% end %>
+
+  <p><strong>Prompt:</strong></p>
+  <p class="job-prompt"><%= @job.prompt %></p>
+
+  <% if @job.status == "failed" && @job.error_message.present? %>
+    <p><strong>Error (full):</strong></p>
+    <pre class="job-error" role="alert"><%= @job.error_message %></pre>
+  <% end %>
+
+  <% if @job.status == "completed" && @job.asset.present? %>
+    <p><%= link_to "View asset", asset_path(@job.asset), class: "btn" %></p>
+  <% end %>
+
+  <p><%= link_to "Back to dashboard", dashboard_path %></p>
+</div>

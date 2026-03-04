@@ -1,6 +1,7 @@
 use axum::{
     extract::{Query, State},
     http::StatusCode,
+    middleware as axum_middleware,
     routing::{get, post},
     Json, Router,
 };
@@ -129,6 +130,22 @@ async fn health_handler() -> StatusCode {
     StatusCode::OK
 }
 
+async fn log_correlation_id(
+    req: axum::http::Request<axum::body::Body>,
+    next: axum::middleware::Next,
+) -> axum::response::Response {
+    let id = req
+        .headers()
+        .get("X-Correlation-Id")
+        .or_else(|| req.headers().get("X-Request-Id"))
+        .and_then(|v| v.to_str().ok())
+        .unwrap_or("");
+    if !id.is_empty() {
+        eprintln!("rust_index correlation_id={} path={}", id, req.uri().path());
+    }
+    next.run(req).await
+}
+
 #[tokio::main]
 async fn main() {
     let port: u16 = std::env::var("PORT")
@@ -146,6 +163,7 @@ async fn main() {
         .route("/index", post(index_handler))
         .route("/search", get(search_handler))
         .route("/health", get(health_handler))
+        .layer(axum_middleware::from_fn(log_correlation_id))
         .layer(cors)
         .with_state(AppState {
             index: Arc::default(),
