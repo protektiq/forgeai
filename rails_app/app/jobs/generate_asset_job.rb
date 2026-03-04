@@ -7,8 +7,9 @@ class GenerateAssetJob < ApplicationJob
 
   # Service contract (Python generator):
   #   POST ${GENERATOR_URL}/generate
+  #   Headers: Content-Type: application/json, Accept: application/json
   #   Body: JSON { "prompt": "..." }
-  #   Response: image bytes, Content-Type: image/png (or image/jpeg)
+  #   Response: JSON { "image_base64", "seed", "model" }; we decode base64 and store generator_metadata on Asset.
   # C++ media and Rust index: optional CLI commands via MEDIA_SERVICE_COMMAND, INDEX_SERVICE_COMMAND.
   #   Env passed: INPUT_PATH (path to image file), ASSET_ID, PROMPT. Skip step if command blank.
 
@@ -47,6 +48,7 @@ class GenerateAssetJob < ApplicationJob
     url = URI.join(Rails.application.config.generator_url, GENERATOR_PATH)
     req = Net::HTTP::Post.new(url)
     req["Content-Type"] = "application/json"
+    req["Accept"] = "application/json"
     req.body = { prompt: job.prompt }.to_json
 
     res = nil
@@ -59,31 +61,62 @@ class GenerateAssetJob < ApplicationJob
       return nil
     end
 
-    content_type = res["Content-Type"]&.split(";")&.first&.strip.presence || "image/png"
-    unless content_type.start_with?("image/")
-      mark_failed(job, "Generator returned non-image content type: #{content_type}")
+    content_type = res["Content-Type"]&.split(";")&.first&.strip.presence
+    unless content_type&.include?("application/json")
+      mark_failed(job, "Generator returned non-JSON content type: #{content_type || 'unknown'}")
       return nil
     end
 
-    [res.body, content_type]
+    data = begin
+      JSON.parse(res.body)
+    rescue JSON::ParserError => e
+      mark_failed(job, "Invalid JSON response: #{e.message}")
+      return nil
+    end
+
+    unless data.is_a?(Hash) && data["image_base64"].present? && data.key?("seed") && data["model"].present?
+      mark_failed(job, "Invalid JSON response: missing image_base64, seed, or model")
+      return nil
+    end
+
+    image_bytes = begin
+      Base64.strict_decode64(data["image_base64"].to_s)
+    rescue ArgumentError => e
+      mark_failed(job, "Invalid image_base64 in response: #{e.message}")
+      return nil
+    end
+
+    {
+      image_bytes: image_bytes,
+      content_type: "image/png",
+      seed: data["seed"],
+      model: data["model"].to_s
+    }
   rescue StandardError => e
     mark_failed(job, "Generator error: #{e.message}")
     nil
   end
 
-  def store_image(job, image_body_and_content_type)
-    return nil unless image_body_and_content_type
+  def store_image(job, payload)
+    return nil unless payload.is_a?(Hash) && payload[:image_bytes].present?
 
-    image_body, content_type = image_body_and_content_type
+    image_bytes = payload[:image_bytes]
+    content_type = payload[:content_type].presence || "image/png"
+    seed = payload[:seed]
+    model = payload[:model].to_s.presence
+
     asset = Asset.new(
       user_id: job.user_id,
       generation_job_id: job.id,
       filename: "generated-#{job.id}.png",
       content_type: content_type,
-      byte_size: image_body.bytesize
+      byte_size: image_bytes.bytesize
     )
+    asset.metadata = {}
+    asset.metadata["generator"] = { "seed" => seed, "model" => model } if seed.present? || model.present?
+
     asset.file.attach(
-      io: StringIO.new(image_body),
+      io: StringIO.new(image_bytes),
       filename: "generated-#{job.id}.png",
       content_type: content_type
     )

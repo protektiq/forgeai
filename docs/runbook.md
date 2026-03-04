@@ -6,6 +6,15 @@ How to build and run each service locally. For prerequisites and high-level "how
 
 Run each service in its own terminal from the corresponding folder. No startup order is required; services are independent. To run everything locally, open five terminals and run one service per terminal.
 
+### First end-to-end win (Rails ↔ Python)
+
+To verify prompt submission produces an image stored by Rails and visible in the asset library:
+
+1. **Start the Python generator** (e.g. in `python_gen/`): `uvicorn main:app --host 0.0.0.0 --port 5000`. Leave it running.
+2. **Set `GENERATOR_URL`** (optional): Default is `http://localhost:5000`. If python_gen runs on another host/port, set `GENERATOR_URL` in the environment before starting Rails/Sidekiq (e.g. `export GENERATOR_URL=http://localhost:5001`).
+3. **Start Rails** and **Sidekiq** (Redis must be running): In `rails_app/`, run `bundle exec rails s` in one terminal and `bundle exec sidekiq` in another.
+4. In the browser: sign in, open the dashboard, submit a prompt, click Generate. Refresh until the job status is completed, then open "View asset" or the Asset library; the new asset should appear with file and generator metadata (seed, model).
+
 ## Per-service commands
 
 ### Rails app (`rails_app/`)

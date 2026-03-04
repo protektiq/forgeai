@@ -18,6 +18,12 @@
     <p>No linked generation job.</p>
   <% end %>
 
+  <% if @asset.metadata.present? && @asset.metadata["generator"].present? %>
+    <% gen = @asset.metadata["generator"] %>
+    <p><strong>Seed:</strong> <%= gen["seed"] %></p>
+    <p><strong>Model:</strong> <%= gen["model"] %></p>
+  <% end %>
+
   <p>
     <%= link_to "Download", download_asset_path(@asset), class: "btn" %>
     <%= link_to "Back to library", assets_path %>
