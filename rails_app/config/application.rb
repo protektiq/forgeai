@@ -25,5 +25,10 @@ module RailsApp
     config.cpp_media_url = ENV.fetch("CPP_MEDIA_URL", "").strip.presence
     config.index_service_url = ENV.fetch("INDEX_SERVICE_URL", "").strip.presence
     config.index_service_command = ENV.fetch("INDEX_SERVICE_COMMAND", "")
+
+    # Internal API (used by dotnet_api): API user and optional key check
+    config.api_user_id = ENV.fetch("API_USER_ID", "").strip.presence
+    config.rails_internal_api_key = ENV.fetch("RAILS_INTERNAL_API_KEY", "").strip.presence
+    config.host_for_blob_urls = ENV.fetch("HOST_FOR_BLOB_URLS", "").strip.presence
   end
 end

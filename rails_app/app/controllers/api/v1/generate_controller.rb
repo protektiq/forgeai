@@ -1,0 +1,30 @@
+# frozen_string_literal: true
+
+module Api
+  module V1
+    # POST /api/v1/generate — creates a GenerationJob for the API user and enqueues GenerateAssetJob.
+    class GenerateController < BaseController
+      def create
+        prompt = params[:prompt].to_s.strip
+        if prompt.blank?
+          render json: { error: "prompt is required" }, status: :unprocessable_entity
+          return
+        end
+
+        if prompt.length > 10_000
+          render json: { error: "prompt is too long (maximum 10000 characters)" }, status: :unprocessable_entity
+          return
+        end
+
+        job = api_user.generation_jobs.build(prompt: prompt, status: "queued")
+        unless job.save
+          render json: { error: job.errors.full_messages.join(", ") }, status: :unprocessable_entity
+          return
+        end
+
+        GenerateAssetJob.perform_later(job.id)
+        render json: { job_id: job.id, status: "queued" }, status: :created
+      end
+    end
+  end
+end
