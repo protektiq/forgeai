@@ -7,6 +7,11 @@
       <% @assets.each do |asset| %>
         <li class="asset-card">
           <%= link_to asset_path(asset) do %>
+            <% if asset.thumbnail.attached? %>
+              <%= image_tag asset.thumbnail, alt: asset.filename.presence || "Asset ##{asset.id}", class: "asset-card-thumb", loading: "lazy" %>
+            <% else %>
+              <span class="asset-card-placeholder" aria-hidden="true">No preview</span>
+            <% end %>
             <strong><%= asset.filename.presence || "Asset ##{asset.id}" %></strong>
             <br>
             <time datetime="<%= asset.created_at.iso8601 %>"><%= asset.created_at.strftime("%Y-%m-%d %H:%M") %></time>

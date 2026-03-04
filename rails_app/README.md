@@ -40,7 +40,9 @@ Clicking **Generate** on the dashboard creates a `GenerationJob` with status `qu
 1. Marks the job `running`
 2. Calls the **Python generator** (HTTP POST to `GENERATOR_URL/generate` with `{ "prompt": "..." }`; expects image bytes in the response)
 3. Stores the image in Active Storage and creates an `Asset` linked to the job
-4. Optionally runs the **C++ media** command (env: `INPUT_PATH`, `ASSET_ID`, `PROMPT`)
+4. Optionally calls the **C++ media** service:
+   - **HTTP** (when `CPP_MEDIA_URL` is set): POSTs the image to `CPP_MEDIA_URL/process`, receives thumbnail (and optionally processed) in JSON, and attaches the thumbnail to the Asset. The asset library and asset detail pages then show thumbnails when present.
+   - **CLI** (when `MEDIA_SERVICE_COMMAND` is set and `CPP_MEDIA_URL` is blank): runs the command with env `INPUT_PATH`, `ASSET_ID`, `PROMPT` (no thumbnail attachment)
 5. Optionally runs the **Rust index** command (env: `ASSET_ID`, `PROMPT`)
 6. Marks the job `completed` or `failed` (with `error_message`)
 
@@ -50,18 +52,19 @@ Clicking **Generate** on the dashboard creates a `GenerationJob` with status `qu
 |----------|---------|-------------|
 | `REDIS_URL` | `redis://localhost:6379/0` | Redis connection for Sidekiq |
 | `GENERATOR_URL` | `http://localhost:5000` | Base URL of the Python generator service (e.g. Flask on port 5000) |
-| `MEDIA_SERVICE_COMMAND` | (blank) | Command to run for C++ post-processing; skipped if blank |
+| `CPP_MEDIA_URL` | (blank) | Base URL of the C++ media HTTP service (e.g. `http://localhost:8080`). When set, the job POSTs the image to `/process` and attaches the returned thumbnail to the Asset; thumbnails are shown in the asset library and asset detail. |
+| `MEDIA_SERVICE_COMMAND` | (blank) | Fallback: command to run for C++ post-processing when `CPP_MEDIA_URL` is not set; skipped if blank |
 | `INDEX_SERVICE_COMMAND` | (blank) | Command to run for Rust indexing; skipped if blank |
 
-The Python service must implement `POST /generate` returning image bytes (e.g. `Content-Type: image/png`). If the generator is not running or returns an error, the job is marked `failed` with an error message. C++ and Rust steps are skipped when their commands are not set.
+The Python service must implement `POST /generate` returning image bytes (e.g. `Content-Type: image/png`). If the generator is not running or returns an error, the job is marked `failed` with an error message. When `CPP_MEDIA_URL` is set, start the cpp_media service (see `cpp_media/README.md`); the job will send the generated image there and attach the returned thumbnail to the Asset. The asset library displays thumbnails when attached; the asset detail page shows both the original image and the thumbnail. C++ CLI and Rust steps are skipped when their commands/URLs are not set.
 
 ## Usage
 
 - **Root (/)** — Redirects to dashboard when signed in, or to sign-in when not.
 - **Sign up / Sign in** — Devise routes (e.g. `/users/sign_up`, `/users/sign_in`). After sign-in you are redirected to the dashboard.
 - **Dashboard** — Submit a prompt and click **Generate** to create a queued job and start the background pipeline. Recent jobs show status: queued, running, completed, or failed (with error message). Refresh the page to see updates.
-- **Asset library** — List of your assets (after completed generations).
-- **Asset detail** — View metadata, linked job prompt/status, and download the stored file.
+- **Asset library** — List of your assets (after completed generations). When the C++ media service is used, thumbnails are shown for each asset when available; otherwise a “No preview” placeholder is shown.
+- **Asset detail** — View metadata, linked job prompt/status, the main image and thumbnail (when attached), and download the stored file.
 
 ## Database
 

@@ -10,11 +10,13 @@ class GenerateAssetJob < ApplicationJob
   #   Headers: Content-Type: application/json, Accept: application/json
   #   Body: JSON { "prompt": "..." }
   #   Response: JSON { "image_base64", "seed", "model" }; we decode base64 and store generator_metadata on Asset.
-  # C++ media and Rust index: optional CLI commands via MEDIA_SERVICE_COMMAND, INDEX_SERVICE_COMMAND.
-  #   Env passed: INPUT_PATH (path to image file), ASSET_ID, PROMPT. Skip step if command blank.
-
+  # C++ media: optional HTTP (CPP_MEDIA_URL) or CLI (MEDIA_SERVICE_COMMAND).
+  #   HTTP: POST image to /process, attach returned thumbnail (and optionally processed) to Asset.
+  #   CLI: Env INPUT_PATH, ASSET_ID, PROMPT; no thumbnail attachment.
   GENERATOR_PATH = "/generate"
+  MEDIA_PROCESS_PATH = "/process"
   MAX_ERROR_MESSAGE_LENGTH = 1000
+  ALLOWED_IMAGE_CONTENT_TYPES = %w[image/jpeg image/png].freeze
 
   discard_on(ActiveRecord::RecordNotFound) {}
 
@@ -128,6 +130,12 @@ class GenerateAssetJob < ApplicationJob
   end
 
   def call_media_service(job, asset)
+    base_url = Rails.application.config.cpp_media_url.presence
+    if base_url.present?
+      call_media_service_http(job, asset, base_url)
+      return
+    end
+
     cmd = Rails.application.config.media_service_command.to_s.strip
     return if cmd.blank?
 
@@ -143,6 +151,67 @@ class GenerateAssetJob < ApplicationJob
         "PROMPT" => job.prompt.to_s
       )
     end
+  rescue StandardError => e
+    mark_failed(job, "Media service error: #{e.message}")
+  end
+
+  def call_media_service_http(job, asset, base_url)
+    process_url = URI.join(base_url, MEDIA_PROCESS_PATH)
+    image_bytes = asset.file.blob.download
+    body = {
+      image_base64: Base64.strict_encode64(image_bytes),
+      thumbnail_size: 256,
+      resize_max: 1200,
+      output_format: "jpg",
+      operations: "thumbnail,resize"
+    }.to_json
+
+    req = Net::HTTP::Post.new(process_url)
+    req["Content-Type"] = "application/json"
+    req["Accept"] = "application/json"
+    req.body = body
+
+    res = nil
+    Net::HTTP.start(process_url.host, process_url.port, open_timeout: 10, read_timeout: 60) do |http|
+      res = http.request(req)
+    end
+
+    unless res.is_a?(Net::HTTPSuccess)
+      mark_failed(job, "Media service returned #{res.code}: #{res.message}")
+      return
+    end
+
+    data = begin
+      JSON.parse(res.body)
+    rescue JSON::ParserError => e
+      mark_failed(job, "Media service invalid JSON: #{e.message}")
+      return
+    end
+
+    unless data.is_a?(Hash) && data["thumbnail_base64"].present? && data["thumbnail_content_type"].present?
+      mark_failed(job, "Media service response missing thumbnail_base64 or thumbnail_content_type")
+      return
+    end
+
+    thumb_ct = data["thumbnail_content_type"].to_s.strip
+    unless ALLOWED_IMAGE_CONTENT_TYPES.include?(thumb_ct)
+      mark_failed(job, "Media service invalid thumbnail_content_type: #{thumb_ct}")
+      return
+    end
+
+    thumb_bytes = begin
+      Base64.strict_decode64(data["thumbnail_base64"].to_s)
+    rescue ArgumentError => e
+      mark_failed(job, "Media service invalid thumbnail_base64: #{e.message}")
+      return
+    end
+
+    ext = thumb_ct.include?("png") ? "png" : "jpg"
+    asset.thumbnail.attach(
+      io: StringIO.new(thumb_bytes),
+      filename: "thumb-#{asset.id}.#{ext}",
+      content_type: thumb_ct
+    )
   rescue StandardError => e
     mark_failed(job, "Media service error: #{e.message}")
   end
