@@ -15,6 +15,6 @@ module RailsApp
   class Application < Rails::Application
     config.load_defaults 7.0
     config.api_only = false
-    config.root = __dir__
+    config.root = File.expand_path("..", __dir__)
   end
 end

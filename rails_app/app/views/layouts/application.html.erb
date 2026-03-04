@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= content_for?(:title) ? yield(:title) : "ForgeAI" %></title>
+    <style>
+      * { box-sizing: border-box; }
+      body { font-family: system-ui, sans-serif; margin: 0; padding: 0; line-height: 1.5; color: #1a1a1a; background: #f5f5f5; }
+      .navbar { background: #222; color: #eee; padding: 0.75rem 1.5rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+      .navbar a { color: #eee; text-decoration: none; }
+      .navbar a:hover { text-decoration: underline; }
+      .navbar .brand { font-weight: 600; margin-right: auto; }
+      .container { max-width: 900px; margin: 0 auto; padding: 1.5rem; }
+      .flash { padding: 0.75rem 1rem; margin-bottom: 1rem; border-radius: 4px; }
+      .flash.notice { background: #d4edda; color: #155724; }
+      .flash.alert { background: #f8d7da; color: #721c24; }
+      form label { display: block; margin-bottom: 0.25rem; font-weight: 500; }
+      form input[type="text"], form input[type="email"], form input[type="password"], form textarea { width: 100%; max-width: 400px; padding: 0.5rem; margin-bottom: 1rem; border: 1px solid #ccc; border-radius: 4px; }
+      form textarea { min-height: 100px; resize: vertical; }
+      button, .btn { padding: 0.5rem 1rem; border-radius: 4px; border: 1px solid #333; background: #333; color: #fff; cursor: pointer; font-size: 1rem; text-decoration: none; display: inline-block; }
+      button:hover, .btn:hover { background: #555; }
+      .card { background: #fff; padding: 1rem 1.5rem; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); margin-bottom: 1rem; }
+      .job-list { list-style: none; padding: 0; margin: 0; }
+      .job-list li { padding: 0.5rem 0; border-bottom: 1px solid #eee; }
+      .job-list li:last-child { border-bottom: none; }
+      .asset-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
+      .asset-card { background: #fff; padding: 1rem; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+      .asset-card a { color: #333; text-decoration: none; }
+      .asset-card a:hover { text-decoration: underline; }
+    </style>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+  </head>
+  <body>
+    <nav class="navbar" role="navigation" aria-label="Main">
+      <%= link_to "ForgeAI", root_path, class: "brand" %>
+      <% if user_signed_in? %>
+        <%= link_to "Dashboard", dashboard_path %>
+        <%= link_to "Asset library", assets_path %>
+        <%= button_to "Sign out", destroy_user_session_path, method: :delete, form: { style: "display:inline; margin:0;" }, class: "btn" %>
+        <span aria-hidden="true"><%= current_user.email %></span>
+      <% else %>
+        <%= link_to "Sign in", new_user_session_path %>
+        <%= link_to "Sign up", new_user_registration_path %>
+      <% end %>
+    </nav>
+
+    <% if flash[:notice] %>
+      <div class="container"><p class="flash notice" role="status"><%= flash[:notice] %></p></div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="container"><p class="flash alert" role="alert"><%= flash[:alert] %></p></div>
+    <% end %>
+
+    <main class="container" role="main">
+      <%= yield %>
+    </main>
+  </body>
+</html>

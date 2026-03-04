@@ -1,0 +1,20 @@
+<% content_for :title, "Asset library – ForgeAI" %>
+
+<div class="card">
+  <h1>Asset library</h1>
+  <% if @assets.any? %>
+    <ul class="asset-grid">
+      <% @assets.each do |asset| %>
+        <li class="asset-card">
+          <%= link_to asset_path(asset) do %>
+            <strong><%= asset.filename.presence || "Asset ##{asset.id}" %></strong>
+            <br>
+            <time datetime="<%= asset.created_at.iso8601 %>"><%= asset.created_at.strftime("%Y-%m-%d %H:%M") %></time>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No assets yet. Generation jobs do not create assets until the pipeline is connected.</p>
+  <% end %>
+</div>

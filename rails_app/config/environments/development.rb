@@ -5,4 +5,7 @@ Rails.application.configure do
   config.eager_load = false
   config.consider_all_requests_local = true
   config.server_timing = true
+
+  # Required for Devise mailer links (e.g. password reset)
+  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
 end

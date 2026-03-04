@@ -1,0 +1,40 @@
+<% content_for :title, "Dashboard – ForgeAI" %>
+
+<div class="card">
+  <h1>New generation</h1>
+  <p>Submit a prompt to create a generation job. No image generation runs yet; the job is only stored in the database.</p>
+
+  <%= form_with model: @job || GenerationJob.new, url: dashboard_path, method: :post, local: true do |f| %>
+    <label for="generation_job_prompt">Prompt</label>
+    <%= f.text_area :prompt, id: "generation_job_prompt", placeholder: "Describe what you want to generate…", required: true, maxlength: 10000 %>
+    <button type="submit">Create job</button>
+  <% end %>
+</div>
+
+<% if @job && @job.errors.any? %>
+  <div class="card" role="alert">
+    <p><strong>Could not create job:</strong></p>
+    <ul>
+      <% @job.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="card">
+  <h2>Recent jobs</h2>
+  <% if @recent_jobs.any? %>
+    <ul class="job-list">
+      <% @recent_jobs.each do |job| %>
+        <li>
+          <strong><%= job.prompt.truncate(80) %></strong>
+          — <span><%= job.status %></span>
+          — <time datetime="<%= job.created_at.iso8601 %>"><%= job.created_at.strftime("%Y-%m-%d %H:%M") %></time>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No jobs yet. Submit a prompt above.</p>
+  <% end %>
+</div>

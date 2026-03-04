@@ -1,0 +1,25 @@
+<% content_for :title, "Asset ##{@asset.id} – ForgeAI" %>
+
+<div class="card">
+  <h1><%= @asset.filename.presence || "Asset ##{@asset.id}" %></h1>
+
+  <p><strong>Created:</strong> <time datetime="<%= @asset.created_at.iso8601 %>"><%= @asset.created_at.strftime("%Y-%m-%d %H:%M") %></time></p>
+
+  <% if @asset.generation_job %>
+    <p><strong>Prompt:</strong> <%= @asset.generation_job.prompt %></p>
+    <p><strong>Job status:</strong> <%= @asset.generation_job.status %></p>
+    <% if @asset.generation_job.completed_at %>
+      <p><strong>Completed:</strong> <time datetime="<%= @asset.generation_job.completed_at.iso8601 %>"><%= @asset.generation_job.completed_at.strftime("%Y-%m-%d %H:%M") %></time></p>
+    <% end %>
+    <% if @asset.generation_job.error_message.present? %>
+      <p><strong>Error:</strong> <span role="alert"><%= @asset.generation_job.error_message %></span></p>
+    <% end %>
+  <% else %>
+    <p>No linked generation job.</p>
+  <% end %>
+
+  <p>
+    <%= link_to "Download", download_asset_path(@asset), class: "btn" %>
+    <%= link_to "Back to library", assets_path %>
+  </p>
+</div>
