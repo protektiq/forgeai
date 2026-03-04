@@ -1,0 +1,42 @@
+# Ruby / Rails
+rails_app/tmp/
+rails_app/log/
+*.gem
+vendor/bundle/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+*.egg
+
+# C++
+cpp_media/build/
+cpp_media/out/
+*.o
+*.out
+*.a
+*.so
+*.dylib
+
+# Rust
+rust_index/target/
+
+# .NET
+dotnet_api/bin/
+dotnet_api/obj/
+**/bin/
+**/obj/
+
+# General
+.env
+.env.*
+*.log
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
