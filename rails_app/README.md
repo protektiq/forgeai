@@ -43,7 +43,9 @@ Clicking **Generate** on the dashboard creates a `GenerationJob` with status `qu
 4. Optionally calls the **C++ media** service:
    - **HTTP** (when `CPP_MEDIA_URL` is set): POSTs the image to `CPP_MEDIA_URL/process`, receives thumbnail (and optionally processed) in JSON, and attaches the thumbnail to the Asset. The asset library and asset detail pages then show thumbnails when present.
    - **CLI** (when `MEDIA_SERVICE_COMMAND` is set and `CPP_MEDIA_URL` is blank): runs the command with env `INPUT_PATH`, `ASSET_ID`, `PROMPT` (no thumbnail attachment)
-5. Optionally runs the **Rust index** command (env: `ASSET_ID`, `PROMPT`)
+5. Optionally calls the **Rust index** service:
+   - **HTTP** (when `INDEX_SERVICE_URL` is set): POSTs to `INDEX_SERVICE_URL/index` with JSON `{ asset_id, prompt, metadata, tags }` so assets can be searched later. The asset library search box uses GET `INDEX_SERVICE_URL/search?q=...` to find matching asset IDs and filters the list accordingly.
+   - **CLI** (when `INDEX_SERVICE_COMMAND` is set and `INDEX_SERVICE_URL` is blank): runs the command with env `ASSET_ID`, `PROMPT` (no HTTP indexing)
 6. Marks the job `completed` or `failed` (with `error_message`)
 
 **Environment variables (optional):**
@@ -54,16 +56,17 @@ Clicking **Generate** on the dashboard creates a `GenerationJob` with status `qu
 | `GENERATOR_URL` | `http://localhost:5000` | Base URL of the Python generator service (e.g. Flask on port 5000) |
 | `CPP_MEDIA_URL` | (blank) | Base URL of the C++ media HTTP service (e.g. `http://localhost:8080`). When set, the job POSTs the image to `/process` and attaches the returned thumbnail to the Asset; thumbnails are shown in the asset library and asset detail. |
 | `MEDIA_SERVICE_COMMAND` | (blank) | Fallback: command to run for C++ post-processing when `CPP_MEDIA_URL` is not set; skipped if blank |
-| `INDEX_SERVICE_COMMAND` | (blank) | Command to run for Rust indexing; skipped if blank |
+| `INDEX_SERVICE_URL` | (blank) | Base URL of the Rust index HTTP service (e.g. `http://localhost:3132`). When set, the job POSTs to `/index` after each asset creation and the asset library search box uses GET `/search?q=...` to filter assets by prompt/metadata. |
+| `INDEX_SERVICE_COMMAND` | (blank) | Fallback: command to run for Rust indexing when `INDEX_SERVICE_URL` is not set; skipped if blank |
 
-The Python service must implement `POST /generate` returning image bytes (e.g. `Content-Type: image/png`). If the generator is not running or returns an error, the job is marked `failed` with an error message. When `CPP_MEDIA_URL` is set, start the cpp_media service (see `cpp_media/README.md`); the job will send the generated image there and attach the returned thumbnail to the Asset. The asset library displays thumbnails when attached; the asset detail page shows both the original image and the thumbnail. C++ CLI and Rust steps are skipped when their commands/URLs are not set.
+The Python service must implement `POST /generate` returning image bytes (e.g. `Content-Type: image/png`). If the generator is not running or returns an error, the job is marked `failed` with an error message. When `CPP_MEDIA_URL` is set, start the cpp_media service (see `cpp_media/README.md`); the job will send the generated image there and attach the returned thumbnail to the Asset. The asset library displays thumbnails when attached; the asset detail page shows both the original image and the thumbnail. When `INDEX_SERVICE_URL` is set, start the Rust index service (see `rust_index/README.md`); the job will POST each new asset to `/index`, and the asset library search box will call GET `/search?q=...` to show matching assets. C++ CLI and Rust CLI steps are used only when their URL is not set but their command is set.
 
 ## Usage
 
 - **Root (/)** — Redirects to dashboard when signed in, or to sign-in when not.
 - **Sign up / Sign in** — Devise routes (e.g. `/users/sign_up`, `/users/sign_in`). After sign-in you are redirected to the dashboard.
 - **Dashboard** — Submit a prompt and click **Generate** to create a queued job and start the background pipeline. Recent jobs show status: queued, running, completed, or failed (with error message). Refresh the page to see updates.
-- **Asset library** — List of your assets (after completed generations). When the C++ media service is used, thumbnails are shown for each asset when available; otherwise a “No preview” placeholder is shown.
+- **Asset library** — List of your assets (after completed generations). Use the search box to filter by prompt or metadata when the Rust index service is configured (`INDEX_SERVICE_URL`). When the C++ media service is used, thumbnails are shown for each asset when available; otherwise a "No preview" placeholder is shown.
 - **Asset detail** — View metadata, linked job prompt/status, the main image and thumbnail (when attached), and download the stored file.
 
 ## Database

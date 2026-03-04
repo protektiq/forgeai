@@ -2,6 +2,16 @@
 
 <div class="card">
   <h1>Asset library</h1>
+
+  <%= form_with url: assets_path, method: :get, local: true, class: "search-form", role: "search", "aria-label" => "Search assets" do |f| %>
+    <%= f.text_field :q, value: @search_query, placeholder: "Search prompts, metadata…", "aria-label" => "Search query", class: "search-input" %>
+    <%= f.submit "Search", name: nil, class: "search-submit" %>
+  <% end %>
+
+  <% if @search_unavailable && @search_query.present? %>
+    <p class="search-unavailable" role="status">Search is not configured; showing all assets.</p>
+  <% end %>
+
   <% if @assets.any? %>
     <ul class="asset-grid">
       <% @assets.each do |asset| %>
@@ -20,6 +30,10 @@
       <% end %>
     </ul>
   <% else %>
-    <p>No assets yet. Generation jobs do not create assets until the pipeline is connected.</p>
+    <% if @search_query.present? %>
+      <p role="status">No assets match your search.</p>
+    <% else %>
+      <p>No assets yet. Generation jobs do not create assets until the pipeline is connected.</p>
+    <% end %>
   <% end %>
 </div>

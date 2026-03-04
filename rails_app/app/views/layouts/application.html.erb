@@ -33,6 +33,10 @@
       .asset-show-image { max-width: 100%; height: auto; border-radius: 4px; }
       .asset-show-thumb { max-width: 256px; height: auto; border-radius: 4px; }
       .asset-show-thumb-label { font-weight: 500; margin-right: 0.5rem; }
+      .search-form { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+      .search-form .search-input { flex: 1; min-width: 160px; margin-bottom: 0; }
+      .search-form .search-submit { flex-shrink: 0; }
+      .search-unavailable { color: #856404; background: #fff3cd; padding: 0.5rem 0.75rem; border-radius: 4px; margin-bottom: 1rem; font-size: 0.9rem; }
     </style>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>

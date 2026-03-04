@@ -217,6 +217,12 @@ class GenerateAssetJob < ApplicationJob
   end
 
   def call_index_service(job, asset)
+    base_url = Rails.application.config.index_service_url.presence
+    if base_url.present?
+      call_index_service_http(job, asset, base_url)
+      return
+    end
+
     cmd = Rails.application.config.index_service_command.to_s.strip
     return if cmd.blank?
 
@@ -227,6 +233,32 @@ class GenerateAssetJob < ApplicationJob
       "ASSET_ID" => asset.id.to_s,
       "PROMPT" => job.prompt.to_s
     )
+  rescue StandardError => e
+    mark_failed(job, "Index service error: #{e.message}")
+  end
+
+  def call_index_service_http(job, asset, base_url)
+    index_url = URI.join(base_url, "/index")
+    body = {
+      asset_id: asset.id.to_s,
+      prompt: job.prompt.to_s,
+      metadata: asset.metadata || {},
+      tags: []
+    }.to_json
+
+    req = Net::HTTP::Post.new(index_url)
+    req["Content-Type"] = "application/json"
+    req["Accept"] = "application/json"
+    req.body = body
+
+    res = nil
+    Net::HTTP.start(index_url.host, index_url.port, open_timeout: 10, read_timeout: 10) do |http|
+      res = http.request(req)
+    end
+
+    unless res.is_a?(Net::HTTPSuccess)
+      mark_failed(job, "Index service returned #{res.code}: #{res.message}")
+    end
   rescue StandardError => e
     mark_failed(job, "Index service error: #{e.message}")
   end
