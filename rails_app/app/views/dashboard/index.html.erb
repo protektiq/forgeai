@@ -2,12 +2,12 @@
 
 <div class="card">
   <h1>New generation</h1>
-  <p>Submit a prompt to create a generation job. No image generation runs yet; the job is only stored in the database.</p>
+  <p>Submit a prompt to start a background generation job. Refresh the page to see job status (queued → running → completed or failed).</p>
 
   <%= form_with model: @job || GenerationJob.new, url: dashboard_path, method: :post, local: true do |f| %>
     <label for="generation_job_prompt">Prompt</label>
     <%= f.text_area :prompt, id: "generation_job_prompt", placeholder: "Describe what you want to generate…", required: true, maxlength: 10000 %>
-    <button type="submit">Create job</button>
+    <button type="submit">Generate</button>
   <% end %>
 </div>
 
@@ -30,6 +30,12 @@
         <li>
           <strong><%= job.prompt.truncate(80) %></strong>
           — <span><%= job.status %></span>
+          <% if job.status == "failed" && job.error_message.present? %>
+            — <span role="alert"><%= job.error_message.truncate(100) %></span>
+          <% end %>
+          <% if job.status == "completed" && job.asset.present? %>
+            — <%= link_to "View asset", asset_path(job.asset) %>
+          <% end %>
           — <time datetime="<%= job.created_at.iso8601 %>"><%= job.created_at.strftime("%Y-%m-%d %H:%M") %></time>
         </li>
       <% end %>

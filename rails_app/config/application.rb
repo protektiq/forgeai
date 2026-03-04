@@ -16,5 +16,12 @@ module RailsApp
     config.load_defaults 7.0
     config.api_only = false
     config.root = File.expand_path("..", __dir__)
+
+    config.active_job.queue_adapter = :sidekiq
+
+    # External pipeline services (configurable via ENV for deployment)
+    config.generator_url = ENV.fetch("GENERATOR_URL", "http://localhost:5000")
+    config.media_service_command = ENV.fetch("MEDIA_SERVICE_COMMAND", "")
+    config.index_service_command = ENV.fetch("INDEX_SERVICE_COMMAND", "")
   end
 end

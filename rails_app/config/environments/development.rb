@@ -8,4 +8,7 @@ Rails.application.configure do
 
   # Required for Devise mailer links (e.g. password reset)
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
+
+  # Store uploaded/generated files on local disk
+  config.active_storage.service = :local
 end

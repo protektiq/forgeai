@@ -1,0 +1,10 @@
+# frozen_string_literal: true
+
+# Sidekiq configuration.
+# Concurrency and queues. Run with: bundle exec sidekiq
+# Redis URL: ENV["REDIS_URL"] or default redis://localhost:6379/0
+
+:max_threads: 5
+
+:queues:
+  - [default, 3]

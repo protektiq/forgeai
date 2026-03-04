@@ -6,4 +6,6 @@ Rails.application.configure do
   config.consider_all_requests_local = false
   config.public_file_server.enabled = true
   config.action_mailer.default_url_options = { host: ENV.fetch("HOST", "localhost"), protocol: "https" }
+
+  config.active_storage.service = :local
 end

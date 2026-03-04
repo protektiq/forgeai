@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  mount ActiveStorage::Engine => "/rails/active_storage"
+
   devise_for :users
 
   get "dashboard", to: "dashboard#index"

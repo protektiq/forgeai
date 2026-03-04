@@ -12,12 +12,11 @@ class AssetsController < ApplicationController
   end
 
   def download
-    if @asset.filename.blank?
-      redirect_to asset_path(@asset), alert: "File not generated yet."
+    unless @asset.file.attached?
+      redirect_to asset_path(@asset), alert: "File not available yet."
       return
     end
-    # Placeholder: no file storage yet
-    redirect_to asset_path(@asset), alert: "Download not available yet (no file storage)."
+    redirect_to rails_blob_path(@asset.file, disposition: "attachment")
   end
 
   private
