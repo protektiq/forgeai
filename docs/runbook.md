@@ -27,12 +27,12 @@ cd python_gen
 python3 -m venv .venv
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-python main.py
+uvicorn main:app --host 0.0.0.0 --port 5000
 ```
 
 - **Port:** 5000  
 - **Logs:** stdout  
-- **Common issues:** Port 5000 in use → edit `main.py` to use another port; missing venv → ensure you activate before `pip install`.
+- **Common issues:** Port 5000 in use → use `--port 5001` and set Rails `GENERATOR_URL` accordingly; missing venv → ensure you activate before `pip install`.
 
 ### C++ media (`cpp_media/`)
 
