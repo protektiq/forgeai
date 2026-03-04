@@ -1,0 +1,1770 @@
+cmdline: command line: "C:\Program Files\Coverity\Coverity Static Analysis\bin\cov-analyze" --dir C:\coverity-testing\forgeai\idir --strip-path C:\coverity-testing\forgeai --ticker-mode none --recommended-security-checkers --enable-scan-transparency-data 
+cmdline: parsed cmdline: [
+cmdline:   { name: "dir", args: [ "C:\\coverity-testing\\forgeai\\idir" ] },
+cmdline:   { name: "strip-path", args: [ "C:\\coverity-testing\\forgeai" ] },
+cmdline:   { name: "ticker-mode", args: [ "none" ] },
+cmdline:   { name: "recommended-security-checkers" },
+cmdline:   { name: "enable-scan-transparency-data" },
+cmdline: ]
+startup: am_pid=16788
+startup: detected platform: Windows 11 Enterprise, 64-bit (build 26100)
+startup: target platform: win64
+startup: Detected 12 logical cpus
+startup: Detected 10 cpu cores
+startup: host name: BD-16945
+startup: user name: CarlosAlmeyda
+startup: Analysis version: 2025.12.0 (8600bcfa3c p-2025.12-push-40)
+startup: temp directory: C:/Users/CARLOS~1/AppData/Local/Temp/cov-CarlosAlmeyda/69caf617797ff2d017ddb9de1c264b87
+startup: enable_constraint_fpp=0
+startup: current time: 2026-Mar-04 10:19:57
+startup: Detected amount of memory: 33231568kb
+startup: Limiting memory to 29908411kb
+startup: Using 12 workers as limited by CPU(s)
+Sigma checker-properties info: Capturing Sigma checker properties...
+Sigma checker-properties info: Command line for sigma C:\Program Files\Coverity\Coverity Static Analysis\sigma\bin\sigma.exe internal-coverity-integration checker-properties --protocol-version 1 C:\Users\CARLOS~1\AppData\Local\Temp\cov-CarlosAlmeyda\69caf617797ff2d017ddb9de1c264b87\sigma-checker-properties.json
+Sigma checker-properties info: Exit status: code 0
+Sigma checker-properties info: Loaded 7618 checker properties for Sigma.
+emit: Selected 449 TUs
+tus: tuIndex 0 -> rowID 1
+tus: tuIndex 1 -> rowID 404
+tus: tuIndex 2 -> rowID 423
+tus: tuIndex 3 -> rowID 424
+tus: tuIndex 4 -> rowID 425
+tus: tuIndex 5 -> rowID 426
+tus: tuIndex 6 -> rowID 418
+tus: tuIndex 7 -> rowID 419
+tus: tuIndex 8 -> rowID 420
+tus: tuIndex 9 -> rowID 421
+tus: tuIndex 10 -> rowID 422
+tus: tuIndex 11 -> rowID 427
+tus: tuIndex 12 -> rowID 428
+tus: tuIndex 13 -> rowID 429
+tus: tuIndex 14 -> rowID 430
+tus: tuIndex 15 -> rowID 431
+tus: tuIndex 16 -> rowID 432
+tus: tuIndex 17 -> rowID 433
+tus: tuIndex 18 -> rowID 434
+tus: tuIndex 19 -> rowID 435
+tus: tuIndex 20 -> rowID 437
+tus: tuIndex 21 -> rowID 405
+tus: tuIndex 22 -> rowID 406
+tus: tuIndex 23 -> rowID 407
+tus: tuIndex 24 -> rowID 408
+tus: tuIndex 25 -> rowID 409
+tus: tuIndex 26 -> rowID 436
+tus: tuIndex 27 -> rowID 411
+tus: tuIndex 28 -> rowID 412
+tus: tuIndex 29 -> rowID 413
+tus: tuIndex 30 -> rowID 414
+tus: tuIndex 31 -> rowID 415
+tus: tuIndex 32 -> rowID 416
+tus: tuIndex 33 -> rowID 410
+tus: tuIndex 34 -> rowID 417
+tus: tuIndex 35 -> rowID 392
+tus: tuIndex 36 -> rowID 391
+tus: tuIndex 37 -> rowID 385
+tus: tuIndex 38 -> rowID 386
+tus: tuIndex 39 -> rowID 387
+tus: tuIndex 40 -> rowID 394
+tus: tuIndex 41 -> rowID 395
+tus: tuIndex 42 -> rowID 397
+tus: tuIndex 43 -> rowID 396
+tus: tuIndex 44 -> rowID 393
+tus: tuIndex 45 -> rowID 398
+tus: tuIndex 46 -> rowID 399
+tus: tuIndex 47 -> rowID 440
+tus: tuIndex 48 -> rowID 441
+tus: tuIndex 49 -> rowID 442
+tus: tuIndex 50 -> rowID 443
+tus: tuIndex 51 -> rowID 444
+tus: tuIndex 52 -> rowID 400
+tus: tuIndex 53 -> rowID 401
+tus: tuIndex 54 -> rowID 402
+tus: tuIndex 55 -> rowID 439
+tus: tuIndex 56 -> rowID 445
+tus: tuIndex 57 -> rowID 446
+tus: tuIndex 58 -> rowID 447
+tus: tuIndex 59 -> rowID 448
+tus: tuIndex 60 -> rowID 449
+tus: tuIndex 61 -> rowID 438
+tus: tuIndex 62 -> rowID 403
+tus: tuIndex 63 -> rowID 384
+tus: tuIndex 64 -> rowID 390
+tus: tuIndex 65 -> rowID 389
+tus: tuIndex 66 -> rowID 388
+tus: tuIndex 67 -> rowID 135
+tus: tuIndex 68 -> rowID 301
+tus: tuIndex 69 -> rowID 365
+tus: tuIndex 70 -> rowID 320
+tus: tuIndex 71 -> rowID 309
+tus: tuIndex 72 -> rowID 311
+tus: tuIndex 73 -> rowID 330
+tus: tuIndex 74 -> rowID 314
+tus: tuIndex 75 -> rowID 317
+tus: tuIndex 76 -> rowID 343
+tus: tuIndex 77 -> rowID 344
+tus: tuIndex 78 -> rowID 312
+tus: tuIndex 79 -> rowID 327
+tus: tuIndex 80 -> rowID 352
+tus: tuIndex 81 -> rowID 329
+tus: tuIndex 82 -> rowID 372
+tus: tuIndex 83 -> rowID 316
+tus: tuIndex 84 -> rowID 371
+tus: tuIndex 85 -> rowID 362
+tus: tuIndex 86 -> rowID 326
+tus: tuIndex 87 -> rowID 345
+tus: tuIndex 88 -> rowID 358
+tus: tuIndex 89 -> rowID 373
+tus: tuIndex 90 -> rowID 364
+tus: tuIndex 91 -> rowID 308
+tus: tuIndex 92 -> rowID 323
+tus: tuIndex 93 -> rowID 382
+tus: tuIndex 94 -> rowID 369
+tus: tuIndex 95 -> rowID 374
+tus: tuIndex 96 -> rowID 332
+tus: tuIndex 97 -> rowID 315
+tus: tuIndex 98 -> rowID 367
+tus: tuIndex 99 -> rowID 341
+tus: tuIndex 100 -> rowID 361
+tus: tuIndex 101 -> rowID 325
+tus: tuIndex 102 -> rowID 340
+tus: tuIndex 103 -> rowID 377
+tus: tuIndex 104 -> rowID 354
+tus: tuIndex 105 -> rowID 331
+tus: tuIndex 106 -> rowID 350
+tus: tuIndex 107 -> rowID 347
+tus: tuIndex 108 -> rowID 355
+tus: tuIndex 109 -> rowID 346
+tus: tuIndex 110 -> rowID 307
+tus: tuIndex 111 -> rowID 321
+tus: tuIndex 112 -> rowID 381
+tus: tuIndex 113 -> rowID 310
+tus: tuIndex 114 -> rowID 348
+tus: tuIndex 115 -> rowID 306
+tus: tuIndex 116 -> rowID 359
+tus: tuIndex 117 -> rowID 379
+tus: tuIndex 118 -> rowID 368
+tus: tuIndex 119 -> rowID 370
+tus: tuIndex 120 -> rowID 360
+tus: tuIndex 121 -> rowID 335
+tus: tuIndex 122 -> rowID 356
+tus: tuIndex 123 -> rowID 376
+tus: tuIndex 124 -> rowID 366
+tus: tuIndex 125 -> rowID 357
+tus: tuIndex 126 -> rowID 338
+tus: tuIndex 127 -> rowID 319
+tus: tuIndex 128 -> rowID 302
+tus: tuIndex 129 -> rowID 378
+tus: tuIndex 130 -> rowID 305
+tus: tuIndex 131 -> rowID 336
+tus: tuIndex 132 -> rowID 304
+tus: tuIndex 133 -> rowID 337
+tus: tuIndex 134 -> rowID 342
+tus: tuIndex 135 -> rowID 334
+tus: tuIndex 136 -> rowID 351
+tus: tuIndex 137 -> rowID 349
+tus: tuIndex 138 -> rowID 322
+tus: tuIndex 139 -> rowID 303
+tus: tuIndex 140 -> rowID 318
+tus: tuIndex 141 -> rowID 339
+tus: tuIndex 142 -> rowID 363
+tus: tuIndex 143 -> rowID 313
+tus: tuIndex 144 -> rowID 353
+tus: tuIndex 145 -> rowID 328
+tus: tuIndex 146 -> rowID 333
+tus: tuIndex 147 -> rowID 380
+tus: tuIndex 148 -> rowID 324
+tus: tuIndex 149 -> rowID 375
+tus: tuIndex 150 -> rowID 383
+tus: tuIndex 151 -> rowID 140
+tus: tuIndex 152 -> rowID 141
+tus: tuIndex 153 -> rowID 148
+tus: tuIndex 154 -> rowID 151
+tus: tuIndex 155 -> rowID 155
+tus: tuIndex 156 -> rowID 156
+tus: tuIndex 157 -> rowID 160
+tus: tuIndex 158 -> rowID 167
+tus: tuIndex 159 -> rowID 171
+tus: tuIndex 160 -> rowID 172
+tus: tuIndex 161 -> rowID 175
+tus: tuIndex 162 -> rowID 177
+tus: tuIndex 163 -> rowID 176
+tus: tuIndex 164 -> rowID 178
+tus: tuIndex 165 -> rowID 193
+tus: tuIndex 166 -> rowID 186
+tus: tuIndex 167 -> rowID 183
+tus: tuIndex 168 -> rowID 192
+tus: tuIndex 169 -> rowID 216
+tus: tuIndex 170 -> rowID 218
+tus: tuIndex 171 -> rowID 229
+tus: tuIndex 172 -> rowID 225
+tus: tuIndex 173 -> rowID 228
+tus: tuIndex 174 -> rowID 231
+tus: tuIndex 175 -> rowID 233
+tus: tuIndex 176 -> rowID 234
+tus: tuIndex 177 -> rowID 236
+tus: tuIndex 178 -> rowID 238
+tus: tuIndex 179 -> rowID 246
+tus: tuIndex 180 -> rowID 251
+tus: tuIndex 181 -> rowID 252
+tus: tuIndex 182 -> rowID 254
+tus: tuIndex 183 -> rowID 253
+tus: tuIndex 184 -> rowID 255
+tus: tuIndex 185 -> rowID 257
+tus: tuIndex 186 -> rowID 256
+tus: tuIndex 187 -> rowID 263
+tus: tuIndex 188 -> rowID 261
+tus: tuIndex 189 -> rowID 260
+tus: tuIndex 190 -> rowID 264
+tus: tuIndex 191 -> rowID 265
+tus: tuIndex 192 -> rowID 268
+tus: tuIndex 193 -> rowID 276
+tus: tuIndex 194 -> rowID 275
+tus: tuIndex 195 -> rowID 280
+tus: tuIndex 196 -> rowID 284
+tus: tuIndex 197 -> rowID 285
+tus: tuIndex 198 -> rowID 287
+tus: tuIndex 199 -> rowID 288
+tus: tuIndex 200 -> rowID 296
+tus: tuIndex 201 -> rowID 289
+tus: tuIndex 202 -> rowID 290
+tus: tuIndex 203 -> rowID 295
+tus: tuIndex 204 -> rowID 299
+tus: tuIndex 205 -> rowID 2
+tus: tuIndex 206 -> rowID 4
+tus: tuIndex 207 -> rowID 6
+tus: tuIndex 208 -> rowID 5
+tus: tuIndex 209 -> rowID 3
+tus: tuIndex 210 -> rowID 8
+tus: tuIndex 211 -> rowID 7
+tus: tuIndex 212 -> rowID 9
+tus: tuIndex 213 -> rowID 10
+tus: tuIndex 214 -> rowID 11
+tus: tuIndex 215 -> rowID 16
+tus: tuIndex 216 -> rowID 12
+tus: tuIndex 217 -> rowID 14
+tus: tuIndex 218 -> rowID 15
+tus: tuIndex 219 -> rowID 13
+tus: tuIndex 220 -> rowID 17
+tus: tuIndex 221 -> rowID 19
+tus: tuIndex 222 -> rowID 18
+tus: tuIndex 223 -> rowID 20
+tus: tuIndex 224 -> rowID 21
+tus: tuIndex 225 -> rowID 22
+tus: tuIndex 226 -> rowID 25
+tus: tuIndex 227 -> rowID 23
+tus: tuIndex 228 -> rowID 24
+tus: tuIndex 229 -> rowID 28
+tus: tuIndex 230 -> rowID 26
+tus: tuIndex 231 -> rowID 85
+tus: tuIndex 232 -> rowID 27
+tus: tuIndex 233 -> rowID 29
+tus: tuIndex 234 -> rowID 31
+tus: tuIndex 235 -> rowID 30
+tus: tuIndex 236 -> rowID 32
+tus: tuIndex 237 -> rowID 34
+tus: tuIndex 238 -> rowID 33
+tus: tuIndex 239 -> rowID 35
+tus: tuIndex 240 -> rowID 39
+tus: tuIndex 241 -> rowID 36
+tus: tuIndex 242 -> rowID 37
+tus: tuIndex 243 -> rowID 38
+tus: tuIndex 244 -> rowID 40
+tus: tuIndex 245 -> rowID 41
+tus: tuIndex 246 -> rowID 42
+tus: tuIndex 247 -> rowID 43
+tus: tuIndex 248 -> rowID 45
+tus: tuIndex 249 -> rowID 44
+tus: tuIndex 250 -> rowID 46
+tus: tuIndex 251 -> rowID 47
+tus: tuIndex 252 -> rowID 49
+tus: tuIndex 253 -> rowID 51
+tus: tuIndex 254 -> rowID 48
+tus: tuIndex 255 -> rowID 50
+tus: tuIndex 256 -> rowID 59
+tus: tuIndex 257 -> rowID 52
+tus: tuIndex 258 -> rowID 53
+tus: tuIndex 259 -> rowID 54
+tus: tuIndex 260 -> rowID 55
+tus: tuIndex 261 -> rowID 56
+tus: tuIndex 262 -> rowID 57
+tus: tuIndex 263 -> rowID 58
+tus: tuIndex 264 -> rowID 60
+tus: tuIndex 265 -> rowID 62
+tus: tuIndex 266 -> rowID 61
+tus: tuIndex 267 -> rowID 63
+tus: tuIndex 268 -> rowID 64
+tus: tuIndex 269 -> rowID 65
+tus: tuIndex 270 -> rowID 66
+tus: tuIndex 271 -> rowID 67
+tus: tuIndex 272 -> rowID 68
+tus: tuIndex 273 -> rowID 69
+tus: tuIndex 274 -> rowID 70
+tus: tuIndex 275 -> rowID 72
+tus: tuIndex 276 -> rowID 71
+tus: tuIndex 277 -> rowID 73
+tus: tuIndex 278 -> rowID 77
+tus: tuIndex 279 -> rowID 74
+tus: tuIndex 280 -> rowID 75
+tus: tuIndex 281 -> rowID 76
+tus: tuIndex 282 -> rowID 79
+tus: tuIndex 283 -> rowID 78
+tus: tuIndex 284 -> rowID 82
+tus: tuIndex 285 -> rowID 80
+tus: tuIndex 286 -> rowID 81
+tus: tuIndex 287 -> rowID 83
+tus: tuIndex 288 -> rowID 84
+tus: tuIndex 289 -> rowID 86
+tus: tuIndex 290 -> rowID 87
+tus: tuIndex 291 -> rowID 88
+tus: tuIndex 292 -> rowID 89
+tus: tuIndex 293 -> rowID 90
+tus: tuIndex 294 -> rowID 92
+tus: tuIndex 295 -> rowID 91
+tus: tuIndex 296 -> rowID 100
+tus: tuIndex 297 -> rowID 93
+tus: tuIndex 298 -> rowID 94
+tus: tuIndex 299 -> rowID 95
+tus: tuIndex 300 -> rowID 96
+tus: tuIndex 301 -> rowID 97
+tus: tuIndex 302 -> rowID 98
+tus: tuIndex 303 -> rowID 99
+tus: tuIndex 304 -> rowID 101
+tus: tuIndex 305 -> rowID 102
+tus: tuIndex 306 -> rowID 103
+tus: tuIndex 307 -> rowID 105
+tus: tuIndex 308 -> rowID 104
+tus: tuIndex 309 -> rowID 106
+tus: tuIndex 310 -> rowID 107
+tus: tuIndex 311 -> rowID 108
+tus: tuIndex 312 -> rowID 109
+tus: tuIndex 313 -> rowID 111
+tus: tuIndex 314 -> rowID 110
+tus: tuIndex 315 -> rowID 113
+tus: tuIndex 316 -> rowID 112
+tus: tuIndex 317 -> rowID 114
+tus: tuIndex 318 -> rowID 115
+tus: tuIndex 319 -> rowID 117
+tus: tuIndex 320 -> rowID 116
+tus: tuIndex 321 -> rowID 118
+tus: tuIndex 322 -> rowID 119
+tus: tuIndex 323 -> rowID 120
+tus: tuIndex 324 -> rowID 121
+tus: tuIndex 325 -> rowID 122
+tus: tuIndex 326 -> rowID 123
+tus: tuIndex 327 -> rowID 128
+tus: tuIndex 328 -> rowID 124
+tus: tuIndex 329 -> rowID 125
+tus: tuIndex 330 -> rowID 126
+tus: tuIndex 331 -> rowID 127
+tus: tuIndex 332 -> rowID 129
+tus: tuIndex 333 -> rowID 130
+tus: tuIndex 334 -> rowID 131
+tus: tuIndex 335 -> rowID 132
+tus: tuIndex 336 -> rowID 133
+tus: tuIndex 337 -> rowID 134
+tus: tuIndex 338 -> rowID 136
+tus: tuIndex 339 -> rowID 138
+tus: tuIndex 340 -> rowID 137
+tus: tuIndex 341 -> rowID 139
+tus: tuIndex 342 -> rowID 300
+tus: tuIndex 343 -> rowID 142
+tus: tuIndex 344 -> rowID 146
+tus: tuIndex 345 -> rowID 143
+tus: tuIndex 346 -> rowID 144
+tus: tuIndex 347 -> rowID 145
+tus: tuIndex 348 -> rowID 147
+tus: tuIndex 349 -> rowID 152
+tus: tuIndex 350 -> rowID 149
+tus: tuIndex 351 -> rowID 150
+tus: tuIndex 352 -> rowID 153
+tus: tuIndex 353 -> rowID 154
+tus: tuIndex 354 -> rowID 158
+tus: tuIndex 355 -> rowID 157
+tus: tuIndex 356 -> rowID 159
+tus: tuIndex 357 -> rowID 161
+tus: tuIndex 358 -> rowID 162
+tus: tuIndex 359 -> rowID 163
+tus: tuIndex 360 -> rowID 164
+tus: tuIndex 361 -> rowID 165
+tus: tuIndex 362 -> rowID 166
+tus: tuIndex 363 -> rowID 168
+tus: tuIndex 364 -> rowID 169
+tus: tuIndex 365 -> rowID 297
+tus: tuIndex 366 -> rowID 170
+tus: tuIndex 367 -> rowID 173
+tus: tuIndex 368 -> rowID 174
+tus: tuIndex 369 -> rowID 179
+tus: tuIndex 370 -> rowID 181
+tus: tuIndex 371 -> rowID 180
+tus: tuIndex 372 -> rowID 182
+tus: tuIndex 373 -> rowID 184
+tus: tuIndex 374 -> rowID 185
+tus: tuIndex 375 -> rowID 187
+tus: tuIndex 376 -> rowID 188
+tus: tuIndex 377 -> rowID 189
+tus: tuIndex 378 -> rowID 190
+tus: tuIndex 379 -> rowID 191
+tus: tuIndex 380 -> rowID 197
+tus: tuIndex 381 -> rowID 195
+tus: tuIndex 382 -> rowID 196
+tus: tuIndex 383 -> rowID 194
+tus: tuIndex 384 -> rowID 198
+tus: tuIndex 385 -> rowID 200
+tus: tuIndex 386 -> rowID 199
+tus: tuIndex 387 -> rowID 201
+tus: tuIndex 388 -> rowID 202
+tus: tuIndex 389 -> rowID 203
+tus: tuIndex 390 -> rowID 204
+tus: tuIndex 391 -> rowID 205
+tus: tuIndex 392 -> rowID 207
+tus: tuIndex 393 -> rowID 206
+tus: tuIndex 394 -> rowID 208
+tus: tuIndex 395 -> rowID 209
+tus: tuIndex 396 -> rowID 210
+tus: tuIndex 397 -> rowID 211
+tus: tuIndex 398 -> rowID 212
+tus: tuIndex 399 -> rowID 213
+tus: tuIndex 400 -> rowID 214
+tus: tuIndex 401 -> rowID 215
+tus: tuIndex 402 -> rowID 217
+tus: tuIndex 403 -> rowID 219
+tus: tuIndex 404 -> rowID 220
+tus: tuIndex 405 -> rowID 221
+tus: tuIndex 406 -> rowID 224
+tus: tuIndex 407 -> rowID 222
+tus: tuIndex 408 -> rowID 223
+tus: tuIndex 409 -> rowID 227
+tus: tuIndex 410 -> rowID 226
+tus: tuIndex 411 -> rowID 230
+tus: tuIndex 412 -> rowID 232
+tus: tuIndex 413 -> rowID 235
+tus: tuIndex 414 -> rowID 250
+tus: tuIndex 415 -> rowID 239
+tus: tuIndex 416 -> rowID 237
+tus: tuIndex 417 -> rowID 241
+tus: tuIndex 418 -> rowID 240
+tus: tuIndex 419 -> rowID 242
+tus: tuIndex 420 -> rowID 243
+tus: tuIndex 421 -> rowID 244
+tus: tuIndex 422 -> rowID 245
+tus: tuIndex 423 -> rowID 247
+tus: tuIndex 424 -> rowID 248
+tus: tuIndex 425 -> rowID 249
+tus: tuIndex 426 -> rowID 259
+tus: tuIndex 427 -> rowID 258
+tus: tuIndex 428 -> rowID 262
+tus: tuIndex 429 -> rowID 266
+tus: tuIndex 430 -> rowID 267
+tus: tuIndex 431 -> rowID 269
+tus: tuIndex 432 -> rowID 270
+tus: tuIndex 433 -> rowID 271
+tus: tuIndex 434 -> rowID 272
+tus: tuIndex 435 -> rowID 283
+tus: tuIndex 436 -> rowID 273
+tus: tuIndex 437 -> rowID 274
+tus: tuIndex 438 -> rowID 277
+tus: tuIndex 439 -> rowID 278
+tus: tuIndex 440 -> rowID 279
+tus: tuIndex 441 -> rowID 281
+tus: tuIndex 442 -> rowID 282
+tus: tuIndex 443 -> rowID 286
+tus: tuIndex 444 -> rowID 291
+tus: tuIndex 445 -> rowID 292
+tus: tuIndex 446 -> rowID 298
+tus: tuIndex 447 -> rowID 294
+tus: tuIndex 448 -> rowID 293
+was: Web-app security infrastructure enabled by (C#) __BAD_CERT_VERIFICATION_ABSTRACT_INTERPRETATION
+was: Web-app security infrastructure enabled by (C#) __RISKY_CRYPTO_ABSTRACT_INTERPRETATION
+was: Web-app security infrastructure enabled by (C#) __INSECURE_COMMUNICATION_ABSTRACT_INTERPRETATION
+was: Web-app security infrastructure enabled by (C#) UNLOGGED_SECURITY_EXCEPTION
+was: Web-app security infrastructure enabled by (C#) BUILD_SINK_TYPE_GRAPH
+was: Web-app security infrastructure enabled by (C#) BUILD_STRING_GRAPH
+was: Web-app security infrastructure enabled by (C#) __CSRF_JAVA_CSHARP
+was: Web-app security infrastructure enabled by (C#) __MASS_ASSIGNMENT_JAVA_CSHARP
+was: Web-app security infrastructure enabled by (C#) __MISSING_AUTHZ_JAVA_CSHARP
+was: Web-app security infrastructure enabled by (C#) __XSS_STRING_GRAPH
+was: Web-app security infrastructure enabled by (Python 3) BUDA_DIRECTIVES_TYPE_INFERENCE_CHECKER
+was: Web-app security infrastructure enabled by (Python 3) __REGEX_INJECTION_BUDA_PYTHON
+was: Web-app security infrastructure enabled by (Python 3) __PATH_MANIPULATION_BUDA_NONJS
+was: Web-app security infrastructure enabled by (Python 3) __SCRIPT_CODE_INJECTION_BUDA_NONJS
+was: Web-app security infrastructure enabled by (Python 3) __URL_MANIPULATION_BUDA_DYNAMICS_NOJS
+was: Web-app security infrastructure enabled by (Python 3) __UNSAFE_DESERIALIZATION_BUDA
+was: Web-app security infrastructure enabled by (Python 3) __HARDCODED_CREDENTIALS_BUDA_DYNAMICS
+was: Web-app security infrastructure enabled by (Python 3) __OPEN_REDIRECT_BUDA_DYNAMICS
+was: Web-app security infrastructure enabled by (Python 3) __SQLI_BUDA_DYNAMICS
+was: Web-app security infrastructure enabled by (Python 3) __SENSITIVE_DATA_LEAK_BUDA_DYNAMICS
+was: Web-app security infrastructure enabled by (Python 3) __INSECURE_RANDOM_BUDA_DYNAMICS
+was: Web-app security infrastructure enabled by (Python 3) __INSUFFICIENT_LOGGING_BUDA_DYNAMICS
+was: Web-app security infrastructure enabled by (Python 3) __COOKIE_INJECTION_BUDA_PYTHON
+was: Web-app security infrastructure enabled by (Python 3) __OS_CMD_INJECTION_BUDA
+was: Web-app security infrastructure enabled by (Python 3) __NOSQL_QUERY_INJECTION_BUDA
+was: Web-app security infrastructure enabled by (Python 3) __XSS_BUDA
+was: Web-app security infrastructure enabled by (Python 3) __TEMPLATE_INJECTION_BUDA_PYTHON
+was: Web-app security infrastructure enabled by (Python 3) __HEADER_INJECTION_BUDA
+was: Web-app security infrastructure enabled by (Python 3) __CSRF_BUDA
+was: Web-app security infrastructure enabled by (Python 3) __INSECURE_SALT_BUDA
+was: Web-app security infrastructure enabled by (Python 3) __MISSING_AUTHZ_BUDA_STATS
+was: Web-app security infrastructure enabled by (Python 3) __MISSING_AUTHZ_BUDA
+was: Web-app security infrastructure enabled by (C#) TANDEM_DATAFLOW_CHECKER_INFRASTRUCTURE_STATICS
+was: Web-app security infrastructure enabled by (C#) __HEADER_INJECTION_STATICS
+was: Web-app security infrastructure enabled by (C#) LDAP_INJECTION
+was: Web-app security infrastructure enabled by (C#) __NOSQL_QUERY_INJECTION_STATICS
+was: Web-app security infrastructure enabled by (C#) __REGEX_INJECTION_STATICS
+was: Web-app security infrastructure enabled by (C#) __SCRIPT_CODE_INJECTION_STATICS
+was: Web-app security infrastructure enabled by (C#) __SESSION_FIXATION_STATICS
+was: Web-app security infrastructure enabled by (C#) UNKNOWN_LANGUAGE_INJECTION
+was: Web-app security infrastructure enabled by (C#) UNRESTRICTED_DISPATCH
+was: Web-app security infrastructure enabled by (C#) __UNSAFE_DESERIALIZATION_STATICS
+was: Web-app security infrastructure enabled by (C#) UNSAFE_NAMED_QUERY
+was: Web-app security infrastructure enabled by (C#) __XPATH_INJECTION_STATICS
+was: Web-app security infrastructure enabled by (C#) __WEAK_PASSWORD_HASH_BUDA_STATICS
+was: Web-app security infrastructure enabled by (C#) __HARDCODED_CREDENTIALS_BUDA_STATICS_NO_CALLGRAPH
+was: Web-app security infrastructure enabled by (C#) __XML_EXTERNAL_ENTITY_BUDA_JAVA_DOTNET
+was: Web-app security infrastructure enabled by (C#) __INSECURE_RANDOM_BUDA_STATICS
+was: Web-app security infrastructure enabled by (C#) __OPEN_REDIRECT_BUDA_STATICS
+was: Web-app security infrastructure enabled by (C#) __OS_CMD_INJECTION_BUDA_STATICS_TANDEM
+was: Web-app security infrastructure enabled by (C#) __PATH_MANIPULATION_BUDA_STATICS
+was: Web-app security infrastructure enabled by (C#) __SENSITIVE_DATA_LEAK_BUDA_STATICS
+was: Web-app security infrastructure enabled by (C#) __SQLI_BUDA_STATICS
+was: Web-app security infrastructure enabled by (C#) __SSRF_BUDA_STATICS
+was: Web-app security infrastructure enabled by (C#) __TAINT_ASSERT_BUDA_STATICS
+was: Web-app security infrastructure enabled by (C#) __UNENCRYPTED_SENSITIVE_DATA_BUDA_STATICS_NO_CALLGRAPH
+was: Web-app security infrastructure enabled by (C#) __URL_MANIPULATION_BUDA_STATICS
+was: Web-app security infrastructure enabled by (C#) TANDEM_DATAFLOW_CHECKER_INFRASTRUCTURE_STATICS_WORMHOLING
+was: Web-app security infrastructure enabled by (C#) __HEADER_INJECTION_STATICS_WORMHOLING
+was: Web-app security infrastructure enabled by (C#) LDAP_INJECTION_WORMHOLING
+was: Web-app security infrastructure enabled by (C#) __NOSQL_QUERY_INJECTION_STATICS_WORMHOLING
+was: Web-app security infrastructure enabled by (C#) __REGEX_INJECTION_STATICS_WORMHOLING
+was: Web-app security infrastructure enabled by (C#) __SCRIPT_CODE_INJECTION_STATICS_WORMHOLING
+was: Web-app security infrastructure enabled by (C#) __SESSION_FIXATION_STATICS_WORMHOLING
+was: Web-app security infrastructure enabled by (C#) UNKNOWN_LANGUAGE_INJECTION_WORMHOLING
+was: Web-app security infrastructure enabled by (C#) UNRESTRICTED_DISPATCH_WORMHOLING
+was: Web-app security infrastructure enabled by (C#) __UNSAFE_DESERIALIZATION_STATICS_WORMHOLING
+was: Web-app security infrastructure enabled by (C#) UNSAFE_NAMED_QUERY_WORMHOLING
+was: Web-app security infrastructure enabled by (C#) __XPATH_INJECTION_STATICS_WORMHOLING
+was: Web-app security infrastructure enabled by (C#) __WEAK_PASSWORD_HASH_BUDA_STATICS_WORMHOLING
+was: Web-app security infrastructure enabled by (C#) __HARDCODED_CREDENTIALS_BUDA_STATICS_NO_CALLGRAPH_WORMHOLING
+was: Web-app security infrastructure enabled by (C#) __XML_EXTERNAL_ENTITY_BUDA_JAVA_DOTNET_WORMHOLING
+was: Web-app security infrastructure enabled by (C#) __INSECURE_RANDOM_BUDA_STATICS_WORMHOLING
+was: Web-app security infrastructure enabled by (C#) __OPEN_REDIRECT_BUDA_STATICS_WORMHOLING
+was: Web-app security infrastructure enabled by (C#) __OS_CMD_INJECTION_BUDA_STATICS_TANDEM_WORMHOLING
+was: Web-app security infrastructure enabled by (C#) __PATH_MANIPULATION_BUDA_STATICS_WORMHOLING
+was: Web-app security infrastructure enabled by (C#) __SENSITIVE_DATA_LEAK_BUDA_STATICS_WORMHOLING
+was: Web-app security infrastructure enabled by (C#) __SQLI_BUDA_STATICS_WORMHOLING
+was: Web-app security infrastructure enabled by (C#) __SSRF_BUDA_STATICS_WORMHOLING
+was: Web-app security infrastructure enabled by (C#) __TAINT_ASSERT_BUDA_STATICS_WORMHOLING
+was: Web-app security infrastructure enabled by (C#) __UNENCRYPTED_SENSITIVE_DATA_BUDA_STATICS_NO_CALLGRAPH_WORMHOLING
+was: Web-app security infrastructure enabled by (C#) __URL_MANIPULATION_BUDA_STATICS_WORMHOLING
+was: Web-app security infrastructure enabled by (Text) CODEXM_TEXT_STAT_PASS
+was: Web-app security infrastructure enabled by (Text) __CONFIG.UNSAFE_SESSION_TIMEOUT_JAVA
+was: Web-app security infrastructure enabled by (Text) CONFIG.HANA_XS_PREVENT_XSRF_DISABLED
+was: Web-app security infrastructure enabled by (Text) CONFIG.DEAD_AUTHORIZATION_RULE
+was: Web-app security infrastructure enabled by (C#) __CONFIG.ENABLED_DEBUG_MODE_DOTNET
+was: Web-app security infrastructure enabled by (Text) __CONFIG.ENABLED_DEBUG_MODE_DOTNET
+was: Web-app security infrastructure enabled by (C#) CONFIG.ENABLED_TRACE_MODE
+was: Web-app security infrastructure enabled by (Text) CONFIG.ENABLED_TRACE_MODE
+was: Web-app security infrastructure enabled by (C#) CONFIG.ASP_VIEWSTATE_MAC
+was: Web-app security infrastructure enabled by (Text) CONFIG.ASP_VIEWSTATE_MAC
+was: Web-app security infrastructure enabled by (C#) CONFIG.DYNAMIC_DATA_HTML_COMMENT
+was: Web-app security infrastructure enabled by (Python 3) __BAD_CERT_VERIFICATION_CODEXM_PYTHON
+was: Web-app security infrastructure enabled by (C#) __HARDCODED_CREDENTIALS_URL
+was: Web-app security infrastructure enabled by (Python 3) __HARDCODED_CREDENTIALS_URL
+was: Web-app security infrastructure enabled by (Python 3) __HARDCODED_CREDENTIALS_CODEXM_PYTHON
+was: Web-app security infrastructure enabled by (Python 3) __WEAK_PASSWORD_HASH_CODEXM_PYTHON
+was: Web-app security infrastructure enabled by (C#) INSECURE_COMMUNICATION
+was: Web-app security infrastructure enabled by (C#) BAD_CERT_VERIFICATION
+was: Web-app security infrastructure enabled by (Python 3) BAD_CERT_VERIFICATION
+was: Web-app security infrastructure enabled by (C#) WEAK_PASSWORD_HASH
+was: Web-app security infrastructure enabled by (Python 3) WEAK_PASSWORD_HASH
+was: Web-app security infrastructure enabled by (C#) HARDCODED_CREDENTIALS
+was: Web-app security infrastructure enabled by (Python 3) HARDCODED_CREDENTIALS
+was: Web-app security infrastructure enabled by (C#) XSS
+was: Web-app security infrastructure enabled by (Python 3) XSS
+was: Web-app security infrastructure enabled by (C#) SQLI
+was: Web-app security infrastructure enabled by (Python 3) SQLI
+was: Web-app security infrastructure enabled by (C#) PATH_MANIPULATION
+was: Web-app security infrastructure enabled by (Python 3) PATH_MANIPULATION
+was: Web-app security infrastructure enabled by (C#) OPEN_REDIRECT
+was: Web-app security infrastructure enabled by (Python 3) OPEN_REDIRECT
+was: Web-app security infrastructure enabled by (C#) OS_CMD_INJECTION
+was: Web-app security infrastructure enabled by (Python 3) OS_CMD_INJECTION
+was: Web-app security infrastructure enabled by (C#) UNENCRYPTED_SENSITIVE_DATA
+was: Web-app security infrastructure enabled by (C#) CSRF
+was: Web-app security infrastructure enabled by (Python 3) CSRF
+was: Web-app security infrastructure enabled by (C#) MASS_ASSIGNMENT
+was: Web-app security infrastructure enabled by (Python 3) COOKIE_INJECTION
+was: Web-app security infrastructure enabled by (C#) HEADER_INJECTION
+was: Web-app security infrastructure enabled by (Python 3) HEADER_INJECTION
+was: Web-app security infrastructure enabled by (C#) REGEX_INJECTION
+was: Web-app security infrastructure enabled by (Python 3) REGEX_INJECTION
+was: Web-app security infrastructure enabled by (C#) SESSION_FIXATION
+was: Web-app security infrastructure enabled by (C#) NOSQL_QUERY_INJECTION
+was: Web-app security infrastructure enabled by (Python 3) NOSQL_QUERY_INJECTION
+was: Web-app security infrastructure enabled by (C#) SCRIPT_CODE_INJECTION
+was: Web-app security infrastructure enabled by (Python 3) SCRIPT_CODE_INJECTION
+was: Web-app security infrastructure enabled by (C#) SENSITIVE_DATA_LEAK
+was: Web-app security infrastructure enabled by (Python 3) SENSITIVE_DATA_LEAK
+was: Web-app security infrastructure enabled by (C#) RISKY_CRYPTO
+was: Web-app security infrastructure enabled by (C#) TAINT_ASSERT
+was: Web-app security infrastructure enabled by (Python 3) TEMPLATE_INJECTION
+was: Web-app security infrastructure enabled by (C#) MISSING_AUTHZ
+was: Web-app security infrastructure enabled by (Python 3) MISSING_AUTHZ
+was: Web-app security infrastructure enabled by (C#) UNSAFE_DESERIALIZATION
+was: Web-app security infrastructure enabled by (Python 3) UNSAFE_DESERIALIZATION
+was: Web-app security infrastructure enabled by (C#) INSECURE_RANDOM
+was: Web-app security infrastructure enabled by (Python 3) INSECURE_RANDOM
+was: Web-app security infrastructure enabled by (Python 3) INSECURE_SALT
+was: Web-app security infrastructure enabled by (C#) XPATH_INJECTION
+was: Web-app security infrastructure enabled by (C#) URL_MANIPULATION
+was: Web-app security infrastructure enabled by (Python 3) URL_MANIPULATION
+was: Web-app security infrastructure enabled by (Python 3) INSUFFICIENT_LOGGING
+was: Web-app security infrastructure enabled by (C#) XML_EXTERNAL_ENTITY
+was: Web-app security infrastructure enabled by (Text) CONFIG.UNSAFE_SESSION_TIMEOUT
+was: Web-app security infrastructure enabled by (C#) CONFIG.ENABLED_DEBUG_MODE
+was: Web-app security infrastructure enabled by (Text) CONFIG.ENABLED_DEBUG_MODE
+was: Web-app security infrastructure enabled by (C#) SSRF
+startup: AMReqMB 1024
+startup: WUReqMB 2048
+wlink: Identifying web applications
+wlink: Linking web-app archive bytecode
+wlink: Web-app linker scanned 0 web-apps (found: 0 classfiles, 0 jars, and 0 other files)
+wlink: Webapps domains found: 0 Android app domains found: 1
+emitdb: callgraph.cpp:2756 11111111
+emitdb: callgraph.cpp:2786 11000011
+emitdb: callgraph.cpp:2806 11000011
+fwa: Starting Framework Analysis
+aqs: Started server on 127.0.0.1:5142
+fwa: [INFO] Processing dir: C:/Users/CARLOS~1/AppData/Local/Temp/cov-CarlosAlmeyda/69caf617797ff2d017ddb9de1c264b87/fwa/dom-0
+fwa: [INFO] Framework Analyzer outputs
+fwa: [INFO]   Unpacked files at: C:\Users\CARLOS~1\AppData\Local\Temp\cov-CarlosAlmeyda\69caf617797ff2d017ddb9de1c264b87\fwa\dom-0
+fwa: [INFO]   Temp files: C:\Users\CARLOS~1\AppData\Local\Temp\cov-CarlosAlmeyda\69caf617797ff2d017ddb9de1c264b87\fwa\dom-0.tmp
+fwa: [INFO] Executed command: 
+fwa: C:\Program Files\Coverity\Coverity Static Analysis\python3.11\bin\python3.11.exe -E C:\Users\CARLOS~1\AppData\Local\Temp\cov-CarlosAlmeyda\69caf617797ff2d017ddb9de1c264b87\fwa\code\Main.pyc --python-dir C:\Users\CARLOS~1\AppData\Local\Temp\cov-CarlosAlmeyda\69caf617797ff2d017ddb9de1c264b87\fwa\code @C:/Users/CARLOS~1/AppData/Local/Temp/cov-CarlosAlmeyda/69caf617797ff2d017ddb9de1c264b87/fwa-argfile.txt 
+aqs: Cached 0 class annotation relations
+aqs: Cached 0 method annotation relations
+aqs: Coverity Framework Analyzer
+aqs: Copyright 2012-2022 Black Duck Software, Inc. All rights reserved.
+aqs: 
+aqs: Settings::opts = Namespace(scan=['C:\\Users\\CARLOS~1\\AppData\\Local\\Temp\\cov-CarlosAlmeyda\\69caf617797ff2d017ddb9de1c264b87\\fwa\\dom-0'], temp_dir=['C:\\Users\\CARLOS~1\\AppData\\Local\\Temp\\cov-CarlosAlmeyda\\69caf617797ff2d017ddb9de1c264b87\\fwa\\dom-0.tmp'], log=['C:\\coverity-testing\\forgeai\\idir\\output\\fwa-0-debug.log'], framework_config=['C:\\coverity-testing\\forgeai\\idir\\output\\fwa-0-config.json'], python_dir=['C:\\Users\\CARLOS~1\\AppData\\Local\\Temp\\cov-CarlosAlmeyda\\69caf617797ff2d017ddb9de1c264b87\\fwa\\code'], max_filesize=None, webapp_id=['0'], disable=None, disable_default=False, enable=None, app_root_path=['C:\\coverity-testing\\forgeai'], list_plugins=None, aqs_port=['5142'], aqs_key_file=['C:\\Users\\CARLOS~1\\AppData\\Local\\Temp\\cov-CarlosAlmeyda\\69caf617797ff2d017ddb9de1c264b87\\analysis-query-server.key'])
+fwa: [INFO] Registering framework configuration: C:/coverity-testing/forgeai/idir/output/fwa-0-config.json
+fwa: Cumulative AQS stats: requests=455 out_bytes=1764K
+http: Shutdown server: total requests=455 out_bytes=1764K
+fwa: Framework analyzer time: 2297 ms
+codexm: Initializing data gathered from CodeXM
+directives: ===== User directives:
+directives: === Language: apex
+directives: Directive Kind                                     Number
+directives: --------------                                     ------
+directives: === Language: cpp
+directives: Directive Kind                                     Number
+directives: --------------                                     ------
+directives: === Language: cs
+directives: Directive Kind                                     Number
+directives: --------------                                     ------
+directives: === Language: cuda
+directives: Directive Kind                                     Number
+directives: --------------                                     ------
+directives: === Language: dart
+directives: Directive Kind                                     Number
+directives: --------------                                     ------
+directives: === Language: fortran
+directives: Directive Kind                                     Number
+directives: --------------                                     ------
+directives: === Language: go
+directives: Directive Kind                                     Number
+directives: --------------                                     ------
+directives: === Language: java
+directives: Directive Kind                                     Number
+directives: --------------                                     ------
+directives: === Language: javascript
+directives: Directive Kind                                     Number
+directives: --------------                                     ------
+directives: === Language: kotlin
+directives: Directive Kind                                     Number
+directives: --------------                                     ------
+directives: === Language: objc
+directives: Directive Kind                                     Number
+directives: --------------                                     ------
+directives: === Language: php
+directives: Directive Kind                                     Number
+directives: --------------                                     ------
+directives: === Language: python2
+directives: Directive Kind                                     Number
+directives: --------------                                     ------
+directives: === Language: python3
+directives: Directive Kind                                     Number
+directives: --------------                                     ------
+directives: === Language: ruby
+directives: Directive Kind                                     Number
+directives: --------------                                     ------
+directives: === Language: rust
+directives: Directive Kind                                     Number
+directives: --------------                                     ------
+directives: === Language: scala
+directives: Directive Kind                                     Number
+directives: --------------                                     ------
+directives: === Language: swift
+directives: Directive Kind                                     Number
+directives: --------------                                     ------
+directives: === Language: text-files
+directives: Directive Kind                                     Number
+directives: --------------                                     ------
+directives: === Language: typescript
+directives: Directive Kind                                     Number
+directives: --------------                                     ------
+directives: === Language: vb
+directives: Directive Kind                                     Number
+directives: --------------                                     ------
+rta: RTA discarded 310949 functions
+directives: Optimizing dataflow configuration
+directives: Optimizing dataflow configuration
+emit: 22 analyzable symbols in callgraph
+emitdb: callgraph.cpp:2858 11000000
+dyncg: N/A or no data
+cicx: Running: C:/Program Files/Coverity/Coverity Static Analysis/bin/cov-internal-calc-xrefs.exe --outputdir C:/coverity-testing/forgeai/idir/output --dir C:/coverity-testing/forgeai/idir --output-file C:/coverity-testing/forgeai/idir/output/merged-xrefs --strip-path C:\coverity-testing\forgeai --no-timestamp --progress-file-v1 C:\Users\CARLOS~1\AppData\Local\Temp\cov-CarlosAlmeyda\69caf617797ff2d017ddb9de1c264b87\calc-xrefs-progress --tus-file C:\coverity-testing\forgeai\idir\output\calc-xrefs-tus
+general: Starting analysis
+da: Loaded 123 models from emit DB.
+Sigma analysis info: Running sigma analysis...
+Sigma analysis info: Using Sigma version: 2025.11.0
+Sigma analysis info: Command line for sigma C:\Program Files\Coverity\Coverity Static Analysis\sigma\bin\sigma.exe --config C:\coverity-testing\forgeai\idir\output\sigma-config.json analyze C:\coverity-testing\forgeai\idir\output\sigma
+Sigma analysis info: Files dumped: 449
+Sigma analysis info: Exit status: 0
+Sigma stdout: Copyright (c) 2025 Black Duck Software, Inc.
+Sigma stdout: Sigma version : 2025.11.0
+Sigma stdout: For documentation and support, visit https://documentation.blackduck.com/bundle/sigma-ug/page/topics/sigma_user_guide.html
+Sigma stdout: By using this software, the user accepts the terms of Black Duck Software's end user software license and maintenance agreement found at: https://www.blackduck.com/company/legal.html
+Sigma stdout: 
+Sigma stdout: 2026-03-04 18:20:09 INFO Telemetry data conforms to schema e64f13671933fe956d8d8d73fa1d2a2308642cb2c67680b84fd4d1910a106893
+Sigma stdout: 2026-03-04 18:20:09 INFO Analysis done in 2 seconds
+Sigma stdout: 2026-03-04 18:20:09 INFO Found 2 defects
+Sigma stdout: 
+Sigma stdout: Identified
+Sigma stdout: 
+Sigma stdout: │File Type │Occurrences│
+Sigma stdout: ├──────────┼───────────┤
+Sigma stdout: │Unknown   │        384│
+Sigma stdout: │Ruby      │         32│
+Sigma stdout: │Markdown  │          9│
+Sigma stdout: │Ruby HTML │          5│
+Sigma stdout: │JSON      │          3│
+Sigma stdout: │YAML      │          3│
+Sigma stdout: │TOML      │          1│
+Sigma stdout: │Plain Text│          1│
+Sigma stdout: │MSBuild   │          1│
+Sigma stdout: │Python    │          1│
+Sigma stdout: │C#        │          1│
+Sigma stdout: 
+Sigma stdout: 
+Sigma stdout: Issues
+Sigma stdout: 
+Sigma stdout: │        Type         │ Tags │Occurrences│
+Sigma stdout: ├─────────────────────┼──────┼───────────┤
+Sigma stdout: │hardcoded_secret_file│secret│          2│
+Sigma stdout: 
+Sigma stdout: Full results: C:\coverity-testing\forgeai\idir\output\sigma-output.json
+Sigma stdout: 
+Sigma stdout: Found 2 issues in 2 seconds
+Brakeman Pro: Running Brakeman Pro...
+Brakeman Pro: Command line for Brakeman Pro C:\Program Files\Coverity\Coverity Static Analysis\ruby\bin\ruby -I C:\Program Files\Coverity\Coverity Static Analysis\ruby\lib\ruby\3.4.0 -I C:\Program Files\Coverity\Coverity Static Analysis\ruby\lib\ruby\3.4.0\x64-mingw-ucrt C:\Program Files\Coverity\Coverity Static Analysis\brakeman-pro\bin\brakeman-pro -p C:\coverity-testing\forgeai\idir\output\brakeman-pro-sa\app-src --cov-src-map C:/coverity-testing/forgeai/idir/output/brakeman-pro-sa/src-map.json --format cov -o C:\coverity-testing\forgeai\idir\output\BRAKEMAN.errors.xml --no-exit-on-warn --no-progress -t BAD_CERT_VERIFICATION,COOKIE_SERIALIZER_CONFIG,CSRF,DENY_LIST_FOR_AUTHN,DIVIDE_BY_ZERO,DYNAMIC_OBJECT_ATTRIBUTES,END_OF_LIFE_RAILS,END_OF_LIFE_RUBY,HARDCODED_CREDENTIALS,OPEN_REDIRECT,OS_CMD_INJECTION,PATH_MANIPULATION,RAILS_DEFAULT_ROUTES,RAILS_DEVISE_CONFIG,RAILS_MISSING_FILTER_ACTION,REGEX_INJECTION,REGEX_MISSING_ANCHOR,RESOURCE_LEAK,REVERSE_TABNABBING,RUBY_VULNERABLE_LIBRARY,SCRIPT_CODE_INJECTION,SENSITIVE_DATA_LEAK,SESSION_MANIPULATION,SQLI,STRICT_TRANSPORT_SECURITY,TEMPLATE_INJECTION,UNSAFE_BASIC_AUTH,UNSAFE_DESERIALIZATION,UNSAFE_REFLECTION,UNSAFE_SESSION_SETTING,WEAK_PASSWORD_HASH,XSS
+Brakeman Pro: Exit status: 4
+dm-access-lib: AM listening for DM at 127.0.0.1:55562
+dm-access-lib: AM starting DM with command line: C:/Program Files/Coverity/Coverity Static Analysis/bin/cov-internal-dm.exe --AM-port 55562 --log-file C:/coverity-testing/forgeai/idir/output/distributor.log -j 12 --AW-timeout 36000 C:\Program Files\Coverity\Coverity Static Analysis\bin\cov-analyze.exe --worker --message-size-limit 104857600
+dm-access-lib: DM started: dm_pid=11040
+dm-access-lib: AM got connection from DM: (local) 127.0.0.1:55562 - 127.0.0.1:55563 (remote)
+makeWUP: ENABLE_ONLY0
+makeWUP: stat0
+makeWUP: stat2
+makeWUP: stat1
+makeWUP: BUDA_callgraph_0
+makeWUP: BUDA_callgraph_12
+wurlegend: <phase><n> dw_id wup_bytes dw_ms wur_bytes aw_ms [mem] paths (rest are labeled)
+wur: stat1 2 12901 578 342 0 mem=95379456 max=100569088 19 nr=11 n: batch 0
+makeWUP: BUDA_callgraph_14
+makeWUP: BUDA_callgraph_18
+makeWUP: BUDA_callgraph_17
+makeWUP: BUDA_callgraph_13
+makeWUP: BUDA_callgraph_16
+makeWUP: BUDA_callgraph_22
+makeWUP: BUDA_callgraph_21
+makeWUP: BUDA_callgraph_15
+makeWUP: BUDA_callgraph_20
+makeWUP: BUDA_callgraph_19
+makeWUP: BUDA_callgraph_7
+makeWUP: BUDA_callgraph_3
+makeWUP: BUDA_callgraph_6
+makeWUP: BUDA_callgraph_11
+makeWUP: BUDA_callgraph_8
+makeWUP: BUDA_callgraph_4
+makeWUP: BUDA_callgraph_2
+makeWUP: BUDA_callgraph_10
+makeWUP: BUDA_callgraph_1
+makeWUP: BUDA_callgraph_9
+makeWUP: BUDA_callgraph_5
+wur: stat2 1 18995 563 1534 0 mem=95535104 max=100712448 0 nr=11 n: batch 1
+makeWUP: stat3
+makeWUP: conc0
+makeWUP: conc12
+makeWUP: conc14
+makeWUP: conc16
+makeWUP: conc17
+makeWUP: conc21
+makeWUP: conc15
+makeWUP: conc13
+makeWUP: conc22
+makeWUP: conc18
+makeWUP: conc20
+makeWUP: conc19
+makeWUP: conc7
+makeWUP: conc3
+makeWUP: conc6
+makeWUP: conc2
+makeWUP: conc5
+makeWUP: conc10
+makeWUP: conc1
+makeWUP: conc11
+makeWUP: conc9
+wur: conc12 1 5380 125 119 125 92 n: !main.py!%SCRIPT in TU 404
+wur: conc7 1 1630 16 626 16 4 n: GenerateRequest::op_Equality(GenerateRequest,GenerateRequest)System.Boolean in TU 1
+makeWUP: conc8
+wur: conc3 1 1266 0 567 0 1 n: GenerateRequest::get_Prompt()System.String in TU 1
+wur: conc22 1 1055 0 256 0 2 n: !main.py!validate_prompt_no_control_chars in TU 404
+makeWUP: conc4
+wur: conc5 1 1643 0 387 0 2 n: GenerateRequest::Equals(System.Object)System.Boolean in TU 1
+wur: conc9 1 1316 16 816 0 1 n: GenerateRequest::set_Prompt(System.String)System.Void in TU 1
+wur: conc11 1 3524 0 357 0 16 n: Program::<Main>$(System.String[])System.Void in TU 1
+wur: conc1 1 1645 0 743 0 1 n: GenerateRequest::.ctor(System.String)System.Void in TU 1
+wur: conc10 1 1325 15 168 15 1 n: Program::.ctor()System.Void in TU 1
+wur: conc8 1 2245 0 636 0 8 n: GenerateRequest::op_Inequality(GenerateRequest,GenerateRequest)System.Boolean in TU 1
+wur: conc2 1 1395 0 399 0 1 n: GenerateRequest::<Clone>$()GenerateRequest in TU 1
+wur: conc4 1 1828 0 1228 0 1 n: GenerateRequest::Deconstruct(System.String&)System.Void in TU 1
+wur: conc6 1 1300 0 451 0 1 n: GenerateRequest::get_EqualityContract()System.Type in TU 1
+wur: conc13 1 940 0 303 0 1 n: !main.py!GenerateRequest:%CONSTRUCTOR in TU 404
+wur: conc15 1 971 0 308 0 1 n: !main.py!GenerateResponseJson:%CONSTRUCTOR in TU 404
+wur: conc19 1 772 31 117 31 1 n: !main.py!health in TU 404
+wur: conc20 1 808 0 117 0 1 n: !main.py!index in TU 404
+wur: conc17 1 1918 0 501 0 4 n: !main.py!generate in TU 404
+wur: conc18 1 3299 16 52 16 10 n: !main.py!generate_placeholder_png in TU 404
+wur: conc16 1 1687 0 117 0 1 n: !main.py!GenerateResponseJson:%DEFINITION in TU 404
+wur: conc14 1 1441 0 117 0 1 n: !main.py!GenerateRequest:%DEFINITION in TU 404
+wur: conc21 1 1219 16 608 16 3 n: !main.py!log_correlation_id in TU 404
+makeWUP: conc23
+makeWUP: PER_TU0
+makeWUP: PER_TU449
+makeWUP: PER_TU448
+makeWUP: PER_TU447
+makeWUP: PER_TU446
+makeWUP: PER_TU445
+makeWUP: PER_TU444
+makeWUP: PER_TU443
+makeWUP: PER_TU442
+makeWUP: PER_TU441
+makeWUP: PER_TU440
+makeWUP: PER_TU439
+makeWUP: PER_TU438
+makeWUP: PER_TU437
+makeWUP: PER_TU436
+makeWUP: PER_TU435
+makeWUP: PER_TU434
+makeWUP: PER_TU433
+makeWUP: PER_TU432
+makeWUP: PER_TU431
+makeWUP: PER_TU430
+makeWUP: PER_TU429
+makeWUP: PER_TU428
+makeWUP: PER_TU427
+makeWUP: PER_TU426
+makeWUP: PER_TU425
+makeWUP: PER_TU424
+makeWUP: PER_TU423
+makeWUP: PER_TU422
+makeWUP: PER_TU421
+makeWUP: PER_TU420
+makeWUP: PER_TU419
+makeWUP: PER_TU418
+makeWUP: PER_TU417
+makeWUP: PER_TU416
+makeWUP: PER_TU415
+makeWUP: PER_TU414
+makeWUP: PER_TU413
+makeWUP: PER_TU412
+makeWUP: PER_TU411
+makeWUP: PER_TU410
+makeWUP: PER_TU409
+makeWUP: PER_TU408
+makeWUP: PER_TU407
+makeWUP: PER_TU406
+makeWUP: PER_TU405
+makeWUP: PER_TU404
+makeWUP: PER_TU403
+makeWUP: PER_TU402
+makeWUP: PER_TU401
+makeWUP: PER_TU400
+makeWUP: PER_TU399
+makeWUP: PER_TU398
+makeWUP: PER_TU397
+makeWUP: PER_TU396
+makeWUP: PER_TU395
+makeWUP: PER_TU394
+makeWUP: PER_TU393
+makeWUP: PER_TU392
+makeWUP: PER_TU391
+makeWUP: PER_TU390
+makeWUP: PER_TU389
+makeWUP: PER_TU388
+makeWUP: PER_TU387
+makeWUP: PER_TU386
+makeWUP: PER_TU385
+makeWUP: PER_TU384
+makeWUP: PER_TU383
+makeWUP: PER_TU382
+makeWUP: PER_TU381
+makeWUP: PER_TU380
+makeWUP: PER_TU379
+makeWUP: PER_TU378
+makeWUP: PER_TU377
+makeWUP: PER_TU376
+makeWUP: PER_TU375
+makeWUP: PER_TU374
+makeWUP: PER_TU373
+makeWUP: PER_TU372
+makeWUP: PER_TU371
+makeWUP: PER_TU370
+makeWUP: PER_TU369
+makeWUP: PER_TU368
+makeWUP: PER_TU367
+makeWUP: PER_TU366
+makeWUP: PER_TU365
+makeWUP: PER_TU364
+makeWUP: PER_TU363
+makeWUP: PER_TU362
+makeWUP: PER_TU361
+makeWUP: PER_TU360
+makeWUP: PER_TU359
+makeWUP: PER_TU358
+makeWUP: PER_TU357
+makeWUP: PER_TU356
+makeWUP: PER_TU355
+makeWUP: PER_TU354
+makeWUP: PER_TU353
+makeWUP: PER_TU352
+makeWUP: PER_TU351
+makeWUP: PER_TU350
+makeWUP: PER_TU349
+makeWUP: PER_TU348
+makeWUP: PER_TU347
+makeWUP: PER_TU346
+makeWUP: PER_TU345
+makeWUP: PER_TU344
+makeWUP: PER_TU343
+makeWUP: PER_TU342
+makeWUP: PER_TU341
+makeWUP: PER_TU340
+makeWUP: PER_TU339
+makeWUP: PER_TU338
+makeWUP: PER_TU337
+makeWUP: PER_TU336
+makeWUP: PER_TU335
+makeWUP: PER_TU334
+makeWUP: PER_TU333
+makeWUP: PER_TU332
+makeWUP: PER_TU331
+makeWUP: PER_TU330
+makeWUP: PER_TU329
+makeWUP: PER_TU328
+makeWUP: PER_TU327
+makeWUP: PER_TU326
+makeWUP: PER_TU325
+makeWUP: PER_TU324
+makeWUP: PER_TU323
+makeWUP: PER_TU322
+makeWUP: PER_TU321
+makeWUP: PER_TU320
+makeWUP: PER_TU319
+makeWUP: PER_TU318
+makeWUP: PER_TU317
+makeWUP: PER_TU316
+makeWUP: PER_TU315
+makeWUP: PER_TU314
+makeWUP: PER_TU313
+makeWUP: PER_TU312
+makeWUP: PER_TU311
+makeWUP: PER_TU310
+makeWUP: PER_TU309
+makeWUP: PER_TU308
+makeWUP: PER_TU307
+makeWUP: PER_TU306
+makeWUP: PER_TU305
+makeWUP: PER_TU304
+makeWUP: PER_TU303
+makeWUP: PER_TU302
+makeWUP: PER_TU301
+makeWUP: PER_TU300
+makeWUP: PER_TU299
+makeWUP: PER_TU298
+makeWUP: PER_TU297
+makeWUP: PER_TU296
+makeWUP: PER_TU295
+makeWUP: PER_TU294
+makeWUP: PER_TU293
+makeWUP: PER_TU292
+makeWUP: PER_TU291
+makeWUP: PER_TU290
+makeWUP: PER_TU289
+makeWUP: PER_TU288
+makeWUP: PER_TU287
+makeWUP: PER_TU286
+makeWUP: PER_TU285
+makeWUP: PER_TU284
+makeWUP: PER_TU283
+makeWUP: PER_TU282
+makeWUP: PER_TU281
+makeWUP: PER_TU280
+makeWUP: PER_TU279
+makeWUP: PER_TU278
+makeWUP: PER_TU277
+makeWUP: PER_TU276
+makeWUP: PER_TU275
+makeWUP: PER_TU274
+makeWUP: PER_TU273
+makeWUP: PER_TU272
+makeWUP: PER_TU271
+makeWUP: PER_TU270
+makeWUP: PER_TU269
+makeWUP: PER_TU268
+makeWUP: PER_TU267
+makeWUP: PER_TU266
+makeWUP: PER_TU265
+makeWUP: PER_TU264
+makeWUP: PER_TU263
+makeWUP: PER_TU262
+makeWUP: PER_TU261
+makeWUP: PER_TU260
+makeWUP: PER_TU259
+makeWUP: PER_TU258
+makeWUP: PER_TU257
+makeWUP: PER_TU256
+makeWUP: PER_TU255
+makeWUP: PER_TU254
+makeWUP: PER_TU253
+makeWUP: PER_TU252
+makeWUP: PER_TU251
+makeWUP: PER_TU250
+makeWUP: PER_TU249
+makeWUP: PER_TU248
+makeWUP: PER_TU247
+makeWUP: PER_TU246
+makeWUP: PER_TU245
+makeWUP: PER_TU244
+makeWUP: PER_TU243
+makeWUP: PER_TU242
+makeWUP: PER_TU241
+makeWUP: PER_TU240
+makeWUP: PER_TU239
+makeWUP: PER_TU238
+makeWUP: PER_TU237
+makeWUP: PER_TU236
+makeWUP: PER_TU235
+makeWUP: PER_TU234
+makeWUP: PER_TU233
+makeWUP: PER_TU232
+makeWUP: PER_TU231
+makeWUP: PER_TU230
+makeWUP: PER_TU229
+makeWUP: PER_TU228
+makeWUP: PER_TU227
+makeWUP: PER_TU226
+makeWUP: PER_TU225
+makeWUP: PER_TU224
+makeWUP: PER_TU223
+makeWUP: PER_TU222
+makeWUP: PER_TU221
+makeWUP: PER_TU220
+makeWUP: PER_TU219
+makeWUP: PER_TU218
+makeWUP: PER_TU217
+makeWUP: PER_TU216
+makeWUP: PER_TU215
+makeWUP: PER_TU214
+makeWUP: PER_TU213
+makeWUP: PER_TU212
+makeWUP: PER_TU211
+makeWUP: PER_TU210
+makeWUP: PER_TU209
+makeWUP: PER_TU208
+makeWUP: PER_TU207
+makeWUP: PER_TU206
+makeWUP: PER_TU205
+makeWUP: PER_TU204
+makeWUP: PER_TU203
+makeWUP: PER_TU202
+makeWUP: PER_TU201
+makeWUP: PER_TU200
+makeWUP: PER_TU199
+makeWUP: PER_TU198
+makeWUP: PER_TU197
+makeWUP: PER_TU196
+makeWUP: PER_TU195
+makeWUP: PER_TU194
+makeWUP: PER_TU193
+makeWUP: PER_TU192
+makeWUP: PER_TU191
+makeWUP: PER_TU190
+makeWUP: PER_TU189
+makeWUP: PER_TU188
+makeWUP: PER_TU187
+makeWUP: PER_TU186
+makeWUP: PER_TU185
+makeWUP: PER_TU184
+makeWUP: PER_TU183
+makeWUP: PER_TU182
+makeWUP: PER_TU181
+makeWUP: PER_TU180
+makeWUP: PER_TU179
+makeWUP: PER_TU178
+makeWUP: PER_TU177
+makeWUP: PER_TU176
+makeWUP: PER_TU175
+makeWUP: PER_TU174
+makeWUP: PER_TU173
+makeWUP: PER_TU172
+makeWUP: PER_TU171
+makeWUP: PER_TU170
+makeWUP: PER_TU169
+makeWUP: PER_TU168
+makeWUP: PER_TU167
+makeWUP: PER_TU166
+makeWUP: PER_TU165
+makeWUP: PER_TU164
+makeWUP: PER_TU163
+makeWUP: PER_TU162
+makeWUP: PER_TU161
+makeWUP: PER_TU160
+makeWUP: PER_TU159
+makeWUP: PER_TU158
+makeWUP: PER_TU157
+makeWUP: PER_TU156
+makeWUP: PER_TU155
+makeWUP: PER_TU154
+makeWUP: PER_TU153
+makeWUP: PER_TU152
+makeWUP: PER_TU151
+makeWUP: PER_TU150
+makeWUP: PER_TU149
+makeWUP: PER_TU148
+makeWUP: PER_TU147
+makeWUP: PER_TU146
+makeWUP: PER_TU145
+makeWUP: PER_TU144
+makeWUP: PER_TU143
+makeWUP: PER_TU142
+makeWUP: PER_TU141
+makeWUP: PER_TU140
+makeWUP: PER_TU139
+makeWUP: PER_TU138
+makeWUP: PER_TU137
+makeWUP: PER_TU136
+makeWUP: PER_TU135
+makeWUP: PER_TU134
+makeWUP: PER_TU133
+makeWUP: PER_TU132
+makeWUP: PER_TU131
+makeWUP: PER_TU130
+makeWUP: PER_TU129
+makeWUP: PER_TU128
+makeWUP: PER_TU127
+makeWUP: PER_TU126
+makeWUP: PER_TU125
+makeWUP: PER_TU124
+makeWUP: PER_TU123
+makeWUP: PER_TU122
+makeWUP: PER_TU121
+makeWUP: PER_TU120
+makeWUP: PER_TU119
+makeWUP: PER_TU118
+makeWUP: PER_TU117
+makeWUP: PER_TU116
+makeWUP: PER_TU115
+makeWUP: PER_TU114
+makeWUP: PER_TU113
+makeWUP: PER_TU112
+makeWUP: PER_TU111
+makeWUP: PER_TU110
+makeWUP: PER_TU109
+makeWUP: PER_TU108
+makeWUP: PER_TU107
+makeWUP: PER_TU106
+makeWUP: PER_TU105
+makeWUP: PER_TU104
+makeWUP: PER_TU103
+makeWUP: PER_TU102
+makeWUP: PER_TU101
+makeWUP: PER_TU100
+makeWUP: PER_TU99
+makeWUP: PER_TU98
+makeWUP: PER_TU97
+makeWUP: PER_TU96
+makeWUP: PER_TU95
+makeWUP: PER_TU94
+makeWUP: PER_TU93
+makeWUP: PER_TU92
+makeWUP: PER_TU91
+makeWUP: PER_TU90
+makeWUP: PER_TU89
+makeWUP: PER_TU88
+makeWUP: PER_TU87
+makeWUP: PER_TU86
+makeWUP: PER_TU85
+makeWUP: PER_TU84
+makeWUP: PER_TU83
+makeWUP: PER_TU82
+makeWUP: PER_TU81
+makeWUP: PER_TU80
+makeWUP: PER_TU79
+makeWUP: PER_TU78
+makeWUP: PER_TU77
+makeWUP: PER_TU76
+makeWUP: PER_TU75
+makeWUP: PER_TU74
+makeWUP: PER_TU73
+makeWUP: PER_TU72
+makeWUP: PER_TU71
+makeWUP: PER_TU70
+makeWUP: PER_TU69
+makeWUP: PER_TU68
+makeWUP: PER_TU67
+tu_timing: 0 ms spent on tu 388
+makeWUP: PER_TU66
+tu_timing: 0 ms spent on tu 389
+makeWUP: PER_TU65
+tu_timing: 0 ms spent on tu 390
+makeWUP: PER_TU64
+tu_timing: 0 ms spent on tu 384
+makeWUP: PER_TU63
+tu_timing: 0 ms spent on tu 403
+makeWUP: PER_TU62
+tu_timing: 0 ms spent on tu 438
+makeWUP: PER_TU61
+tu_timing: 0 ms spent on tu 449
+makeWUP: PER_TU60
+tu_timing: 0 ms spent on tu 448
+makeWUP: PER_TU59
+tu_timing: 0 ms spent on tu 447
+makeWUP: PER_TU58
+tu_timing: 0 ms spent on tu 446
+makeWUP: PER_TU57
+tu_timing: 0 ms spent on tu 445
+makeWUP: PER_TU56
+tu_timing: 0 ms spent on tu 439
+makeWUP: PER_TU55
+tu_timing: 0 ms spent on tu 402
+makeWUP: PER_TU54
+tu_timing: 0 ms spent on tu 401
+makeWUP: PER_TU53
+tu_timing: 0 ms spent on tu 400
+makeWUP: PER_TU52
+tu_timing: 0 ms spent on tu 444
+makeWUP: PER_TU51
+tu_timing: 0 ms spent on tu 443
+makeWUP: PER_TU50
+tu_timing: 0 ms spent on tu 442
+makeWUP: PER_TU49
+tu_timing: 0 ms spent on tu 441
+makeWUP: PER_TU48
+tu_timing: 0 ms spent on tu 440
+makeWUP: PER_TU47
+tu_timing: 0 ms spent on tu 399
+makeWUP: PER_TU46
+tu_timing: 0 ms spent on tu 398
+makeWUP: PER_TU45
+tu_timing: 0 ms spent on tu 393
+makeWUP: PER_TU44
+tu_timing: 0 ms spent on tu 396
+makeWUP: PER_TU43
+tu_timing: 0 ms spent on tu 397
+makeWUP: PER_TU42
+tu_timing: 0 ms spent on tu 395
+makeWUP: PER_TU41
+tu_timing: 0 ms spent on tu 394
+makeWUP: PER_TU40
+tu_timing: 0 ms spent on tu 387
+makeWUP: PER_TU39
+tu_timing: 0 ms spent on tu 386
+makeWUP: PER_TU38
+tu_timing: 0 ms spent on tu 385
+makeWUP: PER_TU37
+tu_timing: 0 ms spent on tu 391
+makeWUP: PER_TU36
+tu_timing: 0 ms spent on tu 392
+makeWUP: PER_TU35
+makeWUP: PER_TU34
+makeWUP: PER_TU33
+makeWUP: PER_TU32
+makeWUP: PER_TU31
+makeWUP: PER_TU30
+makeWUP: PER_TU29
+makeWUP: PER_TU28
+makeWUP: PER_TU27
+makeWUP: PER_TU26
+makeWUP: PER_TU25
+makeWUP: PER_TU24
+makeWUP: PER_TU23
+makeWUP: PER_TU22
+makeWUP: PER_TU21
+makeWUP: PER_TU20
+makeWUP: PER_TU19
+makeWUP: PER_TU18
+makeWUP: PER_TU17
+makeWUP: PER_TU16
+makeWUP: PER_TU15
+makeWUP: PER_TU14
+makeWUP: PER_TU13
+makeWUP: PER_TU12
+makeWUP: PER_TU11
+makeWUP: PER_TU10
+makeWUP: PER_TU9
+makeWUP: PER_TU8
+makeWUP: PER_TU7
+makeWUP: PER_TU6
+makeWUP: PER_TU5
+makeWUP: PER_TU4
+makeWUP: PER_TU3
+makeWUP: PER_TU2
+makeWUP: PER_TU1
+makeWUP: conctd0
+makeWUP: conctd11
+makeWUP: conctd10
+makeWUP: conctd8
+makeWUP: conctd7
+makeWUP: conctd9
+makeWUP: conctd3
+makeWUP: conctd6
+makeWUP: conctd2
+makeWUP: conctd1
+makeWUP: conctd5
+makeWUP: conctd4
+makeWUP: conctd15
+makeWUP: conctd19
+makeWUP: conctd22
+makeWUP: conctd12
+makeWUP: conctd13
+makeWUP: conctd20
+makeWUP: conctd17
+makeWUP: conctd14
+makeWUP: conctd18
+makeWUP: conctd21
+makeWUP: conctd16
+makeWUP: conctd23
+makeWUP: gen0
+makeWUP: gen2
+makeWUP: gen1
+makeWUP: PER_TU450
+wur: gen2 1 41061 312 2274 312 44 nr=11 n: batch 1
+wur: gen1 1 42571 31 138 31 37 nr=11 n: batch 0
+makeWUP: gen3
+makeWUP: dataflowB1_0
+makeWUP: dataflowB1_2
+makeWUP: dataflowB1_1
+wur: dataflowB1_1 1 13173 0 534 0 20 nr=11 n: batch 0
+makeWUP: dataflowB1_3
+dyn_map_rw: Number of fns with dynamic reads: 0
+dyn_map_rw: Number of total dynamic reads: 0
+dyn_map_rw: Number of unresolvable dynamic reads: 0
+dyn_map_rw: Number of fns with dynamic calls: 0
+dyn_map_rw: Number of total dynamic calls: 0
+dyn_map_rw: Number of unresolvable dynamic calls: 0
+razor: Found 0 Razor section definitions
+webforms_dom: Summarized 0 Web Forms BuildControl methods
+makeWUP: BUDA_prepass_0
+makeWUP: BUDA_prepass_3
+makeWUP: BUDA_prepass_7
+makeWUP: BUDA_prepass_15
+makeWUP: BUDA_prepass_16
+makeWUP: BUDA_prepass_13
+makeWUP: BUDA_prepass_14
+makeWUP: BUDA_prepass_20
+makeWUP: BUDA_prepass_12
+makeWUP: BUDA_prepass_21
+makeWUP: BUDA_prepass_22
+makeWUP: BUDA_prepass_17
+makeWUP: BUDA_prepass_19
+makeWUP: BUDA_prepass_18
+makeWUP: BUDA_prepass_1
+makeWUP: BUDA_prepass_11
+makeWUP: BUDA_prepass_2
+makeWUP: BUDA_prepass_10
+wur: BUDA_prepass_3 1 878 0 191 0 0 n: GenerateRequest::get_Prompt()System.String in TU 1
+makeWUP: BUDA_prepass_6
+makeWUP: BUDA_prepass_5
+wur: BUDA_prepass_7 1 1172 0 71 0 0 n: GenerateRequest::op_Equality(GenerateRequest,GenerateRequest)System.Boolean in TU 1
+makeWUP: BUDA_prepass_9
+makeWUP: BUDA_prepass_4
+makeWUP: BUDA_prepass_8
+makeWUP: dataflowA1_0
+local: singleton DATAFLOW_ANALYSIS1 phase
+analyze_dataflow1_stat: resident set kbytes (pre DATAFLOW_ANALYSIS1 phase): 466596K
+analyze_dataflow1_stat: peak virtual memory kbytes (pre DATAFLOW_ANALYSIS1 phase): 434080K
+graph: Phase overhead for graph adjacency sets: 1KB 0.00% active
+analyze_dataflow1_stat: resident set kbytes (post DATAFLOW_ANALYSIS1 phase): 466804K
+analyze_dataflow1_stat: peak virtual memory kbytes (post DATAFLOW_ANALYSIS1 phase): 434080K
+wur: BUDA_prepass_11 1 2739 0 71 0 0 n: Program::<Main>$(System.String[])System.Void in TU 1
+wur: BUDA_prepass_2 1 1014 0 253 0 0 n: GenerateRequest::<Clone>$()GenerateRequest in TU 1
+wur: BUDA_prepass_6 1 920 0 96 0 0 n: GenerateRequest::get_EqualityContract()System.Type in TU 1
+wur: BUDA_prepass_9 1 934 0 144 0 0 n: GenerateRequest::set_Prompt(System.String)System.Void in TU 1
+wur: BUDA_prepass_4 1 1222 0 142 0 0 n: GenerateRequest::Deconstruct(System.String&)System.Void in TU 1
+wur: BUDA_prepass_8 1 1237 0 71 0 0 n: GenerateRequest::op_Inequality(GenerateRequest,GenerateRequest)System.Boolean in TU 1
+wur: BUDA_prepass_5 1 1170 0 71 0 0 n: GenerateRequest::Equals(System.Object)System.Boolean in TU 1
+wur: BUDA_prepass_1 1 1161 0 140 0 0 n: GenerateRequest::.ctor(System.String)System.Void in TU 1
+wur: BUDA_prepass_10 1 809 0 71 0 0 n: Program::.ctor()System.Void in TU 1
+makeWUP: BUDA_prepass_23
+wur: BUDA_callgraph_12 2 10761 1329 1066 1297 0 n: !main.py!%SCRIPT in TU 404
+wur: BUDA_callgraph_21 9 6611 2531 447 1312 mem=203673600 max=226934784 0 n: !main.py!log_correlation_id in TU 404
+wur: BUDA_callgraph_19 12 6101 2563 207 1282 mem=204025856 max=227229696 0 n: !main.py!health in TU 404
+wur: BUDA_callgraph_14 3 6842 2579 490 1250 mem=202592256 max=226705408 0 n: !main.py!GenerateRequest:%DEFINITION in TU 404
+wur: BUDA_callgraph_22 8 6461 2578 399 1250 mem=203735040 max=226996224 0 n: !main.py!validate_prompt_no_control_chars in TU 404
+wur: BUDA_callgraph_17 5 7300 2610 858 1281 mem=204611584 max=227233792 0 n: !main.py!generate in TU 404
+wur: BUDA_callgraph_20 11 6136 2625 238 1296 mem=204029952 max=227225600 0 n: !main.py!index in TU 404
+wur: BUDA_callgraph_13 6 6342 2641 326 1281 mem=203599872 max=226865152 0 n: !main.py!GenerateRequest:%CONSTRUCTOR in TU 404
+wur: BUDA_callgraph_15 10 6378 2641 331 1297 mem=204087296 max=226902016 0 n: !main.py!GenerateResponseJson:%CONSTRUCTOR in TU 404
+wur: BUDA_callgraph_16 7 7093 2672 573 1312 mem=204079104 max=227131392 0 n: !main.py!GenerateResponseJson:%DEFINITION in TU 404
+wur: BUDA_callgraph_18 4 8697 2688 942 1313 mem=204619776 max=227254272 0 n: !main.py!generate_placeholder_png in TU 404
+makeWUP: BUDA_callgraph_23
+makeWUP: BUDA_callgraph_14
+makeWUP: BUDA_callgraph_16
+makeWUP: BUDA_callgraph_17
+makeWUP: BUDA_statics_checkers_0
+makeWUP: BUDA_statics_checkers_12
+makeWUP: BUDA_statics_checkers_13
+makeWUP: BUDA_statics_checkers_15
+makeWUP: BUDA_statics_checkers_16
+makeWUP: BUDA_statics_checkers_14
+makeWUP: BUDA_statics_checkers_20
+makeWUP: BUDA_statics_checkers_17
+makeWUP: BUDA_statics_checkers_21
+makeWUP: BUDA_statics_checkers_22
+makeWUP: BUDA_statics_checkers_18
+makeWUP: BUDA_statics_checkers_19
+makeWUP: BUDA_statics_checkers_7
+makeWUP: BUDA_statics_checkers_3
+makeWUP: BUDA_statics_checkers_1
+makeWUP: BUDA_statics_checkers_11
+makeWUP: BUDA_statics_checkers_6
+makeWUP: BUDA_statics_checkers_10
+makeWUP: BUDA_statics_checkers_9
+makeWUP: BUDA_statics_checkers_5
+makeWUP: BUDA_statics_checkers_2
+makeWUP: dataflowB2_0
+makeWUP: dataflowB2_2
+makeWUP: dataflowB2_1
+wur: BUDA_statics_checkers_3 5 2447 0 844 0 1 n: GenerateRequest::get_Prompt()System.String in TU 1
+wur: BUDA_statics_checkers_6 8 2489 0 725 0 1 n: GenerateRequest::get_EqualityContract()System.Type in TU 1
+wur: BUDA_statics_checkers_7 4 2831 0 612 0 4 n: GenerateRequest::op_Equality(GenerateRequest,GenerateRequest)System.Boolean in TU 1
+wur: BUDA_statics_checkers_10 9 4322 0 611 0 1 n: Program::.ctor()System.Void in TU 1
+wur: BUDA_callgraph_17 3 12963 0 1866 0 0 n: !main.py!generate in TU 404
+wur: BUDA_statics_checkers_1 6 4674 0 877 0 1 n: GenerateRequest::.ctor(System.String)System.Void in TU 1
+wur: BUDA_callgraph_16 2 8591 0 580 0 mem=204627968 max=227667968 0 n: !main.py!GenerateResponseJson:%DEFINITION in TU 404
+wur: BUDA_statics_checkers_5 11 2829 0 611 0 2 n: GenerateRequest::Equals(System.Object)System.Boolean in TU 1
+wur: BUDA_statics_checkers_9 10 2503 0 880 0 1 n: GenerateRequest::set_Prompt(System.String)System.Void in TU 1
+wur: BUDA_statics_checkers_11 7 6480 0 612 0 8 n: Program::<Main>$(System.String[])System.Void in TU 1
+wur: BUDA_statics_checkers_2 12 2583 0 933 0 1 n: GenerateRequest::<Clone>$()GenerateRequest in TU 1
+makeWUP: BUDA_statics_checkers_4
+makeWUP: BUDA_statics_checkers_8
+wur: dataflowB2_1 2 17181 16 1116 16 25 nr=11 n: batch 0
+makeWUP: dataflowB2_3
+stats: AUTHZ_STAT: inferred 0 check requirements
+stats: AUTHZ_STAT: total checks : 0 / 0
+wur: BUDA_statics_checkers_8 2 4930 15 612 15 4 n: GenerateRequest::op_Inequality(GenerateRequest,GenerateRequest)System.Boolean in TU 1
+wur: BUDA_statics_checkers_4 3 5315 15 1031 15 1 n: GenerateRequest::Deconstruct(System.String&)System.Void in TU 1
+makeWUP: BUDA_statics_checkers_23
+makeWUP: dataflowA2_0
+local: singleton DATAFLOW_ANALYSIS2 phase
+analyze_dataflow2_stat: resident set kbytes (pre DATAFLOW_ANALYSIS2 phase): 473100K
+analyze_dataflow2_stat: peak virtual memory kbytes (pre DATAFLOW_ANALYSIS2 phase): 466064K
+webforms_dom: 0 Control Render roots
+deep-write: Performing deep writes = 0
+deep-write: Number of field/property writes = 0
+taint: sink reachability: seeded with 0 nodes
+taint: sink reachability: visited 0 nodes
+taint: taint reachability: seeded with 0 nodes
+taint: taint reachability: visited 0 nodes
+graph: Phase overhead for graph adjacency sets: 3KB 40.00% active
+happens-before: Starting computation
+happens-before: Num topo sorts: 24
+happens-before: Max ctrl-flow nodes per fn: 2
+happens-before: Max unrolled nodes per fn: 22
+happens-before: Num unrolled nodes: 302
+happens-before: Max unrolling ratio: 22
+happens-before: Num explicit entry points: 0
+happens-before: Num other starting points: 11
+analyze_dataflow2_stat: resident set kbytes (post DATAFLOW_ANALYSIS2 phase): 479712K
+analyze_dataflow2_stat: peak virtual memory kbytes (post DATAFLOW_ANALYSIS2 phase): 466064K
+wur: BUDA_callgraph_14 1 8026 641 496 625 mem=215367680 max=239640576 0 n: !main.py!GenerateRequest:%DEFINITION in TU 404
+makeWUP: BUDA_callgraph_12
+makeWUP: dataflow_checkers0
+xss_stat: resident set kbytes (before XSS checker run): 479736K
+xss_stat: peak virtual memory kbytes (before XSS checker run): 466064K
+xss_timestamp: creating xss finder instance 2026-Mar-04 10:20:23
+xss_stats: num entry nodes: 0
+xss_stat: resident set kbytes (XSS before creating rules): 479772K
+xss_stat: peak virtual memory kbytes (XSS before creating rules): 466064K
+xss_stat: resident set kbytes (XSS after creating rules): 479788K
+xss_stat: peak virtual memory kbytes (XSS after creating rules): 466064K
+xss_stats: total rules: 0
+xss_stats: symbols for ctrl: 0
+xss_stats: symbols for data: 0
+xss_stats: symbols for other: 0
+xss_stats: total non-terminal nodes: 0
+xss_stats: total symbols: 0
+xss_stats: rules with one symbol: 0
+xss_stats: elided node entries: 0
+xss_stats: grammar pruning: total head symbols: 0
+xss_stats: grammar pruning: head symbols needing summaries: 0
+xss_stats: grammar pruning: total symbols: 0
+xss_stats: grammar pruning: needed symbols: 0
+xss_stats: grammar pruning: need state before: 0
+xss_stat: resident set kbytes (XSS before finding states): 479812K
+xss_stat: peak virtual memory kbytes (XSS before finding states): 466064K
+xss_timestamp: start finding states 2026-Mar-04 10:20:23
+xss_timestamp: finished finding states 2026-Mar-04 10:20:23
+xss_stat: resident set kbytes (XSS after finding states): 479820K
+xss_stat: peak virtual memory kbytes (XSS after finding states): 466064K
+xss_stats: head symbols: 0
+xss_stats: head symbols with summaries: 0
+xss_stats: total summaries over head symbols: 0
+xss_stats: rules with summaries: 0
+xss_stats: rules visited with state: 0
+xss_stats: total summaries over rules: 0
+xss_stats: max summaries per rule: 0
+xss_stats: symbols with states: 0
+xss_stats: total states over symbols: 0
+xss_stats: max states per symbol: 0
+xss_stats: error transitions (before filtering): 0
+xss_stats: unique parse states: 0
+xss_stats: states with unconsumed text: 0
+xss_stats: summary reupdates avoided: 0
+xss_stats:  node limit: 0
+xss_stats:  penalty limit: 0
+xss_stats:  edge limit: 0
+xss_stats:  fields limit: 0
+xss_stats: candidate graph success_guard searches: 0
+xss_stats: candidate graph fail_guard searches: 0
+xss_stats: candidate graph success searches: 0
+xss_stats: candidate graph fail searches: 0
+xss_stats: derivation search firewall violations: 0
+xss_stats: num_cullable_XSS_GROUP_EXCESS: 0
+xss_stats: num_cullable_XSS_SITE_EXCESS: 0
+xss_stats: num_cullable_XSS_TOO_MANY_CONTEXTS: 0
+xss_stats: num_cullable_XSS_SAFE_INJECTION: 0
+xss_stats: num_cullable_XSS_ERROR: 0
+xss_stats: num_cullable_XSS_WITH_BYTECODE: 0
+xss_stats: inj site to IV searches: 0
+xss_stats: inj site to IV search - nodes visited: 0
+xss_stats: inj site to IV search - nodes visited firewall violations: 0
+xss_timestamp: after creating XSS defects 2026-Mar-04 10:20:23
+xss_stat: resident set kbytes (after creating XSS defects): 479856K
+xss_stat: peak virtual memory kbytes (after creating XSS defects): 466064K
+xss_stat: resident set kbytes (after XSS checker run): 479856K
+xss_stat: peak virtual memory kbytes (after XSS checker run): 466064K
+xss_stat: resident set kbytes (after XSS checker cleanup): 479868K
+xss_stat: peak virtual memory kbytes (after XSS checker cleanup): 466064K
+wur: BUDA_callgraph_12 1 25329 16 1022 16 0 n: !main.py!%SCRIPT in TU 404
+makeWUP: BUDA_callgraph_23
+makeWUP: BUDA_callgraph_17
+makeWUP: dataflow_checkers2
+makeWUP: dataflow_checkers1
+wul: dataflow_checkers1 wu_sz=3345 0 n: batch 0
+wul: dataflow_checkers1 wu_sz=3152 0 n: batch 0
+wul: dataflow_checkers1 wu_sz=3042 0 n: batch 0
+wul: dataflow_checkers1 wu_sz=3243 0 n: batch 0
+wul: dataflow_checkers1 wu_sz=3324 0 n: batch 0
+wul: dataflow_checkers1 wu_sz=3055 0 n: batch 0
+wul: dataflow_checkers1 wu_sz=3219 0 n: batch 0
+wul: dataflow_checkers1 wu_sz=3221 0 n: batch 0
+wul: dataflow_checkers1 wu_sz=3070 0 n: batch 0
+wul: dataflow_checkers1 wu_sz=2341 0 n: batch 0
+wul: dataflow_checkers1 wu_sz=19205 0 n: batch 0
+makeWUP: Post_static_BUDA_directives_checkers_0
+makeWUP: Post_static_BUDA_directives_checkers_1
+wur: dataflow_checkers1 2 12465 0 12 0 0 nr=11 n: batch 0
+makeWUP: dataflow_checkers3
+wur: BUDA_callgraph_17 1 17985 16 2149 16 0 n: !main.py!generate in TU 404
+makeWUP: BUDA_callgraph_12
+wur: BUDA_callgraph_12 1 26037 15 1022 15 0 n: !main.py!%SCRIPT in TU 404
+makeWUP: BUDA_callgraph_23
+makeWUP: BUDA_callgraph_12
+wur: BUDA_callgraph_12 1 26037 0 1022 0 0 n: !main.py!%SCRIPT in TU 404
+makeWUP: BUDA_callgraph_23
+makeWUP: Dynamic_BUDA_directives_type_inference_0
+makeWUP: Dynamic_BUDA_directives_type_inference_12
+makeWUP: Dynamic_BUDA_directives_type_inference_3
+makeWUP: Dynamic_BUDA_directives_type_inference_7
+makeWUP: Dynamic_BUDA_directives_type_inference_2
+makeWUP: Dynamic_BUDA_directives_type_inference_11
+makeWUP: Dynamic_BUDA_directives_type_inference_10
+makeWUP: Dynamic_BUDA_directives_type_inference_8
+makeWUP: Dynamic_BUDA_directives_type_inference_6
+makeWUP: Dynamic_BUDA_directives_type_inference_4
+makeWUP: Dynamic_BUDA_directives_type_inference_9
+makeWUP: Dynamic_BUDA_directives_type_inference_5
+makeWUP: Dynamic_BUDA_directives_type_inference_1
+wur: Dynamic_BUDA_directives_type_inference_12 1 10739 157 554 157 0 n: !main.py!%SCRIPT in TU 404
+makeWUP: Dynamic_BUDA_directives_type_inference_14
+makeWUP: Dynamic_BUDA_directives_type_inference_17
+makeWUP: Dynamic_BUDA_directives_type_inference_21
+makeWUP: Dynamic_BUDA_directives_type_inference_20
+makeWUP: Dynamic_BUDA_directives_type_inference_22
+makeWUP: Dynamic_BUDA_directives_type_inference_19
+makeWUP: Dynamic_BUDA_directives_type_inference_16
+makeWUP: Dynamic_BUDA_directives_type_inference_18
+wur: Dynamic_BUDA_directives_type_inference_14 1 7421 0 402 0 0 n: !main.py!GenerateRequest:%DEFINITION in TU 404
+makeWUP: Dynamic_BUDA_directives_type_inference_13
+wur: Dynamic_BUDA_directives_type_inference_13 1 6921 0 65 0 0 n: !main.py!GenerateRequest:%CONSTRUCTOR in TU 404
+wur: Dynamic_BUDA_directives_type_inference_16 7 7672 312 413 312 0 n: !main.py!GenerateResponseJson:%DEFINITION in TU 404
+makeWUP: Dynamic_BUDA_directives_type_inference_15
+wur: Dynamic_BUDA_directives_type_inference_15 1 6957 0 65 0 0 n: !main.py!GenerateResponseJson:%CONSTRUCTOR in TU 404
+wur: Dynamic_BUDA_directives_type_inference_19 6 6752 312 65 312 0 n: !main.py!health in TU 404
+wur: Dynamic_BUDA_directives_type_inference_20 4 6787 328 65 328 0 n: !main.py!index in TU 404
+wur: Dynamic_BUDA_directives_type_inference_22 5 7040 328 65 328 0 n: !main.py!validate_prompt_no_control_chars in TU 404
+wur: Dynamic_BUDA_directives_type_inference_21 3 7190 328 65 328 0 n: !main.py!log_correlation_id in TU 404
+wur: Dynamic_BUDA_directives_type_inference_17 2 7879 328 65 328 0 n: !main.py!generate in TU 404
+wur: Dynamic_BUDA_directives_type_inference_18 8 9276 375 65 375 0 n: !main.py!generate_placeholder_png in TU 404
+makeWUP: Dynamic_BUDA_directives_type_inference_23
+makeWUP: Dynamic_BUDA_checkers3_0
+makeWUP: Dynamic_BUDA_checkers2_0
+makeWUP: Dynamic_BUDA_checkers3_15
+makeWUP: Dynamic_BUDA_checkers3_21
+makeWUP: Dynamic_BUDA_checkers3_20
+makeWUP: Dynamic_BUDA_checkers3_13
+makeWUP: Dynamic_BUDA_checkers3_19
+makeWUP: Dynamic_BUDA_checkers2_21
+makeWUP: Dynamic_BUDA_checkers2_22
+makeWUP: Dynamic_BUDA_checkers2_19
+makeWUP: Dynamic_BUDA_checkers2_20
+makeWUP: Dynamic_BUDA_checkers3_18
+makeWUP: Dynamic_BUDA_checkers2_15
+makeWUP: Dynamic_BUDA_checkers2_18
+makeWUP: Dynamic_BUDA_checkers3_22
+makeWUP: Dynamic_BUDA_checkers2_13
+makeWUP: Dynamic_BUDA_checkers3_7
+makeWUP: Dynamic_BUDA_checkers2_3
+makeWUP: Dynamic_BUDA_checkers2_7
+makeWUP: Dynamic_BUDA_checkers3_3
+makeWUP: Dynamic_BUDA_checkers3_9
+makeWUP: Dynamic_BUDA_checkers3_1
+makeWUP: Dynamic_BUDA_checkers2_4
+makeWUP: Dynamic_BUDA_checkers2_8
+makeWUP: Dynamic_BUDA_checkers3_4
+makeWUP: Dynamic_BUDA_checkers3_5
+makeWUP: Dynamic_BUDA_checkers2_11
+makeWUP: Dynamic_BUDA_checkers3_10
+makeWUP: Dynamic_BUDA_checkers3_8
+makeWUP: Dynamic_BUDA_checkers3_6
+makeWUP: Dynamic_BUDA_checkers3_2
+makeWUP: Dynamic_BUDA_checkers3_11
+makeWUP: Dynamic_BUDA_checkers2_1
+makeWUP: Dynamic_BUDA_checkers2_6
+makeWUP: Dynamic_BUDA_checkers2_5
+makeWUP: Dynamic_BUDA_checkers2_10
+makeWUP: Dynamic_BUDA_checkers2_9
+makeWUP: Dynamic_BUDA_checkers2_2
+wur: Dynamic_BUDA_checkers3_15 1 8949 2796 812 2796 0 n: !main.py!GenerateResponseJson:%CONSTRUCTOR in TU 404
+makeWUP: Dynamic_BUDA_checkers3_16
+wur: Dynamic_BUDA_checkers3_22 1 9032 32 513 32 0 n: !main.py!validate_prompt_no_control_chars in TU 404
+wur: Dynamic_BUDA_checkers3_19 5 8744 2843 924 2562 mem=255885312 max=264638464 0 n: !main.py!health in TU 404
+wur: Dynamic_BUDA_checkers2_15 11 7286 2890 909 2890 mem=243175424 max=251731968 0 n: !main.py!GenerateResponseJson:%CONSTRUCTOR in TU 404
+makeWUP: Dynamic_BUDA_checkers2_16
+wur: Dynamic_BUDA_checkers3_16 5 10840 47 1781 47 0 n: !main.py!GenerateResponseJson:%DEFINITION in TU 404
+wur: Dynamic_BUDA_checkers2_22 7 7369 2906 1172 2906 mem=254357504 max=263233536 0 n: !main.py!validate_prompt_no_control_chars in TU 404
+wur: Dynamic_BUDA_checkers2_16 11 9447 47 2430 47 0 n: !main.py!GenerateResponseJson:%DEFINITION in TU 404
+wur: Dynamic_BUDA_checkers3_20 3 8779 3093 1135 2797 mem=256028672 max=264777728 0 n: !main.py!index in TU 404
+wur: Dynamic_BUDA_checkers3_13 4 8913 3109 806 2812 mem=256229376 max=264982528 0 n: !main.py!GenerateRequest:%CONSTRUCTOR in TU 404
+makeWUP: Dynamic_BUDA_checkers3_14
+wur: Dynamic_BUDA_checkers2_20 9 7116 3109 1211 3093 mem=243273728 max=251834368 0 n: !main.py!index in TU 404
+wur: Dynamic_BUDA_checkers3_14 3 10584 31 1410 31 0 n: !main.py!GenerateRequest:%DEFINITION in TU 404
+wur: Dynamic_BUDA_checkers2_19 8 7081 3187 992 3171 mem=254115840 max=262995968 0 n: !main.py!health in TU 404
+wur: Dynamic_BUDA_checkers3_21 2 9182 3218 2908 2937 0 n: !main.py!log_correlation_id in TU 404
+wur: Dynamic_BUDA_checkers2_21 6 7519 3312 4814 3296 mem=254910464 max=263786496 0 n: !main.py!log_correlation_id in TU 404
+wur: Dynamic_BUDA_checkers2_18 12 9605 3469 2104 3453 mem=243777536 max=252362752 0 n: !main.py!generate_placeholder_png in TU 404
+makeWUP: Dynamic_BUDA_checkers2_17
+wur: Dynamic_BUDA_checkers3_18 10 11268 3578 1541 3282 mem=246140928 max=254619648 0 n: !main.py!generate_placeholder_png in TU 404
+makeWUP: Dynamic_BUDA_checkers3_17
+wur: Dynamic_BUDA_checkers3_17 3 15557 93 5199 93 0 n: !main.py!generate in TU 404
+makeWUP: Dynamic_BUDA_checkers3_12
+wur: Dynamic_BUDA_checkers3_12 3 45496 188 8771 188 0 n: !main.py!%SCRIPT in TU 404
+makeWUP: Dynamic_BUDA_checkers3_23
+stats: AUTHZ_STAT: inferred 0 check requirements
+stats: AUTHZ_STAT: total checks : 0 / 0
+wur: Dynamic_BUDA_checkers2_13 1 7250 1859 903 1859 0 n: !main.py!GenerateRequest:%CONSTRUCTOR in TU 404
+makeWUP: Dynamic_BUDA_checkers2_14
+wur: Dynamic_BUDA_checkers2_14 1 9191 16 1928 16 0 n: !main.py!GenerateRequest:%DEFINITION in TU 404
+wur: Dynamic_BUDA_checkers2_17 2 15581 1531 5723 1531 0 n: !main.py!generate in TU 404
+makeWUP: Dynamic_BUDA_checkers2_12
+wur: Dynamic_BUDA_checkers2_12 1 58279 94 16291 94 0 n: !main.py!%SCRIPT in TU 404
+makeWUP: Dynamic_BUDA_checkers2_23
+makeWUP: Post_dynamic_BUDA_directives_checkers_0
+makeWUP: Post_dynamic_BUDA_directives_checkers_13
+makeWUP: Post_dynamic_BUDA_directives_checkers_18
+makeWUP: Post_dynamic_BUDA_directives_checkers_22
+makeWUP: Post_dynamic_BUDA_directives_checkers_21
+makeWUP: Post_dynamic_BUDA_directives_checkers_15
+makeWUP: Post_dynamic_BUDA_directives_checkers_20
+makeWUP: Post_dynamic_BUDA_directives_checkers_19
+makeWUP: Post_dynamic_BUDA_directives_checkers_7
+makeWUP: Post_dynamic_BUDA_directives_checkers_3
+makeWUP: Post_dynamic_BUDA_directives_checkers_10
+makeWUP: Post_dynamic_BUDA_directives_checkers_9
+makeWUP: Post_dynamic_BUDA_directives_checkers_8
+makeWUP: Post_dynamic_BUDA_directives_checkers_4
+makeWUP: Post_dynamic_BUDA_directives_checkers_11
+makeWUP: Post_dynamic_BUDA_directives_checkers_1
+makeWUP: Post_dynamic_BUDA_directives_checkers_5
+makeWUP: Post_dynamic_BUDA_directives_checkers_6
+makeWUP: Post_dynamic_BUDA_directives_checkers_2
+wur: Post_dynamic_BUDA_directives_checkers_13 1 6903 78 366 78 0 n: !main.py!GenerateRequest:%CONSTRUCTOR in TU 404
+wur: Post_dynamic_BUDA_directives_checkers_15 5 6939 78 372 78 0 n: !main.py!GenerateResponseJson:%CONSTRUCTOR in TU 404
+makeWUP: Post_dynamic_BUDA_directives_checkers_14
+wur: Post_dynamic_BUDA_directives_checkers_22 3 7022 78 158 78 0 n: !main.py!validate_prompt_no_control_chars in TU 404
+makeWUP: Post_dynamic_BUDA_directives_checkers_16
+wur: Post_dynamic_BUDA_directives_checkers_21 4 7172 78 354 78 0 n: !main.py!log_correlation_id in TU 404
+wur: Post_dynamic_BUDA_directives_checkers_14 1 7747 16 543 0 0 n: !main.py!GenerateRequest:%DEFINITION in TU 404
+wur: Post_dynamic_BUDA_directives_checkers_16 3 8003 16 658 16 0 n: !main.py!GenerateResponseJson:%DEFINITION in TU 404
+wur: Post_dynamic_BUDA_directives_checkers_18 2 9258 109 743 109 0 n: !main.py!generate_placeholder_png in TU 404
+makeWUP: Post_dynamic_BUDA_directives_checkers_17
+wur: Post_dynamic_BUDA_directives_checkers_17 1 10049 16 1063 16 0 n: !main.py!generate in TU 404
+wur: Post_dynamic_BUDA_directives_checkers_20 6 6769 141 232 141 0 n: !main.py!index in TU 404
+wur: Post_dynamic_BUDA_directives_checkers_19 7 6734 156 201 156 0 n: !main.py!health in TU 404
+makeWUP: Post_dynamic_BUDA_directives_checkers_12
+wur: Post_dynamic_BUDA_directives_checkers_12 1 14964 0 2825 0 0 n: !main.py!%SCRIPT in TU 404
+makeWUP: Post_dynamic_BUDA_directives_checkers_23
+dfg: string graph: final nodes = 66 edges = 54 memory = 14K
+dfg: ===== string_graph sink frequencies:
+dfg:              Sink Type    Number
+dfg:              ---------    ------
+summary: Analysis summary report:
+summary: ------------------------
+summary: Files analyzed                 : 63 Total
+summary:     C#                         : 1
+summary:     Python 3                   : 1
+summary:     Ruby                       : 33
+summary:     Text                       : 28
+summary: Total LoC input to cov-analyze : 18636
+summary: Functions analyzed             : 22
+summary: Paths analyzed                 : 160
+summary: Time taken by analysis         : 00:00:33
+summary: Defect occurrences found       : 2 SIGMA.hardcoded_secret
+summary: TU Language    Capture    TU Count
+summary: -----------    -------    --------
+summary: C# source      Build         1
+summary: Python 3       Filesystem    1
+summary: Ruby           Filesystem    33
+summary: Text data      Filesystem    28
+summary: Number of functions: 22
+summary: out_of_memory count: 0
+summary: paths_exceeded count: 0
+summary: recoverable failures: 0
+summary: cs-source-wu-time-milliseconds: 20708
+summary: python3-wu-time-milliseconds: 183241
+summary: all-wu-time-milliseconds: 203949
+mem: AM peak mem bytes: 477249536
+assert: suppressed asserts: workers=0, master=0
+failures: recoverable failures: workers=0, master=0

@@ -1,0 +1,26 @@
+# Version: 8600bcfa3c p-2025.12-push-40
+# Command Line: C:\Program Files\Coverity\Coverity Static Analysis\bin\cov-security-da --dir C:\coverity-testing\forgeai\idir --ticker-mode none
+timer                                              ms      calls
+----------------------------------------------------------------
+cov_security_da::run                            48734          1
+  cov_security_da::doSecurityDA                 48734          1
+    Looking for translation units                   0          1
+    Computing links for translation units       17609          1
+    xfer symbol cache                            1032          1
+    Dump bytecode TUs                             828          1
+      dumpBytecode                                828          1
+    runSecurityDA                               29172          1
+      runDotNetSecurityDA                       29172          1
+    (left over)                                    93
+
+activity                                           ms      calls
+----------------------------------------------------------------
+cov_security_da::run                            48734          1
+cov_security_da::doSecurityDA                   48734          1
+Looking for translation units                       0          1
+Computing links for translation units           17609          1
+xfer symbol cache                                1032          1
+Dump bytecode TUs                                 828          1
+dumpBytecode                                      828          1
+runSecurityDA                                   29172          1
+runDotNetSecurityDA                             29172          1

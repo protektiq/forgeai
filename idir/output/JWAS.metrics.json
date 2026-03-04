@@ -1,0 +1,108 @@
+{
+  "basic-metrics" : {
+    "string-graph-nodes" : 66,
+    "string-graph-edges" : 54,
+    "string-graph-tainted-node-percent" : "0.00",
+    "string-graph-sink-reachable-node-percent" : "0.00",
+    "string-graph-tainted-fn-percent" : "0.00",
+    "string-graph-sink-reachable-fn-percent" : "0.00"
+  },
+  "memory-metrics" : {
+    "predicted-string-graph-memory" : 39872,
+    "analyze_dataflow1_post_DATAFLOW_ANALYSIS1_phase" : {
+      "resident_memory" : 478007296,
+      "peak_resident_memory" : 0,
+      "virtual_memory" : 0,
+      "peak_virtual_memory" : 444497920
+    },
+    "analyze_dataflow1_pre_DATAFLOW_ANALYSIS1_phase" : {
+      "resident_memory" : 477794304,
+      "peak_resident_memory" : 0,
+      "virtual_memory" : 0,
+      "peak_virtual_memory" : 444497920
+    },
+    "analyze_dataflow2_post_DATAFLOW_ANALYSIS2_phase" : {
+      "resident_memory" : 491225088,
+      "peak_resident_memory" : 0,
+      "virtual_memory" : 0,
+      "peak_virtual_memory" : 477249536
+    },
+    "analyze_dataflow2_pre_DATAFLOW_ANALYSIS2_phase" : {
+      "resident_memory" : 484454400,
+      "peak_resident_memory" : 0,
+      "virtual_memory" : 0,
+      "peak_virtual_memory" : 477249536
+    },
+    "xss_XSS_after_creating_rules" : {
+      "resident_memory" : 491302912,
+      "peak_resident_memory" : 0,
+      "virtual_memory" : 0,
+      "peak_virtual_memory" : 477249536
+    },
+    "xss_XSS_after_finding_states" : {
+      "resident_memory" : 491335680,
+      "peak_resident_memory" : 0,
+      "virtual_memory" : 0,
+      "peak_virtual_memory" : 477249536
+    },
+    "xss_XSS_before_creating_rules" : {
+      "resident_memory" : 491286528,
+      "peak_resident_memory" : 0,
+      "virtual_memory" : 0,
+      "peak_virtual_memory" : 477249536
+    },
+    "xss_XSS_before_finding_states" : {
+      "resident_memory" : 491327488,
+      "peak_resident_memory" : 0,
+      "virtual_memory" : 0,
+      "peak_virtual_memory" : 477249536
+    },
+    "xss_after_XSS_checker_cleanup" : {
+      "resident_memory" : 491384832,
+      "peak_resident_memory" : 0,
+      "virtual_memory" : 0,
+      "peak_virtual_memory" : 477249536
+    },
+    "xss_after_XSS_checker_run" : {
+      "resident_memory" : 491372544,
+      "peak_resident_memory" : 0,
+      "virtual_memory" : 0,
+      "peak_virtual_memory" : 477249536
+    },
+    "xss_after_creating_XSS_defects" : {
+      "resident_memory" : 491372544,
+      "peak_resident_memory" : 0,
+      "virtual_memory" : 0,
+      "peak_virtual_memory" : 477249536
+    },
+    "xss_before_XSS_checker_run" : {
+      "resident_memory" : 491249664,
+      "peak_resident_memory" : 0,
+      "virtual_memory" : 0,
+      "peak_virtual_memory" : 477249536
+    }
+  },
+  "state-derivation-search-metrics" : {},
+  "candidate-graph-search-metrics" : {
+    "xss_stats" : {
+      "node_limit" : 0,
+      "confidence_penalty_limit" : 0,
+      "edge_limit" : 0,
+      "fields_limit" : 0,
+      "subset_stats" : {
+        "success_guard" : {
+          "node_limit" : 0
+        },
+        "fail_guard" : {
+          "node_limit" : 0
+        },
+        "success_stats" : {
+          "node_limit" : 0
+        },
+        "fail_stats" : {
+          "node_limit" : 0
+        }
+      }
+    }
+  }
+}

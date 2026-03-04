@@ -1,0 +1,6050 @@
+{
+  "ALLOC_FREE_MISMATCH" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "ANDROID_CAPABILITY_LEAK" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "ANGULAR_EXPRESSION_INJECTION" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "ANGULAR_SCE_DISABLED" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "ARRAY_VS_SINGLETON" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "ASPNET_MVC_VERSION_HEADER" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "ASSERT_SIDE_EFFECT" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "ATTRIBUTE_NAME_CONFLICT" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "AUTO_CAUSES_COPY" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "BAD_ALLOC_ARITHMETIC" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "BAD_ALLOC_STRLEN" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "BAD_CERT_VERIFICATION" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ],
+    "unsupported" : [
+      "Text"
+    ]
+  },
+  "BAD_CHECK_OF_WAIT_COND" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "BAD_COMPARE" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "BAD_EQ" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "BAD_EQ_TYPES" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "BAD_FREE" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "BAD_LOCK_OBJECT" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "BAD_OVERRIDE" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "BAD_SHIFT" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "BAD_SIZEOF" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "CALL_SUPER" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "CHAR_IO" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "CHECKED_RETURN" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "COM.BAD_FREE" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "COM.BSTR.CONV" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "CONFIG.ANDROID_GRADLE_OBFUSCATION_NOT_ENABLED" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "CONFIG.ASP_VIEWSTATE_MAC" : {
+    "enabled" : [
+      "C#",
+      "Text"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "CONFIG.BEEGO_CSRF_PROTECTION_DISABLED" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "CONFIG.DEAD_AUTHORIZATION_RULE" : {
+    "enabled" : [
+      "C#",
+      "Text"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "CONFIG.DYNAMIC_DATA_HTML_COMMENT" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "CONFIG.ENABLED_DEBUG_MODE" : {
+    "enabled" : [
+      "C#",
+      "Text"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "CONFIG.ENABLED_TRACE_MODE" : {
+    "enabled" : [
+      "C#",
+      "Text"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "CONFIG.HANA_XS_PREVENT_XSRF_DISABLED" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "CONFIG.UNSAFE_SESSION_TIMEOUT" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "CONSTANT_EXPRESSION_RESULT" : {
+    "enabled" : [
+      "C#",
+      "Python 3"
+    ],
+    "unsupported" : [
+      "Ruby",
+      "Text"
+    ]
+  },
+  "COOKIE_INJECTION" : {
+    "enabled" : [
+      "Python 3"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "COOKIE_SERIALIZER_CONFIG" : {
+    "enabled" : [
+      "Ruby"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ]
+  },
+  "COPY_INSTEAD_OF_MOVE" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "COPY_PASTE_ERROR" : {
+    "enabled" : [
+      "C#",
+      "Python 3"
+    ],
+    "unsupported" : [
+      "Ruby",
+      "Text"
+    ]
+  },
+  "CSRF" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ],
+    "unsupported" : [
+      "Text"
+    ]
+  },
+  "CSS_INJECTION" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "CTOR_DTOR_LEAK" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "CUDA.COLLECTIVE_WARP_SHUFFLE_WIDTH" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "CUDA.CUDEVICE_HANDLES" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "CUDA.DEVICE_DEPENDENT" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "CUDA.DEVICE_DEPENDENT_CALLBACKS" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "CUDA.DIVERGENCE_AT_COLLECTIVE_OPERATION" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "CUDA.ERROR_INTERFACE" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "CUDA.ERROR_KERNEL_LAUNCH" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "CUDA.FORK" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "CUDA.INACTIVE_THREAD_AT_COLLECTIVE_WARP" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "CUDA.INITIATION_OBJECT_DEVICE_THREAD_BLOCK" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "CUDA.INVALID_MEMORY_ACCESS" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "CUDA.SHARE_FUNCTION" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "CUDA.SHARE_OBJECT_STREAM_ASSOCIATED" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "CUDA.SPECIFIERS_INCONSISTENCY" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "CUDA.SYNCHRONIZE_CALLBACKS" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "CUDA.SYNCHRONIZE_TERMINATION" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "DC.DANGEROUS" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "DC.DEADLOCK" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "DEADCODE" : {
+    "enabled" : [
+      "C#",
+      "Python 3"
+    ],
+    "unsupported" : [
+      "Ruby",
+      "Text"
+    ]
+  },
+  "DELETE_ARRAY" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "DELETE_VOID" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "DENY_LIST_FOR_AUTHN" : {
+    "enabled" : [
+      "Ruby"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ]
+  },
+  "DIVIDE_BY_ZERO" : {
+    "enabled" : [
+      "C#",
+      "Ruby"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Text"
+    ]
+  },
+  "DOM_XSS" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "DYNAMIC_OBJECT_ATTRIBUTES" : {
+    "enabled" : [
+      "Ruby"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ]
+  },
+  "EL_INJECTION" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "END_OF_LIFE_RAILS" : {
+    "enabled" : [
+      "Ruby"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ]
+  },
+  "END_OF_LIFE_RUBY" : {
+    "enabled" : [
+      "Ruby"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ]
+  },
+  "EVALUATION_ORDER" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "FORWARD_NULL" : {
+    "enabled" : [
+      "C#",
+      "Python 3"
+    ],
+    "unsupported" : [
+      "Ruby",
+      "Text"
+    ]
+  },
+  "GLOBAL_INIT_ORDER" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "GUARDED_BY_VIOLATION" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "HARDCODED_CREDENTIALS" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ],
+    "unsupported" : [
+      "Text"
+    ]
+  },
+  "HEADER_INJECTION" : {
+    "enabled" : [
+      "C#",
+      "Python 3"
+    ],
+    "unsupported" : [
+      "Ruby",
+      "Text"
+    ]
+  },
+  "HIBERNATE_BAD_HASHCODE" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "IDENTICAL_BRANCHES" : {
+    "enabled" : [
+      "C#",
+      "Python 3"
+    ],
+    "unsupported" : [
+      "Ruby",
+      "Text"
+    ]
+  },
+  "IDENTIFIER_TYPO" : {
+    "enabled" : [
+      "Python 3"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "IMPLICIT_INTENT" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "INCOMPATIBLE_CAST" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "INCOMPLETE_DEALLOCATOR" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "INEFFICIENT_RESERVE" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "INFINITE_LOOP" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "INSECURE_COMMUNICATION" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "INSECURE_CSP" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "INSECURE_FILE_PERMISSIONS" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "INSECURE_RANDOM" : {
+    "enabled" : [
+      "C#",
+      "Python 3"
+    ],
+    "unsupported" : [
+      "Ruby",
+      "Text"
+    ]
+  },
+  "INSECURE_SALT" : {
+    "enabled" : [
+      "Python 3"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "INSUFFICIENT_LOGGING" : {
+    "enabled" : [
+      "Python 3"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "INVALIDATE_ITERATOR" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "JAVA_CODE_INJECTION" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "JCR_INJECTION" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "JSONWEBTOKEN_UNTRUSTED_DECODE" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "JSP_DYNAMIC_INCLUDE" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "JSP_SQL_INJECTION" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "LDAP_INJECTION" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "LOCALSTORAGE_MANIPULATION" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "LOCK_EVASION" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "LOCK_INVERSION" : {
+    "disabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "MASS_ASSIGNMENT" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "MISMATCHED_ITERATOR" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "MISSING_AUTHZ" : {
+    "enabled" : [
+      "C#",
+      "Python 3"
+    ],
+    "unsupported" : [
+      "Ruby",
+      "Text"
+    ]
+  },
+  "MISSING_BREAK" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "MISSING_COMMA" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "MISSING_IFRAME_SANDBOX" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "MISSING_MOVE_ASSIGNMENT" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "MISSING_PERMISSION_FOR_BROADCAST" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "MISSING_RESTORE" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "MISSING_RETURN" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "MISSING_THROW" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "MOBILE_ID_MISUSE" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "MULTIPLE_INIT_SMART_PTRS" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "NEGATIVE_RETURNS" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "NESTING_INDENT_MISMATCH" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "NON_STATIC_GUARDING_STATIC" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "NOSQL_QUERY_INJECTION" : {
+    "enabled" : [
+      "C#",
+      "Python 3"
+    ],
+    "unsupported" : [
+      "Ruby",
+      "Text"
+    ]
+  },
+  "NO_EFFECT" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "NULL_FIELD" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "NULL_RETURNS" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "OGNL_INJECTION" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "OPEN_REDIRECT" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ],
+    "unsupported" : [
+      "Text"
+    ]
+  },
+  "ORM_LOAD_NULL_CHECK" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "ORM_UNNECESSARY_GET" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "OS_CMD_INJECTION" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ],
+    "unsupported" : [
+      "Text"
+    ]
+  },
+  "OVERFLOW_BEFORE_WIDEN" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "OVERLAPPING_COPY" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "OVERRUN" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "PASS_BY_VALUE" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "PATH_MANIPULATION" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ],
+    "unsupported" : [
+      "Text"
+    ]
+  },
+  "PRECEDENCE_ERROR" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "PREDICTABLE_RANDOM_SEED" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "PRINTF_ARGS" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "PROPERTY_MIXUP" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "RAILS_DEFAULT_ROUTES" : {
+    "enabled" : [
+      "Ruby"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ]
+  },
+  "RAILS_DEVISE_CONFIG" : {
+    "enabled" : [
+      "Ruby"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ]
+  },
+  "RAILS_MISSING_FILTER_ACTION" : {
+    "enabled" : [
+      "Ruby"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ]
+  },
+  "READLINK" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "REGEX_CONFUSION" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "REGEX_INJECTION" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ],
+    "unsupported" : [
+      "Text"
+    ]
+  },
+  "REGEX_MISSING_ANCHOR" : {
+    "enabled" : [
+      "Ruby"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ]
+  },
+  "RESOURCE_LEAK" : {
+    "enabled" : [
+      "C#",
+      "Ruby"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Text"
+    ]
+  },
+  "RETURN_LOCAL" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "REVERSE_INULL" : {
+    "enabled" : [
+      "C#",
+      "Python 3"
+    ],
+    "unsupported" : [
+      "Ruby",
+      "Text"
+    ]
+  },
+  "REVERSE_INVALID_ITERATOR" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "REVERSE_NEGATIVE" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "REVERSE_TABNABBING" : {
+    "enabled" : [
+      "Ruby"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ]
+  },
+  "RISKY_CRYPTO" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "RUBY_VULNERABLE_LIBRARY" : {
+    "enabled" : [
+      "Ruby"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ]
+  },
+  "SCRIPT_CODE_INJECTION" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ],
+    "unsupported" : [
+      "Text"
+    ]
+  },
+  "SEALED_JAR_ESCAPE" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SENSITIVE_DATA_LEAK" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ],
+    "unsupported" : [
+      "Text"
+    ]
+  },
+  "SERVLET_ATOMICITY" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SESSIONSTORAGE_MANIPULATION" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SESSION_FIXATION" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SESSION_MANIPULATION" : {
+    "enabled" : [
+      "Ruby"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ]
+  },
+  "SIGMA.access_control_disabled" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.access_to_secret" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.admin_access_enabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.admin_dashboard_publicly_accessible" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.alias_ip_disabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.allow_all_authz_policy" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.allow_non_strict_processing" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.allow_self_signed_certificate" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.always_remember_me_enabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.anonymous_access_enabled" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.anti_spoofing_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.api_exposes_refresh_token" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.api_key_auth_enabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.api_key_in_query_string" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.apparmour_default_configuration_override" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.audio_recording_enabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.automatic_key_rotation_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.automatic_os_upgrade_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.automatic_repair_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.automatic_upgrade_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.automounting_service_account_token" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.azure_ad_authentication_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.azure_ad_managed_identities_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.backups_allowed" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.basic_auth_enabled" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.biometric_authentication_protection_disabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.broad_domain_attribute_cookie" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "Ruby"
+    ]
+  },
+  "SIGMA.broad_filesystem_access" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.cache_ttl_too_long" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.cbc_insecure_padding" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.certificate_rotation_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.certificate_verification_disabled" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "Ruby"
+    ]
+  },
+  "SIGMA.circuit_breaker_disabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.client_store_info_leak" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.cloud_database_deletion_protection_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.cloud_gateway_publicly_accessible" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.cloud_object_lock_disabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.cloud_resource_assigned_public_ip" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.cloud_resource_publicly_accessible" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.cloud_service_authn_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.cloud_service_authz_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.cloud_storage_allows_public_config" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.cloud_storage_default_allow_all" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.cloud_storage_encryption_disabled" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.cloud_storage_publicly_accessible" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.confidential_computing_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.config_browser_plugin_enabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.conflicting_names" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.connection_timeout_disabled" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.container_access_to_host_filesystem" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.container_cpu_share_unlimited" : {
+    "disabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.container_daemon_socket_exposed" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.container_empty_security_context" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.container_excessive_restart_times" : {
+    "disabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.container_filesystem_write" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.container_hostport_binding" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.container_insecure_bind_address" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.container_mapped_to_privileged_port" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.container_missing_cpu_limit" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.container_missing_memory_limit" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.container_missing_pids_limit" : {
+    "disabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.container_privilege_escalation_allowed" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.container_requesting_net_raw" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.container_requesting_sys_admin" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.container_running_as_root" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.container_sharing_host_ipc_namespace" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.container_sharing_host_network_namespace" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.container_sharing_host_pid_namespace" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.container_sharing_mount_volumes" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.container_storing_secret_in_environment_variable" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.container_sudo_usage" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.content_isolation_disabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.content_security_policy_disabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.cookie_logging_enabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.cookie_session_signing_disabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.cors_configured_globally" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.cors_expose_sensitive_data" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.cors_no_credentials_permissive_origin" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "Ruby"
+    ]
+  },
+  "SIGMA.cors_origin_string" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.cors_permissive_methods" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.cors_preflight_age_too_long" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "Ruby"
+    ]
+  },
+  "SIGMA.cors_with_credentials_all_origin" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "Ruby"
+    ]
+  },
+  "SIGMA.cors_with_credentials_http_origin" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "Ruby"
+    ]
+  },
+  "SIGMA.cors_with_credentials_null_origin" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "Ruby"
+    ]
+  },
+  "SIGMA.cors_with_credentials_subdomain_origin" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "Ruby"
+    ]
+  },
+  "SIGMA.credentials_validation_disabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.credentials_without_keychain_protection" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.csp_frame_ancestors_disabled" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.csp_mixed_content" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.csp_permissive_source" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.csp_unsafe_eval" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.csp_unsafe_inline" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.csrf" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.csrf_protection_disabled" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.custom_cryptography" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.custom_keyboards_enabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.custom_resource_in_default_namespace" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.dangerous_oauth2_implicit_flow" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.dangerous_ropc_flow" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.dangerously_exposed_interface" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.data_exfiltration_protection_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.data_mask_obfuscation_disabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.data_sent_to_external_server" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.database_encryption_disabled" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.database_integrity_protection_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.database_repair_mode_enabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.ddos_protection_disabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.debug_enabled" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.debug_logging_enabled" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.default_allow_all_authz_policy" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.default_service_account_enabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.deletion_protection_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.deprecated_component_used" : {
+    "enabled" : [
+      "Python 3"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.deprecated_http_client" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.deprecated_runtime_version" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.deprecated_xss_header" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.dev_mode_enabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.digest_auth_enabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.disk_encryption_disabled" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.dns_prefetch_control_disabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.dnssec_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.drop_invalid_header_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.duplicate_validation_forms" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.dynamic_method_invocation" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.dynamically_loading_extensions_enabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.el_injection" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.element_any" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.empty_encryption_key" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.empty_password" : {
+    "enabled" : [
+      "C#",
+      "Python 3"
+    ],
+    "unsupported" : [
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.empty_salt" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.empty_signing_key" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.encryption_disabled" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.excessive_auth_attempts" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.excessive_buffer_size" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.excessive_connection_timeout" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.excessive_http_buffer_size" : {
+    "enabled" : [
+      "C#",
+      "Text"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.excessive_ingress" : {
+    "disabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.excessive_key_rotation_period" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.excessive_memory_limit" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.excessive_request_retries" : {
+    "enabled" : [
+      "Python 3"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.excessive_request_size" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.excessive_session_lifetime" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.excessive_token_lifetime" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.excessive_ttl" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.expect_ct_disabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.experimental_features_enabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.exposed_directory_listing" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.exposed_privileged_account" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.exposed_secret" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.expression_escaping_disabled" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.external_storage_used" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.file_data_unprotected_on_device" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.file_header_crc_disabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.file_upload_misconfiguration" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.file_upload_misconfiguration_of_fields" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.file_upload_misconfiguration_of_file_path" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.file_upload_misconfiguration_of_filesize" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.file_upload_misconfiguration_of_safe_file_names" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.file_upload_misconfiguration_of_storage" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.file_upload_misconfiguration_of_temp_files" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.full_table_scan" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.gateway_exposes_all_hosts" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.general_pasteboard_used" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.geo_redundant_backup_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.graphiql_enabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.hardcoded_remember_me_key" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.hardcoded_secret" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.hardcoded_value" : {
+    "enabled" : [
+      "C#",
+      "Python 3"
+    ],
+    "unsupported" : [
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.hardware_backed_security_disabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.healthcheck_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.hide_powered_by_disabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.host_header_validation_disabled" : {
+    "enabled" : [
+      "Python 3"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.hpkp_max_age_too_long" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.hpkp_report_uri_missing_tls" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.hsts_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.hsts_http_header_short_max_age" : {
+    "enabled" : [
+      "C#",
+      "Text"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.hsts_http_header_subdomains_disabled" : {
+    "enabled" : [
+      "C#",
+      "Text"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.http_firewall_allow_any_http_method" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.http_firewall_allows_special_char" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.http_firewall_insecure_default" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.http_header_validation_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.http_method_missing_authz" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.http_verb_tampering_method_inclusion" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.http_verb_tampering_method_omission" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.ie_no_open_disabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.image_scanning_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.immutable_tag_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.improper_use_of_add_command" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.improper_use_of_symmetric_cryptography" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.incomplete_credential_removal" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.infrastructure_encryption_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.insecure_active_user_switch" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.insecure_argon2_parameters" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.insecure_block_cipher_algorithm" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "Ruby"
+    ]
+  },
+  "SIGMA.insecure_block_cipher_mode" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "Ruby"
+    ]
+  },
+  "SIGMA.insecure_cipher" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.insecure_cookie_storage" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.insecure_credential_use" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.insecure_dataframe" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.insecure_direct_object_reference" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.insecure_file_permission" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "Ruby"
+    ]
+  },
+  "SIGMA.insecure_iframe_sandbox" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.insecure_ipc" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.insecure_network_bind" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.insecure_permission_on_exported_component" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.insecure_random" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.insecure_random_seed" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.insecure_referrer_policy" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.insecure_samesite_attribute_cookie" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.insecure_stream_cipher_algorithm" : {
+    "enabled" : [
+      "Python 3"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.insecure_temporary_file" : {
+    "enabled" : [
+      "C#",
+      "Python 3"
+    ],
+    "unsupported" : [
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.insecure_tls_cipher_suite" : {
+    "enabled" : [
+      "C#",
+      "Text"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.insecure_tls_renegotiation" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.insecure_tls_version" : {
+    "enabled" : [
+      "C#",
+      "Text"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.insecure_xss_filter" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.insufficient_asymmetric_key_size" : {
+    "enabled" : [
+      "C#",
+      "Python 3"
+    ],
+    "unsupported" : [
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.insufficient_brute_force_protection" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.insufficient_log_retention" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.insufficient_logging" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.insufficient_password_hash_iterations" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "Ruby"
+    ]
+  },
+  "SIGMA.insufficient_password_hash_key_length" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.insufficient_password_hash_salt_length" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.insufficient_presigned_url_timeout" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.insufficient_soft_delete_retention" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.insufficient_symmetric_key_size" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.insufficient_token_entropy" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.introspection_enabled" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.invalid_command_used" : {
+    "disabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.ip_forwarding_enabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.iptable_synchronization_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.javascript_code_in_description" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.jwt_algorithm_none" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.jwt_ignored_expiration_time" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.jwt_ignored_start_time" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.jwt_no_claims_validation" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.jwt_non_expiring_token" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.jwt_revoke_missing" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.jwt_untrusted_decode" : {
+    "enabled" : [
+      "Python 3"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.kernel_protection_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.keyboard_cache_enabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.keychain_data_unprotected_after_device_powered_on" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.keychain_data_unprotected_after_first_login" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.keychain_data_unprotected_passcode_not_set" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.kms_encryption_service_disabled" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.kubernetes_dashboard_enabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.ldap_anonymous_authentication" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "Ruby"
+    ]
+  },
+  "SIGMA.ldap_entry_poisoning" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.least_privilege_violation" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.legacy_attribute_based_access_control" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.local_infile_enabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.location_tracking_enabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.log_file_validation_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.log_monitoring_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.logging_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.logging_request_parameters" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.login_over_http" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.lossy_encoding" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.malicious_url" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "Ruby"
+    ]
+  },
+  "SIGMA.markdown_allow_dangerous_html" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.message_encryption_disabled" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.microservice_authn_disabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.middleware_applied_globally" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.misconfigured_oauth2" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.missing_default_response_object" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.missing_exported_attribute" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.missing_global_exception_handler" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.missing_high_availability_support" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.missing_httponly_attribute" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "Ruby"
+    ]
+  },
+  "SIGMA.missing_httponly_attribute_csrf_cookie" : {
+    "enabled" : [
+      "Python 3"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.missing_httponly_attribute_session_cookie" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.missing_iframe_sandbox" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.missing_load_balancer" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.missing_mfa" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.missing_min_sdk_version" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.missing_mtls" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.missing_network_security_policy" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.missing_perfect_forward_secrecy" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.missing_permission_on_exported_component" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.missing_samesite_attribute" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.missing_samesite_attribute_csrf_cookie" : {
+    "enabled" : [
+      "Python 3"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.missing_samesite_attribute_session_cookie" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.missing_secure_attribute" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "Ruby"
+    ]
+  },
+  "SIGMA.missing_secure_attribute_csrf_cookie" : {
+    "enabled" : [
+      "Python 3"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.missing_secure_attribute_remember_me_cookie" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.missing_secure_attribute_session_cookie" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.missing_security_constraint" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.missing_servlet_mapping" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.missing_target_sdk_version" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.missing_tls" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "Ruby"
+    ]
+  },
+  "SIGMA.missing_uses_sdk_version" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.missing_vpc" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.missing_x_frame_options_header" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.mixed_content_allowed" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.multi_region_configuration_aggregation_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.multi_region_logging_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.no_complexity_limit" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.no_depth_limit" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.no_password_change_on_first_login" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.no_rate_limiting" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.no_sniff_disabled" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.non_production_api_endpoint" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.non_production_route" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.null_cipher_used" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.oauth2_pkce_plaintext_challenge" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.oauth2_scope_in_token_request" : {
+    "enabled" : [
+      "Python 3"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.open_smtp_relay" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.optimized_image_not_used" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.outdated_target_sdk_version" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.outdated_version_used" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.overwrite_unintended_variables" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.parameter_merging_enabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.parameters_validation_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.password_change_disallowed" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.password_change_without_old_password" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.password_stored_without_hash" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.permissive_intent_list" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.permissive_navigation_list" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.permissive_network_list" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.permitted_cross_domain_policies_disabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.persistent_cookie" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.plaintext_storage_sensitive_data" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.predictable_secret" : {
+    "enabled" : [
+      "Python 3"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.privileged_connection_allowed" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.privileged_container_allowed" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.profiling_enabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.project_encryption_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.public_github_repository" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.publicly_accessible_serial_port_enabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.publicly_writable_directories_used" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.query_encryption_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.query_logging_enabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.referrer_policy_disabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.relative_path" : {
+    "disabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.remote_access_via_guest_account" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.remote_application_enabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.remote_execution_enabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.remote_file_inclusion" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.request_allows_any_media_type" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.request_logging_enabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.request_tracing_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.request_validation_disabled" : {
+    "enabled" : [
+      "C#",
+      "Text"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.response_cache_encryption_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.response_cache_used_without_validation" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.response_caching_enabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.response_logging_enabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.reverse_tabnabbing" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.root_path_attribute_cookie" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.rsa_no_padding" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.safe_browsing_options_disabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.sasl_plain_enabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.screenshot_data_leak" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.script_checks_enabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.script_timeout_too_long" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.seccomp_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.security_alerts_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.security_alerts_notification_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.security_scanning_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.selinux_default_configuration_override" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.sensitive_data_in_cookie" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.sensitive_data_in_query_string" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.sensitive_data_in_response" : {
+    "enabled" : [
+      "C#",
+      "Text"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.server_side_request_unrestricted" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.service_account_lookup_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.session_cookie_misuse" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.session_fixation_protection_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.shared_preferences_data_exposure" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.shell_missing_pipefail" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.shielded_nodes_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.shielded_vm_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.socket_accepts_all_origins" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.ssh_port_exposed" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.ssh_publicly_accessible" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.ssl_pinning_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.ssrf_with_untrusted_callback" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.state_changing_get_request" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.static_iv" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.static_non_expiring_token" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.storage_optimization_disabled" : {
+    "disabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.storage_versioning_disabled" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.stripe_validation_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.synchronized_credentials" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.tag_authorization_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.termination_protection_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.third_party_trusted" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.tiller_service_exposed" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.trace_mode_enabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.trojan_source" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.unauthenticated_readonly_access" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.unbounded_occurrences" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.uncontrolled_search_path" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.undefined_oauth2_scope" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.unfettered_resource_loading" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.unfiltered_html_allowed" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.unlimited_concurrent_sessions" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.unprotected_admin_operation" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.unprotected_master_key" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.unreliable_root_jailbreak_detection" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.unrestricted_database_access" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.unrestricted_egress" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.unrestricted_ingress" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.unrestricted_postmessage_target" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.unsafe_authentication_filter" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.unsafe_eval" : {
+    "enabled" : [
+      "Python 3"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.unsafe_file_inclusion" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.unsafe_http_method" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.unsafe_innerhtml_manipulation" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.unsafe_language_feature" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.unsafe_min_os_version" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.unsafe_min_sdk_version" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.unsafe_os_command" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.unsafe_receipt_verification" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.unsafe_session_storage" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.unsafe_sms" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.unsafe_webview_usage" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.unsafe_xml_canonicalization" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.unspecified_cipher_transformation" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.unspecified_software_version" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.unused_form_bean" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.unused_security_control" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.update_command_runs_in_isolation" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.user_namespace_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.vendor_provided_encryption_key" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.verbose_error_message" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.verbose_server_banner" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.view_state_stored_on_client" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.vulnerable_software" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.waf_disabled" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.weak_auth_mechanism" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.weak_biometric_authentication" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.weak_hash" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "Ruby"
+    ]
+  },
+  "SIGMA.weak_password_hash" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.weak_password_policy" : {
+    "enabled" : [
+      "Python 3",
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby"
+    ]
+  },
+  "SIGMA.weak_security_constraint" : {
+    "enabled" : [
+      "Text"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ]
+  },
+  "SIGMA.weak_xss_protection" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.webview_file_access" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.webview_javascript_enabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.write_using_auxiliary_file" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.xml_entity_enabled" : {
+    "enabled" : [
+      "Python 3"
+    ],
+    "unsupported" : [
+      "C#",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.xml_external_entity_enabled" : {
+    "enabled" : [
+      "C#",
+      "Python 3"
+    ],
+    "unsupported" : [
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGMA.xss_filter_disabled" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIGN_EXTENSION" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SIZEOF_MISMATCH" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SOCKET_ACCEPT_ALL_ORIGINS" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SQLI" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ],
+    "unsupported" : [
+      "Text"
+    ]
+  },
+  "SSRF" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "STRAY_SEMICOLON" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "STREAM_FORMAT_STATE" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "STRICT_TRANSPORT_SECURITY" : {
+    "enabled" : [
+      "Ruby"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ]
+  },
+  "SUPPRESSED_ERROR" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "SWAPPED_ARGUMENTS" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "TAINTED_ENVIRONMENT_WITH_EXECUTION" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "TAINT_ASSERT" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "TEMPLATE_INJECTION" : {
+    "enabled" : [
+      "Python 3",
+      "Ruby"
+    ],
+    "unsupported" : [
+      "C#",
+      "Text"
+    ]
+  },
+  "TRUST_BOUNDARY_VIOLATION" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "UNCAUGHT_EXCEPT" : {
+    "disabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "UNCHECKED_ORIGIN" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "UNENCRYPTED_SENSITIVE_DATA" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "UNEXPECTED_CONTROL_FLOW" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "UNINIT" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "UNINIT_CTOR" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "UNINTENDED_GLOBAL" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "UNINTENDED_INTEGER_DIVISION" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "UNKNOWN_LANGUAGE_INJECTION" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "UNLESS_CASE_SENSITIVE_ROUTE_MATCHING" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "UNLOCKED_ACCESS" : {
+    "disabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "UNLOGGED_SECURITY_EXCEPTION" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "UNNECESSARY_STRING_COPY" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "UNREACHABLE" : {
+    "enabled" : [
+      "C#",
+      "Python 3"
+    ],
+    "unsupported" : [
+      "Ruby",
+      "Text"
+    ]
+  },
+  "UNRESTRICTED_ACCESS_TO_FILE" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "UNRESTRICTED_DISPATCH" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "UNSAFE_BASIC_AUTH" : {
+    "enabled" : [
+      "Ruby"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ]
+  },
+  "UNSAFE_DESERIALIZATION" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "UNSAFE_FUNCTIONALITY" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "UNSAFE_JNI" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "UNSAFE_NAMED_QUERY" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "UNSAFE_REFLECTION" : {
+    "enabled" : [
+      "Ruby"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ]
+  },
+  "UNSAFE_SESSION_SETTING" : {
+    "enabled" : [
+      "Ruby"
+    ],
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Text"
+    ]
+  },
+  "UNUSED_VALUE" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "URL_MANIPULATION" : {
+    "enabled" : [
+      "C#",
+      "Python 3"
+    ],
+    "unsupported" : [
+      "Ruby",
+      "Text"
+    ]
+  },
+  "USELESS_CALL" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "USE_AFTER_FREE" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "USE_AFTER_MOVE" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "VARARGS" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "VIRTUAL_DTOR" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "VOLATILE_ATOMICITY" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "WEAK_GUARD" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "WEAK_PASSWORD_HASH" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ],
+    "unsupported" : [
+      "Text"
+    ]
+  },
+  "WRAPPER_ESCAPE" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "WRITE_CONST_FIELD" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "WRONG_METHOD" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "XML_EXTERNAL_ENTITY" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "XPATH_INJECTION" : {
+    "enabled" : [
+      "C#"
+    ],
+    "unsupported" : [
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  },
+  "XSS" : {
+    "enabled" : [
+      "C#",
+      "Python 3",
+      "Ruby"
+    ],
+    "unsupported" : [
+      "Text"
+    ]
+  },
+  "Y2K38_SAFETY" : {
+    "unsupported" : [
+      "C#",
+      "Python 3",
+      "Ruby",
+      "Text"
+    ]
+  }
+}
