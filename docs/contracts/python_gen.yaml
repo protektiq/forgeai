@@ -1,0 +1,27 @@
+# Python gen – image generation service (FastAPI)
+# Source: python_gen/main.py
+# Error responses: see error-response.md (standard shape: error.code, error.message, error.correlation_id)
+
+endpoints:
+  - endpoint: /health
+    method: GET
+    request_schema: null
+    response_schema:
+      status: string
+      service: string
+    error_schema: null
+
+  - endpoint: /generate
+    method: POST
+    request_schema:
+      body:
+        prompt: string  # required, min length 1, max 10000; no control characters
+    response_schema:
+      default:
+        description: binary PNG
+        content_type: image/png
+      application_json:
+        image_base64: string
+        seed: number
+        model: string
+    error_schema: error-response.md  # 422 validation_error

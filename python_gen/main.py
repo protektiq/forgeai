@@ -15,7 +15,8 @@ import secrets
 from io import BytesIO
 
 from fastapi import FastAPI, Request, HTTPException
-from fastapi.responses import Response
+from fastapi.responses import Response, JSONResponse
+from fastapi.exceptions import RequestValidationError
 from pydantic import BaseModel, Field
 
 # ---------------------------------------------------------------------------
@@ -57,6 +58,38 @@ class GenerateResponseJson(BaseModel):
     image_base64: str = Field(..., description="PNG image encoded as base64.")
     seed: int = Field(..., description="Seed used for generation.")
     model: str = Field(..., description="Model name (e.g. pillow-mvp).")
+
+
+# Standard error response shape (see docs/contracts/error-response.md)
+class ErrorPart(BaseModel):
+    code: str
+    message: str
+    correlation_id: str
+
+
+class ApiErrorResponse(BaseModel):
+    error: ErrorPart
+
+
+def _status_to_code(status_code: int) -> str:
+    """Map HTTP status code to standard error code."""
+    if status_code == 400:
+        return "invalid_request"
+    if status_code == 401:
+        return "unauthorized"
+    if status_code == 404:
+        return "not_found"
+    if status_code == 422:
+        return "validation_error"
+    if status_code == 429:
+        return "rate_limit_exceeded"
+    if status_code == 502:
+        return "bad_gateway"
+    if status_code == 503:
+        return "service_unavailable"
+    if status_code >= 500:
+        return "internal_error"
+    return "invalid_request"
 
 
 # ---------------------------------------------------------------------------
@@ -143,6 +176,49 @@ app = FastAPI(
     description="Image generation service (Pillow placeholder MVP).",
     version="0.1.0",
 )
+
+
+def _get_correlation_id(request: Request) -> str:
+    """Read correlation id from headers or return empty string."""
+    return (
+        (request.headers.get("X-Correlation-Id") or request.headers.get("X-Request-Id") or "").strip()
+    )
+
+
+@app.exception_handler(HTTPException)
+async def http_exception_handler(request: Request, exc: HTTPException) -> JSONResponse:
+    """Format HTTPException as standard error shape with correlation_id."""
+    correlation_id = _get_correlation_id(request)
+    detail = exc.detail
+    if isinstance(detail, dict):
+        message = detail.get("msg", detail.get("message", str(detail)))
+    else:
+        message = str(detail)
+    code = _status_to_code(exc.status_code)
+    body = ApiErrorResponse(error=ErrorPart(code=code, message=message, correlation_id=correlation_id))
+    return JSONResponse(
+        status_code=exc.status_code,
+        content=body.model_dump(),
+    )
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError) -> JSONResponse:
+    """Format validation errors as standard error shape with correlation_id."""
+    correlation_id = _get_correlation_id(request)
+    messages = []
+    for err in exc.errors():
+        loc = ".".join(str(x) for x in (err.get("loc") or []) if x != "body")
+        msg = err.get("msg", "validation error")
+        if loc:
+            messages.append(f"{loc}: {msg}")
+        else:
+            messages.append(msg)
+    message = "; ".join(messages) if messages else "Validation error"
+    body = ApiErrorResponse(
+        error=ErrorPart(code="validation_error", message=message, correlation_id=correlation_id)
+    )
+    return JSONResponse(status_code=422, content=body.model_dump())
 
 
 @app.middleware("http")

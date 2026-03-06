@@ -1,5 +1,5 @@
 use axum::{
-    extract::{Query, State},
+    extract::{Extension, Query, State},
     http::StatusCode,
     middleware as axum_middleware,
     routing::{get, post},
@@ -13,6 +13,39 @@ use tower_http::cors::{Any, CorsLayer};
 
 const MAX_ASSET_ID_LEN: usize = 256;
 const MAX_PROMPT_LEN: usize = 10_000;
+
+/// Correlation id from X-Correlation-Id or X-Request-Id (set by middleware).
+#[derive(Clone)]
+struct CorrelationId(pub String);
+
+/// Standard error response shape (see docs/contracts/error-response.md).
+#[derive(Serialize)]
+struct ErrorPart {
+    code: String,
+    message: String,
+    #[serde(rename = "correlation_id")]
+    correlation_id: String,
+}
+
+#[derive(Serialize)]
+struct ApiErrorPayload {
+    error: ErrorPart,
+}
+
+impl ApiErrorPayload {
+    fn new(code: &str, message: impl Into<String>, correlation_id: String) -> Self {
+        Self {
+            error: ErrorPart {
+                code: code.to_string(),
+                message: message.into(),
+                correlation_id,
+            },
+        }
+    }
+}
+
+/// (StatusCode, Json<ApiErrorPayload>) implements IntoResponse in Axum.
+type ApiErrorResponse = (StatusCode, Json<ApiErrorPayload>);
 
 #[derive(Clone, Default)]
 struct AppState {
@@ -82,10 +115,12 @@ fn validate_index_request(body: &IndexRequest) -> Result<(), (StatusCode, &'stat
 
 async fn index_handler(
     State(state): State<AppState>,
+    Extension(corr_id): Extension<CorrelationId>,
     Json(body): Json<IndexRequest>,
-) -> Result<StatusCode, (StatusCode, String)> {
+) -> Result<StatusCode, ApiErrorResponse> {
     if let Err((code, msg)) = validate_index_request(&body) {
-        return Err((code, msg.to_string()));
+        let payload = ApiErrorPayload::new("invalid_request", msg, corr_id.0.clone());
+        return Err((code, Json(payload)));
     }
     let asset_id = body.asset_id.trim().to_string();
     let searchable = build_searchable(
@@ -131,7 +166,7 @@ async fn health_handler() -> StatusCode {
 }
 
 async fn log_correlation_id(
-    req: axum::http::Request<axum::body::Body>,
+    mut req: axum::http::Request<axum::body::Body>,
     next: axum::middleware::Next,
 ) -> axum::response::Response {
     let id = req
@@ -139,10 +174,12 @@ async fn log_correlation_id(
         .get("X-Correlation-Id")
         .or_else(|| req.headers().get("X-Request-Id"))
         .and_then(|v| v.to_str().ok())
-        .unwrap_or("");
+        .map(|s| s.to_string())
+        .unwrap_or_else(String::new);
     if !id.is_empty() {
         eprintln!("rust_index correlation_id={} path={}", id, req.uri().path());
     }
+    req.extensions_mut().insert(CorrelationId(id));
     next.run(req).await
 }
 

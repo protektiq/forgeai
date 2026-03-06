@@ -82,6 +82,36 @@ std::string content_type_for_suffix(const std::string& suffix) {
   return "image/jpeg";
 }
 
+/* Standard error response shape (see docs/contracts/error-response.md). */
+void json_escape(std::ostringstream& out, const std::string& s) {
+  for (unsigned char c : s) {
+    if (c == '"') out << "\\\"";
+    else if (c == '\\') out << "\\\\";
+    else if (c == '\n') out << "\\n";
+    else if (c == '\r') out << "\\r";
+    else if (c == '\t') out << "\\t";
+    else if (c >= 32 && c < 127) out << static_cast<char>(c);
+    else out << " ";
+  }
+}
+
+void set_error_response(httplib::Response& res,
+                        int status,
+                        const std::string& code,
+                        const std::string& message,
+                        const std::string& correlation_id) {
+  res.status = status;
+  std::ostringstream json;
+  json << "{\"error\":{\"code\":\"";
+  json_escape(json, code);
+  json << "\",\"message\":\"";
+  json_escape(json, message);
+  json << "\",\"correlation_id\":\"";
+  json_escape(json, correlation_id);
+  json << "\"}}";
+  res.set_content(json.str(), "application/json");
+}
+
 struct ProcessParams {
   int thumbnail_size = DEFAULT_THUMBNAIL_SIZE;
   int resize_max = DEFAULT_RESIZE_MAX;
@@ -244,32 +274,28 @@ int main(int argc, char* argv[]) {
       /* JSON body */
       if (req.get_header_value("Content-Type").find("application/json") ==
           std::string::npos) {
-        res.status = 400;
-        res.set_content(
-            "{\"error\":\"Missing file or JSON body; use multipart file= or "
-            "application/json with image_base64\"}",
-            "application/json");
+        set_error_response(res, 400, "invalid_request",
+            "Missing file or JSON body; use multipart file= or "
+            "application/json with image_base64",
+            corr);
         return;
       }
       /* Minimal JSON parse for image_base64 and options */
       const std::string& body = req.body;
       size_t pos = body.find("\"image_base64\"");
       if (pos == std::string::npos) {
-        res.status = 400;
-        res.set_content("{\"error\":\"Missing image_base64 in JSON\"}",
-                        "application/json");
+        set_error_response(res, 400, "invalid_request",
+            "Missing image_base64 in JSON", corr);
         return;
       }
       pos = body.find(':', pos);
       if (pos == std::string::npos) {
-        res.status = 400;
-        res.set_content("{\"error\":\"Invalid JSON\"}", "application/json");
+        set_error_response(res, 400, "invalid_request", "Invalid JSON", corr);
         return;
       }
       pos = body.find('"', pos + 1);
       if (pos == std::string::npos) {
-        res.status = 400;
-        res.set_content("{\"error\":\"Invalid JSON\"}", "application/json");
+        set_error_response(res, 400, "invalid_request", "Invalid JSON", corr);
         return;
       }
       size_t start = pos + 1;
@@ -278,9 +304,8 @@ int main(int argc, char* argv[]) {
       std::string b64 = body.substr(start, end - start);
       decoded = base64_decode(b64);
       if (decoded.empty()) {
-        res.status = 400;
-        res.set_content("{\"error\":\"Invalid or empty image_base64\"}",
-                        "application/json");
+        set_error_response(res, 400, "invalid_request",
+            "Invalid or empty image_base64", corr);
         return;
       }
       image_data = decoded.data();
@@ -320,8 +345,7 @@ int main(int argc, char* argv[]) {
     }
 
     if (!image_data || image_size == 0) {
-      res.status = 400;
-      res.set_content("{\"error\":\"No image data\"}", "application/json");
+      set_error_response(res, 400, "invalid_request", "No image data", corr);
       return;
     }
 
@@ -335,17 +359,7 @@ int main(int argc, char* argv[]) {
                            proc_ct,
                            err);
     if (!ok) {
-      res.status = 422;
-      std::ostringstream json;
-      json << "{\"error\":\"";
-      for (char c : err) {
-        if (c == '"') json << "\\\"";
-        else if (c == '\\') json << "\\\\";
-        else if (c >= 32 && c < 127) json << c;
-        else json << " ";
-      }
-      json << "\"}";
-      res.set_content(json.str(), "application/json");
+      set_error_response(res, 422, "validation_error", err, corr);
       return;
     }
 
@@ -368,6 +382,14 @@ int main(int argc, char* argv[]) {
     }
     out << "}";
     res.set_content(out.str(), "application/json");
+  });
+
+  /* Standard error shape for uncaught exceptions (500). */
+  svr.set_exception_handler([](const httplib::Request& req, httplib::Response& res, std::exception_ptr) {
+    res.set_header("Content-Type", "application/json");
+    std::string corr = req.get_header_value("X-Correlation-Id");
+    if (corr.empty()) corr = req.get_header_value("X-Request-Id");
+    set_error_response(res, 500, "internal_error", "An unexpected error occurred", corr);
   });
 
   std::cout << "cpp_media listening on port " << port << std::endl;

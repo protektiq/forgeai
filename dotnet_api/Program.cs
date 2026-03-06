@@ -1,12 +1,28 @@
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 const string ApiKeyHeader = "X-Api-Key";
 const string InternalApiKeyHeader = "X-Internal-Api-Key";
 const string CorrelationIdHeader = "X-Correlation-Id";
 const string RequestIdHeader = "X-Request-Id";
 const int PromptMaxLength = 10_000;
+
+// Standard error response shape (see docs/contracts/error-response.md)
+record ErrorPart(
+    [property: JsonPropertyName("code")] string Code,
+    [property: JsonPropertyName("message")] string Message,
+    [property: JsonPropertyName("correlation_id")] string CorrelationId);
+record ApiErrorResponse([property: JsonPropertyName("error")] ErrorPart Error);
+
+static IResult ApiErrorResult(string code, string message, string correlationId, int statusCode) =>
+    Results.Json(new ApiErrorResponse(new ErrorPart(code, message, correlationId)), statusCode: statusCode);
+
+static string GetCorrelationId(HttpContext context) =>
+    context.Request.Headers[CorrelationIdHeader].FirstOrDefault()
+    ?? context.Request.Headers[RequestIdHeader].FirstOrDefault()
+    ?? Guid.NewGuid().ToString();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,8 +60,11 @@ app.Use(async (context, next) =>
         Encoding.UTF8.GetBytes(provided),
         Encoding.UTF8.GetBytes(configuredApiKey)))
     {
+        var correlationId = context.Request.Headers[CorrelationIdHeader].FirstOrDefault()
+            ?? context.Request.Headers[RequestIdHeader].FirstOrDefault()
+            ?? Guid.NewGuid().ToString();
         context.Response.StatusCode = 401;
-        await context.Response.WriteAsJsonAsync(new { error = "Missing or invalid API key" });
+        await context.Response.WriteAsJsonAsync(new ApiErrorResponse(new ErrorPart("unauthorized", "Missing or invalid API key", correlationId)));
         return;
     }
     await next();
@@ -56,9 +75,7 @@ app.MapGet("/health", () => Results.Ok(new { status = "ok", service = "dotnet_ap
 
 app.MapPost("/api/generate", async (HttpContext context, IHttpClientFactory httpClientFactory) =>
 {
-    var correlationId = context.Request.Headers[CorrelationIdHeader].FirstOrDefault()
-        ?? context.Request.Headers[RequestIdHeader].FirstOrDefault()
-        ?? Guid.NewGuid().ToString();
+    var correlationId = GetCorrelationId(context);
     var logger = context.RequestServices.GetRequiredService<ILogger<Program>>();
     logger.LogInformation("dotnet_api request correlation_id={CorrelationId} path={Path}", correlationId, context.Request.Path);
 
@@ -69,15 +86,15 @@ app.MapPost("/api/generate", async (HttpContext context, IHttpClientFactory http
     }
     catch (JsonException)
     {
-        return Results.Json(new { error = "Invalid JSON body" }, statusCode: 400);
+        return ApiErrorResult("invalid_request", "Invalid JSON body", correlationId, 400);
     }
     if (body == null)
-        return Results.Json(new { error = "Body is required" }, statusCode: 400);
+        return ApiErrorResult("invalid_request", "Body is required", correlationId, 400);
     string prompt = (body.Prompt ?? "").Trim();
     if (prompt.Length == 0)
-        return Results.Json(new { error = "prompt is required" }, statusCode: 400);
+        return ApiErrorResult("invalid_request", "prompt is required", correlationId, 400);
     if (prompt.Length > PromptMaxLength)
-        return Results.Json(new { error = $"prompt must be at most {PromptMaxLength} characters" }, statusCode: 400);
+        return ApiErrorResult("invalid_request", $"prompt must be at most {PromptMaxLength} characters", correlationId, 400);
 
     var rails = httpClientFactory.CreateClient("Rails");
     var payload = new StringContent(JsonSerializer.Serialize(new { prompt }), Encoding.UTF8, "application/json");
@@ -90,11 +107,11 @@ app.MapPost("/api/generate", async (HttpContext context, IHttpClientFactory http
     }
     catch (HttpRequestException ex)
     {
-        return Results.Json(new { error = "Rails service unavailable", detail = ex.Message }, statusCode: 502);
+        return ApiErrorResult("bad_gateway", "Rails service unavailable: " + ex.Message, correlationId, 502);
     }
     catch (TaskCanceledException)
     {
-        return Results.Json(new { error = "Rails service timeout" }, statusCode: 502);
+        return ApiErrorResult("bad_gateway", "Rails service timeout", correlationId, 502);
     }
 
     var content = await response.Content.ReadAsStringAsync();
@@ -103,8 +120,9 @@ app.MapPost("/api/generate", async (HttpContext context, IHttpClientFactory http
     return Results.Json(JsonSerializer.Deserialize<JsonElement>(content), statusCode: (int)response.StatusCode);
 });
 
-app.MapGet("/api/assets", async (string? search, IHttpClientFactory httpClientFactory) =>
+app.MapGet("/api/assets", async (HttpContext context, string? search, IHttpClientFactory httpClientFactory) =>
 {
+    var correlationId = GetCorrelationId(context);
     var rails = httpClientFactory.CreateClient("Rails");
     string url = "api/v1/assets";
     if (!string.IsNullOrWhiteSpace(search))
@@ -119,11 +137,11 @@ app.MapGet("/api/assets", async (string? search, IHttpClientFactory httpClientFa
     }
     catch (HttpRequestException ex)
     {
-        return Results.Json(new { error = "Rails service unavailable", detail = ex.Message }, statusCode: 502);
+        return ApiErrorResult("bad_gateway", "Rails service unavailable: " + ex.Message, correlationId, 502);
     }
     catch (TaskCanceledException)
     {
-        return Results.Json(new { error = "Rails service timeout" }, statusCode: 502);
+        return ApiErrorResult("bad_gateway", "Rails service timeout", correlationId, 502);
     }
     var content = await response.Content.ReadAsStringAsync();
     if (!response.IsSuccessStatusCode)
@@ -131,12 +149,13 @@ app.MapGet("/api/assets", async (string? search, IHttpClientFactory httpClientFa
     return Results.Json(JsonSerializer.Deserialize<JsonElement>(content), statusCode: (int)response.StatusCode);
 });
 
-app.MapGet("/api/assets/{id}", async (string id, IHttpClientFactory httpClientFactory) =>
+app.MapGet("/api/assets/{id}", async (HttpContext context, string id, IHttpClientFactory httpClientFactory) =>
 {
+    var correlationId = GetCorrelationId(context);
     if (string.IsNullOrWhiteSpace(id))
-        return Results.Json(new { error = "Asset id is required" }, statusCode: 400);
+        return ApiErrorResult("invalid_request", "Asset id is required", correlationId, 400);
     if (!int.TryParse(id, out _) && !Guid.TryParse(id, out _))
-        return Results.Json(new { error = "Asset id must be a number or valid id" }, statusCode: 400);
+        return ApiErrorResult("invalid_request", "Asset id must be a number or valid id", correlationId, 400);
 
     var rails = httpClientFactory.CreateClient("Rails");
     string url = "api/v1/assets/" + Uri.EscapeDataString(id.Trim());
@@ -147,11 +166,11 @@ app.MapGet("/api/assets/{id}", async (string id, IHttpClientFactory httpClientFa
     }
     catch (HttpRequestException ex)
     {
-        return Results.Json(new { error = "Rails service unavailable", detail = ex.Message }, statusCode: 502);
+        return ApiErrorResult("bad_gateway", "Rails service unavailable: " + ex.Message, correlationId, 502);
     }
     catch (TaskCanceledException)
     {
-        return Results.Json(new { error = "Rails service timeout" }, statusCode: 502);
+        return ApiErrorResult("bad_gateway", "Rails service timeout", correlationId, 502);
     }
     var content = await response.Content.ReadAsStringAsync();
     if (response.StatusCode == System.Net.HttpStatusCode.NotFound)

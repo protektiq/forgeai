@@ -20,7 +20,7 @@ module Api
       def show
         asset = api_user.assets.find_by(id: params[:id])
         unless asset
-          head :not_found
+          render_api_error("Asset not found", status: :not_found)
           return
         end
 

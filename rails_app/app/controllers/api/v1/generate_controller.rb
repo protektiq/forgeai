@@ -7,12 +7,12 @@ module Api
       def create
         prompt = params[:prompt].to_s.strip
         if prompt.blank?
-          render json: { error: "prompt is required" }, status: :unprocessable_entity
+          render_api_error("prompt is required", status: :unprocessable_entity)
           return
         end
 
         if prompt.length > 10_000
-          render json: { error: "prompt is too long (maximum 10000 characters)" }, status: :unprocessable_entity
+          render_api_error("prompt is too long (maximum 10000 characters)", status: :unprocessable_entity)
           return
         end
 
@@ -22,7 +22,7 @@ module Api
           correlation_id: request.request_id.presence || SecureRandom.uuid
         )
         unless job.save
-          render json: { error: job.errors.full_messages.join(", ") }, status: :unprocessable_entity
+          render_api_error(job.errors.full_messages.join(", "), status: :unprocessable_entity)
           return
         end
 

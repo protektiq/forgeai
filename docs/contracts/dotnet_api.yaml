@@ -1,0 +1,47 @@
+# .NET API – external API surface (proxies to Rails)
+# Source: dotnet_api/Program.cs, dotnet_api/README.md
+# Error responses: see error-response.md (standard shape: error.code, error.message, error.correlation_id)
+
+endpoints:
+  - endpoint: /health
+    method: GET
+    request_schema: null
+    response_schema:
+      status: string
+      service: string
+    error_schema: null
+
+  - endpoint: /api/generate
+    method: POST
+    request_schema:
+      headers:
+        X-Api-Key: string  # required when ApiKey configured
+      body:
+        prompt: string  # required, non-empty, max 10000
+    response_schema:
+      job_id: number
+      status: string
+    response_status: "201"
+    error_schema: error-response.md  # 400 invalid_request, 401 unauthorized, 502 bad_gateway
+
+  - endpoint: /api/assets
+    method: GET
+    request_schema:
+      headers:
+        X-Api-Key: string  # required when ApiKey configured
+      query:
+        search: string  # optional
+    response_schema:
+      description: array of asset objects (proxied from Rails)
+    error_schema: error-response.md  # 401 unauthorized, 502 bad_gateway
+
+  - endpoint: /api/assets/{id}
+    method: GET
+    request_schema:
+      headers:
+        X-Api-Key: string  # required when ApiKey configured
+      path:
+        id: string  # number or valid id
+    response_schema:
+      description: single asset object (proxied from Rails)
+    error_schema: error-response.md  # 400 invalid_request, 401 unauthorized, 404 not_found, 502 bad_gateway

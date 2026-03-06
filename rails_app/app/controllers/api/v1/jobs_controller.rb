@@ -7,7 +7,7 @@ module Api
       def show
         job = api_user.generation_jobs.find_by(id: params[:id])
         unless job
-          render json: { error: "Job not found" }, status: :not_found
+          render_api_error("Job not found", status: :not_found)
           return
         end
 

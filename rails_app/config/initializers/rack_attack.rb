@@ -12,10 +12,20 @@ class Rack::Attack
     match_data = request.env["rack.attack.match_data"]
     retry_after = (match_data && match_data[:period]) ? match_data[:period].to_s : "60"
     if request.path.start_with?("/api/")
+      correlation_id = request.env["action_dispatch.request_id"].presence ||
+        request.env["REQUEST_ID"].presence ||
+        SecureRandom.uuid
+      body = {
+        error: {
+          code: "rate_limit_exceeded",
+          message: "Rate limit exceeded",
+          correlation_id: correlation_id,
+        },
+      }.to_json
       [
         429,
         { "Content-Type" => "application/json", "Retry-After" => retry_after },
-        [{ error: "Rate limit exceeded" }.to_json]
+        [body],
       ]
     else
       [

@@ -4,7 +4,7 @@ How to build and run each service locally. For prerequisites and high-level "how
 
 ## Orchestration
 
-Run each service in its own terminal from the corresponding folder. No startup order is required; services are independent. To run everything locally, open five terminals and run one service per terminal.
+Run each service in its own terminal from the corresponding folder. For a recommended startup order when running the full stack (Redis → Python gen → optional C++/Rust → Rails → Sidekiq → optional .NET API), see the [top-level README — Startup order](../README.md#startup-order). To run everything locally, open multiple terminals and run one service per terminal.
 
 ### First end-to-end win (Rails ↔ Python)
 
@@ -26,6 +26,7 @@ To verify the demo runs a small batch without silent failures:
    - Via API: `for i in 1 2 3 4 5 6 7 8 9 10; do curl -s -X POST http://localhost:3000/api/v1/generate -H "Content-Type: application/json" -H "X-Internal-Api-Key: YOUR_KEY" -d "{\"prompt\":\"test prompt $i\"}"; done` (omit the header if `RAILS_INTERNAL_API_KEY` is not set).
 4. **Check results:** Use the dashboard "Recent jobs" and open **View job** on any job to see full status and error message. Failed jobs show the full error on the Job details page (`/jobs/:id`). API clients can poll `GET /api/v1/jobs/:id` for status and `error_message`.
 5. **Correlation in logs:** Each job has a `correlation_id` (from the request that created it). Rails logs it at job start; outbound calls to Python, C++, and Rust send `X-Correlation-Id`. Grep logs by that id to trace a single job across services.
+6. **API error responses:** All services return errors in a standard JSON shape (`error.code`, `error.message`, `error.correlation_id`). See [docs/contracts/error-response.md](contracts/error-response.md).
 
 ### Rails app (`rails_app/`)
 
@@ -57,11 +58,12 @@ uvicorn main:app --host 0.0.0.0 --port 5000
 ```bash
 cd cpp_media
 make
-./hello
+./cpp_media [port]
 ```
 
-- **Logs:** stdout (no server; one-shot binary)  
-- **Common issues:** No `make` → use `g++ -o hello main.cpp` then `./hello`; see `cpp_media/README.md`.
+- **Port:** 8080 (default); pass port as first argument to override  
+- **Logs:** stdout (HTTP server)  
+- **Common issues:** No `make` or libvips → see `cpp_media/README.md`.
 
 ### Rust index (`rust_index/`)
 
@@ -71,7 +73,8 @@ cargo build
 cargo run
 ```
 
-- **Logs:** stdout (one-shot binary)  
+- **Port:** 3132 (default); override with env `PORT`  
+- **Logs:** stdout (HTTP server)  
 - **Common issues:** First run may download toolchain; see `rust_index/README.md`.
 
 ### .NET API (`dotnet_api/`)
@@ -83,7 +86,7 @@ dotnet build
 dotnet run
 ```
 
-- **Port:** 5000 (HTTP), 5001 (HTTPS) — check app output  
+- **Port:** 5001 (see `Properties/launchSettings.json`)  
 - **Logs:** stdout  
 - **Common issues:** Port in use → configure in `Properties/launchSettings.json` or app configuration; see `dotnet_api/README.md`.
 

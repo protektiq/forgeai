@@ -1,0 +1,33 @@
+# Rust index – full-text-style search over asset prompts, tags, metadata
+# Source: rust_index/src/main.rs
+# Error responses: see error-response.md (standard shape: error.code, error.message, error.correlation_id)
+
+endpoints:
+  - endpoint: /health
+    method: GET
+    request_schema: null
+    response_schema:
+      description: 200 OK, no body
+    error_schema: null
+
+  - endpoint: /index
+    method: POST
+    request_schema:
+      body:
+        asset_id: string   # required
+        prompt: string     # required
+        metadata: object   # optional
+        tags: string[]    # optional
+        embedding: number[] # optional, reserved for future vector search
+    response_schema:
+      description: 204 No Content
+    error_schema: error-response.md  # 400 invalid_request
+
+  - endpoint: /search
+    method: GET
+    request_schema:
+      query:
+        q: string  # search string; empty q returns empty list
+    response_schema:
+      asset_ids: string[]
+    error_schema: null  # empty query returns empty array
