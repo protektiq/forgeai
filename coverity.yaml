@@ -1,0 +1,6 @@
+analyze:
+  location: local
+commit:
+  connect:
+    stream: forgeai
+    url: https://coverity.field-test.blackduck.com

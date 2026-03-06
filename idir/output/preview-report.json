@@ -1,0 +1,82 @@
+{
+  "header" : {
+    "format" : "commit preview report",
+    "version" : 2
+  },
+  "analysisInfo" : {
+    "ownerAssignmentRule" : "default_component_owner",
+    "comparisonSnapshotId" : null,
+    "reportTimestamp" : "2026-03-04T18:20:43.483Z",
+    "user" : "admin",
+    "command" : "C:\\Program Files\\Coverity\\Coverity Static Analysis\\bin\\cov-analyze --dir C:\\coverity-testing\\forgeai\\idir --strip-path C:\\coverity-testing\\forgeai --ticker-mode none --recommended-security-checkers --enable-scan-transparency-data"
+  },
+  "issueInfo" : [ {
+    "cid" : 111550,
+    "mergeKey" : "07a70b85ce6339b4983aaa0e4fc60e1a",
+    "presentInComparisonSnapshot" : false,
+    "firstDetectedDateTime" : "2026-03-04T17:39:43.410Z",
+    "occurrences" : [ {
+      "checker" : "SIGMA.hardcoded_secret",
+      "file" : "/rails_app/config/database.yml",
+      "function" : "unknown",
+      "extra" : "",
+      "mergeWithLowercaseFile" : false,
+      "subcategory" : "file",
+      "mainEventLineNumber" : 1,
+      "mainEventDescription" : "A secret, such as a password, cryptographic key, or token is stored in a file that is persisted to the code repository. Any user with access to the code repository may obtain and use the secret to access restricted resources.",
+      "componentName" : "Other",
+      "componentDefaultOwner" : null,
+      "componentDefaultOwnerLdapServer" : null,
+      "score" : null,
+      "language" : "Text"
+    } ],
+    "triage" : {
+      "severity" : "Unspecified",
+      "owner" : null,
+      "externalReference" : null,
+      "legacy" : "False",
+      "fixTarget" : "Untargeted",
+      "action" : "Undecided",
+      "classification" : "Unclassified"
+    },
+    "customTriage" : {
+      "User Name" : null,
+      "ID" : null
+    },
+    "ownerLdapServerName" : null
+  }, {
+    "cid" : 111551,
+    "mergeKey" : "e9f9b1b03db9bfbaf2bd28870c95df32",
+    "presentInComparisonSnapshot" : false,
+    "firstDetectedDateTime" : "2026-03-04T17:39:43.410Z",
+    "occurrences" : [ {
+      "checker" : "SIGMA.hardcoded_secret",
+      "file" : "/rails_app/db/schema.rb",
+      "function" : "unknown",
+      "extra" : "",
+      "mergeWithLowercaseFile" : false,
+      "subcategory" : "file",
+      "mainEventLineNumber" : 1,
+      "mainEventDescription" : "A secret, such as a password, cryptographic key, or token is stored in a file that is persisted to the code repository. Any user with access to the code repository may obtain and use the secret to access restricted resources.",
+      "componentName" : "Other",
+      "componentDefaultOwner" : null,
+      "componentDefaultOwnerLdapServer" : null,
+      "score" : null,
+      "language" : "Ruby"
+    } ],
+    "triage" : {
+      "severity" : "Unspecified",
+      "owner" : null,
+      "externalReference" : null,
+      "legacy" : "False",
+      "fixTarget" : "Untargeted",
+      "action" : "Undecided",
+      "classification" : "Unclassified"
+    },
+    "customTriage" : {
+      "User Name" : null,
+      "ID" : null
+    },
+    "ownerLdapServerName" : null
+  } ]
+}

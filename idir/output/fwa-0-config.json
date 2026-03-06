@@ -1,0 +1,432 @@
+[
+  {
+    "directives": [
+      {
+        "after": [],
+        "before": [],
+        "default_views": [],
+        "entry_point": "Microsoft.AspNetCore.Mvc.Controller::Json(System.Object)Microsoft.AspNetCore.Mvc.JsonResult",
+        "framework": "dotnetmvc",
+        "param_taint": [
+          null,
+          {
+            "element_kind": "FIELDS",
+            "taint_all_elements_except": [],
+            "taint_kinds": [
+              "http"
+            ],
+            "taint_subtypes": true
+          }
+        ],
+        "return": "NORMAL"
+      },
+      {
+        "after": [],
+        "before": [],
+        "default_views": [],
+        "entry_point": "Microsoft.AspNetCore.Mvc.Controller::Json(System.Object,System.Object)Microsoft.AspNetCore.Mvc.JsonResult",
+        "framework": "dotnetmvc",
+        "param_taint": [
+          null,
+          {
+            "element_kind": "FIELDS",
+            "taint_all_elements_except": [],
+            "taint_kinds": [
+              "http"
+            ],
+            "taint_subtypes": true
+          },
+          {
+            "element_kind": "FIELDS",
+            "taint_all_elements_except": [],
+            "taint_kinds": [
+              "http"
+            ],
+            "taint_subtypes": true
+          }
+        ],
+        "return": "NORMAL"
+      },
+      {
+        "after": [],
+        "before": [],
+        "default_views": [],
+        "entry_point": "Microsoft.AspNetCore.Mvc.Controller::OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)System.Void",
+        "framework": "dotnetmvc",
+        "param_taint": [
+          null,
+          {
+            "element_kind": "FIELDS",
+            "taint_all_elements_except": [],
+            "taint_kinds": [
+              "http"
+            ],
+            "taint_subtypes": true
+          }
+        ],
+        "return": "NORMAL"
+      },
+      {
+        "after": [],
+        "before": [],
+        "default_views": [],
+        "entry_point": "Microsoft.AspNetCore.Mvc.Controller::OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)System.Void",
+        "framework": "dotnetmvc",
+        "param_taint": [
+          null,
+          {
+            "element_kind": "FIELDS",
+            "taint_all_elements_except": [],
+            "taint_kinds": [
+              "http"
+            ],
+            "taint_subtypes": true
+          }
+        ],
+        "return": "NORMAL"
+      },
+      {
+        "after": [],
+        "before": [],
+        "default_views": [],
+        "entry_point": "Microsoft.AspNetCore.Mvc.Controller::OnActionExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate)System.Threading.Tasks.Task",
+        "framework": "dotnetmvc",
+        "param_taint": [
+          null,
+          {
+            "element_kind": "FIELDS",
+            "taint_all_elements_except": [],
+            "taint_kinds": [
+              "http"
+            ],
+            "taint_subtypes": true
+          },
+          {
+            "element_kind": "FIELDS",
+            "taint_all_elements_except": [],
+            "taint_kinds": [
+              "http"
+            ],
+            "taint_subtypes": true
+          }
+        ],
+        "return": "NORMAL"
+      },
+      {
+        "after": [],
+        "before": [],
+        "default_views": [],
+        "entry_point": "Microsoft.AspNetCore.Mvc.Controller::PartialView()Microsoft.AspNetCore.Mvc.PartialViewResult",
+        "framework": "dotnetmvc",
+        "param_taint": [
+          null
+        ],
+        "return": "NORMAL"
+      },
+      {
+        "after": [],
+        "before": [],
+        "default_views": [],
+        "entry_point": "Microsoft.AspNetCore.Mvc.Controller::PartialView(System.Object)Microsoft.AspNetCore.Mvc.PartialViewResult",
+        "framework": "dotnetmvc",
+        "param_taint": [
+          null,
+          {
+            "element_kind": "FIELDS",
+            "taint_all_elements_except": [],
+            "taint_kinds": [
+              "http"
+            ],
+            "taint_subtypes": true
+          }
+        ],
+        "return": "NORMAL"
+      },
+      {
+        "after": [],
+        "before": [],
+        "default_views": [],
+        "entry_point": "Microsoft.AspNetCore.Mvc.Controller::PartialView(System.String)Microsoft.AspNetCore.Mvc.PartialViewResult",
+        "framework": "dotnetmvc",
+        "param_taint": [
+          null,
+          {
+            "element_kind": "FIELDS",
+            "taint_all_elements_except": [],
+            "taint_kinds": [
+              "http"
+            ],
+            "taint_subtypes": true
+          }
+        ],
+        "return": "NORMAL"
+      },
+      {
+        "after": [],
+        "before": [],
+        "default_views": [],
+        "entry_point": "Microsoft.AspNetCore.Mvc.Controller::PartialView(System.String,System.Object)Microsoft.AspNetCore.Mvc.PartialViewResult",
+        "framework": "dotnetmvc",
+        "param_taint": [
+          null,
+          {
+            "element_kind": "FIELDS",
+            "taint_all_elements_except": [],
+            "taint_kinds": [
+              "http"
+            ],
+            "taint_subtypes": true
+          },
+          {
+            "element_kind": "FIELDS",
+            "taint_all_elements_except": [],
+            "taint_kinds": [
+              "http"
+            ],
+            "taint_subtypes": true
+          }
+        ],
+        "return": "NORMAL"
+      },
+      {
+        "after": [],
+        "before": [],
+        "default_views": [],
+        "entry_point": "Microsoft.AspNetCore.Mvc.Controller::View()Microsoft.AspNetCore.Mvc.ViewResult",
+        "framework": "dotnetmvc",
+        "param_taint": [
+          null
+        ],
+        "return": "NORMAL"
+      },
+      {
+        "after": [],
+        "before": [],
+        "default_views": [],
+        "entry_point": "Microsoft.AspNetCore.Mvc.Controller::View(System.Object)Microsoft.AspNetCore.Mvc.ViewResult",
+        "framework": "dotnetmvc",
+        "param_taint": [
+          null,
+          {
+            "element_kind": "FIELDS",
+            "taint_all_elements_except": [],
+            "taint_kinds": [
+              "http"
+            ],
+            "taint_subtypes": true
+          }
+        ],
+        "return": "NORMAL"
+      },
+      {
+        "after": [],
+        "before": [],
+        "default_views": [],
+        "entry_point": "Microsoft.AspNetCore.Mvc.Controller::View(System.String)Microsoft.AspNetCore.Mvc.ViewResult",
+        "framework": "dotnetmvc",
+        "param_taint": [
+          null,
+          {
+            "element_kind": "FIELDS",
+            "taint_all_elements_except": [],
+            "taint_kinds": [
+              "http"
+            ],
+            "taint_subtypes": true
+          }
+        ],
+        "return": "NORMAL"
+      },
+      {
+        "after": [],
+        "before": [],
+        "default_views": [],
+        "entry_point": "Microsoft.AspNetCore.Mvc.Controller::View(System.String,System.Object)Microsoft.AspNetCore.Mvc.ViewResult",
+        "framework": "dotnetmvc",
+        "param_taint": [
+          null,
+          {
+            "element_kind": "FIELDS",
+            "taint_all_elements_except": [],
+            "taint_kinds": [
+              "http"
+            ],
+            "taint_subtypes": true
+          },
+          {
+            "element_kind": "FIELDS",
+            "taint_all_elements_except": [],
+            "taint_kinds": [
+              "http"
+            ],
+            "taint_subtypes": true
+          }
+        ],
+        "return": "NORMAL"
+      },
+      {
+        "after": [],
+        "before": [],
+        "default_views": [],
+        "entry_point": "Microsoft.AspNetCore.Mvc.Controller::ViewComponent(System.String)Microsoft.AspNetCore.Mvc.ViewComponentResult",
+        "framework": "dotnetmvc",
+        "param_taint": [
+          null,
+          {
+            "element_kind": "FIELDS",
+            "taint_all_elements_except": [],
+            "taint_kinds": [
+              "http"
+            ],
+            "taint_subtypes": true
+          }
+        ],
+        "return": "NORMAL"
+      },
+      {
+        "after": [],
+        "before": [],
+        "default_views": [],
+        "entry_point": "Microsoft.AspNetCore.Mvc.Controller::ViewComponent(System.String,System.Object)Microsoft.AspNetCore.Mvc.ViewComponentResult",
+        "framework": "dotnetmvc",
+        "param_taint": [
+          null,
+          {
+            "element_kind": "FIELDS",
+            "taint_all_elements_except": [],
+            "taint_kinds": [
+              "http"
+            ],
+            "taint_subtypes": true
+          },
+          {
+            "element_kind": "FIELDS",
+            "taint_all_elements_except": [],
+            "taint_kinds": [
+              "http"
+            ],
+            "taint_subtypes": true
+          }
+        ],
+        "return": "NORMAL"
+      },
+      {
+        "after": [],
+        "before": [],
+        "default_views": [],
+        "entry_point": "Microsoft.AspNetCore.Mvc.Controller::ViewComponent(System.Type)Microsoft.AspNetCore.Mvc.ViewComponentResult",
+        "framework": "dotnetmvc",
+        "param_taint": [
+          null,
+          {
+            "element_kind": "FIELDS",
+            "taint_all_elements_except": [],
+            "taint_kinds": [
+              "http"
+            ],
+            "taint_subtypes": true
+          }
+        ],
+        "return": "NORMAL"
+      },
+      {
+        "after": [],
+        "before": [],
+        "default_views": [],
+        "entry_point": "Microsoft.AspNetCore.Mvc.Controller::ViewComponent(System.Type,System.Object)Microsoft.AspNetCore.Mvc.ViewComponentResult",
+        "framework": "dotnetmvc",
+        "param_taint": [
+          null,
+          {
+            "element_kind": "FIELDS",
+            "taint_all_elements_except": [],
+            "taint_kinds": [
+              "http"
+            ],
+            "taint_subtypes": true
+          },
+          {
+            "element_kind": "FIELDS",
+            "taint_all_elements_except": [],
+            "taint_kinds": [
+              "http"
+            ],
+            "taint_subtypes": true
+          }
+        ],
+        "return": "NORMAL"
+      },
+      {
+        "after": [],
+        "before": [],
+        "default_views": [],
+        "entry_point": "Ocelot.Cache.OutputCacheController::Delete(System.String)Microsoft.AspNetCore.Mvc.IActionResult",
+        "framework": "dotnetmvc",
+        "param_taint": [
+          null,
+          {
+            "element_kind": "FIELDS",
+            "taint_all_elements_except": [],
+            "taint_kinds": [
+              "http"
+            ],
+            "taint_subtypes": true
+          }
+        ],
+        "return": "NORMAL"
+      },
+      {
+        "after": [],
+        "before": [],
+        "default_views": [],
+        "entry_point": "Ocelot.Configuration.FileConfigurationController::Get()System.Threading.Tasks.Task`1<Microsoft.AspNetCore.Mvc.IActionResult>",
+        "framework": "dotnetmvc",
+        "param_taint": [
+          null
+        ],
+        "return": "NORMAL"
+      },
+      {
+        "after": [],
+        "before": [],
+        "default_views": [],
+        "entry_point": "Ocelot.Configuration.FileConfigurationController::Post(Ocelot.Configuration.File.FileConfiguration)System.Threading.Tasks.Task`1<Microsoft.AspNetCore.Mvc.IActionResult>",
+        "framework": "dotnetmvc",
+        "param_taint": [
+          null,
+          {
+            "element_kind": "FIELDS",
+            "taint_all_elements_except": [],
+            "taint_kinds": [
+              "http"
+            ],
+            "taint_subtypes": true
+          }
+        ],
+        "return": "NORMAL"
+      },
+      {
+        "filter": "Infragistics.Web.Mvc.ComboDataSourceActionAttribute::OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)System.Void",
+        "mapping": "annotation",
+        "name": "Infragistics.Web.Mvc.ComboDataSourceActionAttribute"
+      },
+      {
+        "filter": "Infragistics.Web.Mvc.GridDataSourceActionAttribute::OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)System.Void",
+        "mapping": "annotation",
+        "name": "Infragistics.Web.Mvc.GridDataSourceActionAttribute"
+      },
+      {
+        "filter": "Infragistics.Web.Mvc.XmlaDataSourceActionAttribute::OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)System.Void",
+        "mapping": "annotation",
+        "name": "Infragistics.Web.Mvc.XmlaDataSourceActionAttribute"
+      }
+    ],
+    "format_version": 21,
+    "language": "any",
+    "type": "Coverity analysis configuration"
+  }
+]
+
+// Coverity-generated framework configuration
+//    created 2026-Mar-04 10:20:04
+//    cov-analyze external version 2025.12.0 internal version 8600bcfa3c p-2025.12-push-40

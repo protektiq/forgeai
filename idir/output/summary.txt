@@ -1,0 +1,14 @@
+"C:\Program Files\Coverity\Coverity Static Analysis\bin\cov-analyze" --dir C:\coverity-testing\forgeai\idir --strip-path C:\coverity-testing\forgeai --ticker-mode none --recommended-security-checkers --enable-scan-transparency-data 
+[WARNING] Skipping Brakeman Pro analysis: No Ruby on Rails application detected.
+Analysis summary report:
+------------------------
+Files analyzed                 : 63 Total
+    C#                         : 1
+    Python 3                   : 1
+    Ruby                       : 33
+    Text                       : 28
+Total LoC input to cov-analyze : 18636
+Functions analyzed             : 22
+Paths analyzed                 : 160
+Time taken by analysis         : 00:00:33
+Defect occurrences found       : 2 SIGMA.hardcoded_secret

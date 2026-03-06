@@ -41,3 +41,24 @@ dotnet_api/obj/
 *.swp
 *.swo
 *~
+
+idir/emit/
+idir/**/emit-db
+
+
+# Build / analysis outputs
+**/build/
+**/dist/
+**/out/
+**/*.db
+**/*.sqlite
+**/*.sqlite3
+
+# Logs
+**/*.log
+
+# Temporary / cache files
+**/.cache/
+**/.tmp/
+
+

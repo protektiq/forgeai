@@ -1,0 +1,15 @@
+{
+  "rule" : "default_component_owner",
+  "assignments" : [
+    {
+      "mergeKey" : "07a70b85ce6339b4983aaa0e4fc60e1a",
+      "cimUsername" : null,
+      "ldapServer" : null
+    },
+    {
+      "mergeKey" : "e9f9b1b03db9bfbaf2bd28870c95df32",
+      "cimUsername" : null,
+      "ldapServer" : null
+    }
+  ]
+}
