@@ -1,0 +1,300 @@
+# frozen_string_literal: true
+
+require "open3"
+require "net/http"
+require "uri"
+require "json"
+
+# Shared pipeline logic for generator → store → media → index.
+# Used by GenerateAssetJob and OrchestrateWorkflowJob.
+# Job must respond to: prompt, user_id, correlation_id, id, mark_failed(message).
+module GenerationPipeline
+  GENERATOR_PATH = "/generate"
+  MEDIA_PROCESS_PATH = "/process"
+  MAX_ERROR_MESSAGE_LENGTH = 1000
+  ALLOWED_IMAGE_CONTENT_TYPES = %w[image/jpeg image/png].freeze
+
+  RETRYABLE_HTTP_ERRORS = [
+    Timeout::Error,
+    Net::OpenTimeout,
+    Net::ReadTimeout,
+    Errno::ECONNRESET,
+    Errno::ECONNREFUSED,
+    Errno::ETIMEDOUT,
+    SocketError,
+    EOFError
+  ].freeze
+
+  def call_python_generator(job)
+    url = URI.join(Rails.application.config.generator_url, GENERATOR_PATH)
+    open_t = Rails.application.config.generator_open_timeout
+    read_t = Rails.application.config.generator_read_timeout
+    max_retries = Rails.application.config.generator_retries
+
+    req = Net::HTTP::Post.new(url)
+    req["Content-Type"] = "application/json"
+    req["Accept"] = "application/json"
+    req.body = { prompt: job.prompt }.to_json
+    set_correlation_header(req, job)
+
+    res = with_http_retries(job, "Generator", max_retries) do
+      r = nil
+      Net::HTTP.start(url.host, url.port, open_timeout: open_t, read_timeout: read_t) do |http|
+        r = http.request(req)
+      end
+      r
+    end
+    return nil if res.nil?
+
+    unless res.is_a?(Net::HTTPSuccess)
+      job.mark_failed("Generator returned #{res.code}: #{res.message}")
+      return nil
+    end
+
+    content_type = res["Content-Type"]&.split(";")&.first&.strip.presence
+    unless content_type&.include?("application/json")
+      job.mark_failed("Generator returned non-JSON content type: #{content_type || 'unknown'}")
+      return nil
+    end
+
+    data = begin
+      JSON.parse(res.body)
+    rescue JSON::ParserError => e
+      job.mark_failed("Invalid JSON response: #{e.message}")
+      return nil
+    end
+
+    unless data.is_a?(Hash) && data["image_base64"].present? && data.key?("seed") && data["model"].present?
+      job.mark_failed("Invalid JSON response: missing image_base64, seed, or model")
+      return nil
+    end
+
+    image_bytes = begin
+      Base64.strict_decode64(data["image_base64"].to_s)
+    rescue ArgumentError => e
+      job.mark_failed("Invalid image_base64 in response: #{e.message}")
+      return nil
+    end
+
+    {
+      image_bytes: image_bytes,
+      content_type: "image/png",
+      seed: data["seed"],
+      model: data["model"].to_s
+    }
+  rescue StandardError => e
+    job.mark_failed("Generator error: #{e.message}")
+    nil
+  end
+
+  def store_image(job, payload)
+    return nil unless payload.is_a?(Hash) && payload[:image_bytes].present?
+
+    image_bytes = payload[:image_bytes]
+    content_type = payload[:content_type].presence || "image/png"
+    seed = payload[:seed]
+    model = payload[:model].to_s.presence
+
+    asset = Asset.new(
+      user_id: job.user_id,
+      generation_job_id: job.id,
+      filename: "generated-#{job.id}.png",
+      content_type: content_type,
+      byte_size: image_bytes.bytesize
+    )
+    asset.metadata = {}
+    asset.metadata["generator"] = { "seed" => seed, "model" => model } if seed.present? || model.present?
+
+    asset.file.attach(
+      io: StringIO.new(image_bytes),
+      filename: "generated-#{job.id}.png",
+      content_type: content_type
+    )
+    asset.save!
+    asset
+  rescue StandardError => e
+    job.mark_failed("Store image error: #{e.message}")
+    nil
+  end
+
+  def call_media_service(job, asset)
+    base_url = Rails.application.config.cpp_media_url.presence
+    if base_url.present?
+      call_media_service_http(job, asset, base_url)
+      return
+    end
+
+    cmd = Rails.application.config.media_service_command.to_s.strip
+    return if cmd.blank?
+
+    input_path = nil
+    asset.file.blob.open do |file|
+      input_path = file.path
+      run_external_command(
+        job,
+        cmd,
+        "Media service",
+        "INPUT_PATH" => input_path,
+        "ASSET_ID" => asset.id.to_s,
+        "PROMPT" => job.prompt.to_s
+      )
+    end
+  rescue StandardError => e
+    job.mark_failed("Media service error: #{e.message}")
+  end
+
+  def call_media_service_http(job, asset, base_url)
+    process_url = URI.join(base_url, MEDIA_PROCESS_PATH)
+    image_bytes = asset.file.blob.download
+    body = {
+      image_base64: Base64.strict_encode64(image_bytes),
+      thumbnail_size: 256,
+      resize_max: 1200,
+      output_format: "jpg",
+      operations: "thumbnail,resize"
+    }.to_json
+
+    open_t = Rails.application.config.media_open_timeout
+    read_t = Rails.application.config.media_read_timeout
+    max_retries = Rails.application.config.media_retries
+
+    req = Net::HTTP::Post.new(process_url)
+    req["Content-Type"] = "application/json"
+    req["Accept"] = "application/json"
+    req.body = body
+    set_correlation_header(req, job)
+
+    res = with_http_retries(job, "Media service", max_retries) do
+      r = nil
+      Net::HTTP.start(process_url.host, process_url.port, open_timeout: open_t, read_timeout: read_t) do |http|
+        r = http.request(req)
+      end
+      r
+    end
+    return if res.nil?
+
+    unless res.is_a?(Net::HTTPSuccess)
+      job.mark_failed("Media service returned #{res.code}: #{res.message}")
+      return
+    end
+
+    data = begin
+      JSON.parse(res.body)
+    rescue JSON::ParserError => e
+      job.mark_failed("Media service invalid JSON: #{e.message}")
+      return
+    end
+
+    unless data.is_a?(Hash) && data["thumbnail_base64"].present? && data["thumbnail_content_type"].present?
+      job.mark_failed("Media service response missing thumbnail_base64 or thumbnail_content_type")
+      return
+    end
+
+    thumb_ct = data["thumbnail_content_type"].to_s.strip
+    unless ALLOWED_IMAGE_CONTENT_TYPES.include?(thumb_ct)
+      job.mark_failed("Media service invalid thumbnail_content_type: #{thumb_ct}")
+      return
+    end
+
+    thumb_bytes = begin
+      Base64.strict_decode64(data["thumbnail_base64"].to_s)
+    rescue ArgumentError => e
+      job.mark_failed("Media service invalid thumbnail_base64: #{e.message}")
+      return
+    end
+
+    ext = thumb_ct.include?("png") ? "png" : "jpg"
+    asset.thumbnail.attach(
+      io: StringIO.new(thumb_bytes),
+      filename: "thumb-#{asset.id}.#{ext}",
+      content_type: thumb_ct
+    )
+  rescue StandardError => e
+    job.mark_failed("Media service error: #{e.message}")
+  end
+
+  def call_index_service(job, asset)
+    base_url = Rails.application.config.index_service_url.presence
+    if base_url.present?
+      call_index_service_http(job, asset, base_url)
+      return
+    end
+
+    cmd = Rails.application.config.index_service_command.to_s.strip
+    return if cmd.blank?
+
+    run_external_command(
+      job,
+      cmd,
+      "Index service",
+      "ASSET_ID" => asset.id.to_s,
+      "PROMPT" => job.prompt.to_s
+    )
+  rescue StandardError => e
+    job.mark_failed("Index service error: #{e.message}")
+  end
+
+  def call_index_service_http(job, asset, base_url)
+    index_url = URI.join(base_url, "/index")
+    body = {
+      asset_id: asset.id.to_s,
+      prompt: job.prompt.to_s,
+      metadata: asset.metadata || {},
+      tags: []
+    }.to_json
+
+    open_t = Rails.application.config.index_open_timeout
+    read_t = Rails.application.config.index_read_timeout
+    max_retries = Rails.application.config.index_retries
+
+    req = Net::HTTP::Post.new(index_url)
+    req["Content-Type"] = "application/json"
+    req["Accept"] = "application/json"
+    req.body = body
+    set_correlation_header(req, job)
+
+    res = with_http_retries(job, "Index service", max_retries) do
+      r = nil
+      Net::HTTP.start(index_url.host, index_url.port, open_timeout: open_t, read_timeout: read_t) do |http|
+        r = http.request(req)
+      end
+      r
+    end
+    return if res.nil?
+
+    unless res.is_a?(Net::HTTPSuccess)
+      job.mark_failed("Index service returned #{res.code}: #{res.message}")
+    end
+  rescue StandardError => e
+    job.mark_failed("Index service error: #{e.message}")
+  end
+
+  private
+
+  def set_correlation_header(req, job)
+    req["X-Correlation-Id"] = job.correlation_id if job.correlation_id.present?
+  end
+
+  def with_http_retries(job, service_name, max_retries)
+    (max_retries + 1).times do |attempt|
+      return yield
+    rescue *RETRYABLE_HTTP_ERRORS => e
+      Rails.logger.warn("[#{service_name}] attempt #{attempt + 1}/#{max_retries + 1} failed: #{e.class} #{e.message}")
+      raise if attempt == max_retries
+      sleep(0.5 * (attempt + 1))
+    end
+  rescue *RETRYABLE_HTTP_ERRORS => e
+    job.mark_failed("#{service_name} connection error after #{max_retries + 1} attempts: #{e.message}")
+    nil
+  end
+
+  def run_external_command(job, command, service_name, env = {})
+    full_env = ENV.to_h.merge(env)
+    out, err, status = Open3.capture3(full_env, command, stdin_data: nil)
+    return if status.success?
+
+    msg = [err.presence, out.presence].compact.join(" ").strip
+    msg = "#{service_name} failed (exit #{status.exitstatus})" if msg.blank?
+    job.mark_failed(msg)
+  end
+end

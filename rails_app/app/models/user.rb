@@ -6,4 +6,5 @@ class User < ApplicationRecord
 
   has_many :generation_jobs, dependent: :destroy
   has_many :assets, dependent: :destroy
+  has_many :workflow_runs, dependent: :destroy
 end

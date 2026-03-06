@@ -4,16 +4,16 @@ This document summarizes **who calls whom** and **which contract** is used. For 
 
 ## Client → Rails
 
-- **Dashboard (browser)**: POST `/dashboard` with `generation_job[prompt]`. Creates a job, enqueues `GenerateAssetJob`, redirects. Rate-limited per IP.
-- **Internal API (e.g. .NET proxy or direct)**: POST `/api/v1/generate` with JSON `{ "prompt": "..." }` → 201 `{ "job_id", "status": "queued" }`. Poll GET `/api/v1/jobs/:id` for status; GET `/api/v1/assets` and `/api/v1/assets/:id` for results. Auth: `X-Internal-Api-Key` when `RAILS_INTERNAL_API_KEY` is set.
+- **Dashboard (browser)**: POST `/dashboard` with `generation_job[prompt]`. Creates a **WorkflowRun** (default preset) + **WorkflowRunSteps** + **GenerationJob**, enqueues `GenerateAssetJob`, redirects. Rate-limited per IP.
+- **Internal API (e.g. .NET proxy or direct)**: POST `/api/v1/generate` with JSON `{ "prompt": "..." }` → 201 `{ "job_id", "status": "queued" }` (wrapped path: WorkflowRun + GenerationJob + GenerateAssetJob). With optional `workflow_id` or `workflow_slug`: 201 `{ "workflow_run_id", "status": "queued" }` (OrchestrateWorkflowJob). Poll GET `/api/v1/jobs/:id` for job status; GET `/api/v1/assets` and `/api/v1/assets/:id` for results. Auth: `X-Internal-Api-Key` when `RAILS_INTERNAL_API_KEY` is set.
 
 ## Client → .NET API
 
 - **External API clients**: POST `/api/generate` (body `{ "prompt": "..." }`), GET `/api/assets?search=...`, GET `/api/assets/{id}`. Auth: `X-Api-Key`. .NET forwards to Rails with `X-Internal-Api-Key` and `X-Correlation-Id` (or `X-Request-Id`). Request/response JSON matches [Rails API](rails-api.md).
 
-## Rails worker (GenerateAssetJob) → external services
+## Rails worker (GenerateAssetJob / OrchestrateWorkflowJob) → external services
 
-The worker runs after a job is created (dashboard or API). It performs, in order:
+**GenerateAssetJob** runs after a job is created via the wrapped path (dashboard or API without workflow). **OrchestrateWorkflowJob** runs when a workflow run is created with a preset (API with `workflow_id`/`workflow_slug`); it executes steps in order (generate, store, thumbnail, index) per preset. The worker performs, in order:
 
 1. **Python gen** (always, when generator is configured)
    - **Contract**: [python-gen.md](python-gen.md)

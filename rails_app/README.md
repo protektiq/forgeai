@@ -1,6 +1,6 @@
 # Rails app
 
-Rails is the system of record and user-facing product. Users sign in with Devise, submit prompts on the dashboard (creating `GenerationJob` records with status `queued`), and a background job runs the generation pipeline. Users can browse the asset library and asset detail pages.
+Rails is the system of record and user-facing product. Orchestration is **workflow-centric**: every run is a **WorkflowRun** with **WorkflowRunSteps**. Users sign in with Devise, submit prompts on the dashboard (creating a default WorkflowRun + steps + **GenerationJob** with status `queued`), and a background job runs the generation pipeline. Alternatively, the API can accept a **workflow_id** or **workflow_slug** to run a preset workflow via **OrchestrateWorkflowJob**. Users can browse the asset library and asset detail pages.
 
 ## Prerequisites
 
@@ -13,9 +13,10 @@ Rails is the system of record and user-facing product. Users sign in with Devise
 ```bash
 bundle install
 bundle exec rails db:migrate
+bundle exec rails db:seed
 ```
 
-Ensure Redis is running (e.g. `redis-server`) if you use Sidekiq. Default Redis URL: `redis://localhost:6379/0`. Override with `REDIS_URL` if needed.
+Ensure Redis is running (e.g. `redis-server`) if you use Sidekiq. Default Redis URL: `redis://localhost:6379/0`. Override with `REDIS_URL` if needed. **Seeds** create three workflow presets: `generate_only`, `generate_thumbnail`, `generate_process_index` (default for dashboard/API when no workflow is specified).
 
 ## Run
 
@@ -33,9 +34,13 @@ Server listens on **http://localhost:3000**.
 
 **Minimal setup (no Redis):** In `config/environments/development.rb` set `config.active_job.queue_adapter = :async` so jobs run in-process. No Sidekiq or Redis required; jobs are not persisted across restarts. For production, use Sidekiq + Redis.
 
-## Pipeline (generation job)
+## Pipeline (generation and workflows)
 
-Clicking **Generate** on the dashboard creates a `GenerationJob` with status `queued` and enqueues `GenerateAssetJob`. The worker:
+**Dashboard / API without workflow (wrapped path):** Clicking **Generate** on the dashboard (or `POST /api/v1/generate` with only `prompt`) creates a **WorkflowRun** (default preset `generate_process_index`) and **WorkflowRunSteps**, then a **GenerationJob** linked to the run with status `queued`, and enqueues **GenerateAssetJob**. The worker runs the full pipeline and updates the WorkflowRun and steps on completion or failure.
+
+**API with workflow:** `POST /api/v1/generate` with `workflow_id` or `workflow_slug` creates a **WorkflowRun** and **WorkflowRunSteps** from that preset and enqueues **OrchestrateWorkflowJob**, which executes each step in order (generate → store → thumbnail → index, depending on the preset). Response: `{ workflow_run_id, status: "queued" }`.
+
+The worker (GenerateAssetJob or OrchestrateWorkflowJob):
 
 1. Marks the job `running`
 2. Calls the **Python generator** (HTTP POST to `GENERATOR_URL/generate` with `{ "prompt": "..." }`; expects image bytes in the response)
@@ -46,7 +51,7 @@ Clicking **Generate** on the dashboard creates a `GenerationJob` with status `qu
 5. Optionally calls the **Rust index** service:
    - **HTTP** (when `INDEX_SERVICE_URL` is set): POSTs to `INDEX_SERVICE_URL/index` with JSON `{ asset_id, prompt, metadata, tags }` so assets can be searched later. The asset library search box uses GET `INDEX_SERVICE_URL/search?q=...` to find matching asset IDs and filters the list accordingly.
    - **CLI** (when `INDEX_SERVICE_COMMAND` is set and `INDEX_SERVICE_URL` is blank): runs the command with env `ASSET_ID`, `PROMPT` (no HTTP indexing)
-6. Marks the job `completed` or `failed` (with `error_message`)
+6. Marks the job `completed` or `failed` (with `error_message`). When the run was created via the wrapped path, the worker also updates the **WorkflowRun** and **WorkflowRunSteps** status.
 
 **Environment variables (optional):** See the repo root [.env.example](../../.env.example) for a single reference of all env vars (Rails, dotnet_api, timeouts, retries, rate limit).
 
