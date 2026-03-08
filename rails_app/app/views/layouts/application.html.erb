@@ -49,6 +49,8 @@
       <% if user_signed_in? %>
         <%= link_to "Dashboard", dashboard_path %>
         <%= link_to "Asset library", assets_path %>
+        <%= link_to "Service health", admin_health_index_path %>
+        <%= link_to "Recent failures", admin_failures_index_path %>
         <%= button_to "Sign out", destroy_user_session_path, method: :delete, form: { style: "display:inline; margin:0;" }, class: "btn" %>
         <span aria-hidden="true"><%= current_user.email %></span>
       <% else %>

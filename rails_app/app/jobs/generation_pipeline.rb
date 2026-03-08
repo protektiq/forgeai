@@ -8,11 +8,18 @@ require "json"
 # Shared pipeline logic for generator → store → media → index.
 # Used by GenerateAssetJob and OrchestrateWorkflowJob.
 # Job must respond to: prompt, user_id, correlation_id, id, mark_failed(message).
+# All outbound HTTP requests from Rails must set X-Correlation-Id for tracing (pipeline sets it here; AssetsController sets it for index /ready and /search).
 module GenerationPipeline
   GENERATOR_PATH = "/generate"
   MEDIA_PROCESS_PATH = "/process"
   MAX_ERROR_MESSAGE_LENGTH = 1000
   ALLOWED_IMAGE_CONTENT_TYPES = %w[image/jpeg image/png].freeze
+
+  # C++ media profiles (see cpp_media/profiles.hpp)
+  MEDIA_PROFILE_WEB_OPTIMIZED = "web_optimized"
+  MEDIA_PROFILE_THUMBNAIL_SQUARE = "thumbnail_square"
+  MEDIA_PROFILE_HIGH_QUALITY_JPG = "high_quality_jpg"
+  MEDIA_PROFILE_DEFAULT = MEDIA_PROFILE_WEB_OPTIMIZED
 
   RETRYABLE_HTTP_ERRORS = [
     Timeout::Error,
@@ -25,16 +32,19 @@ module GenerationPipeline
     EOFError
   ].freeze
 
-  def call_python_generator(job)
+  def call_python_generator(job, step_config = nil)
     url = URI.join(Rails.application.config.generator_url, GENERATOR_PATH)
     open_t = Rails.application.config.generator_open_timeout
     read_t = Rails.application.config.generator_read_timeout
     max_retries = Rails.application.config.generator_retries
 
+    backend = step_config.is_a?(Hash) && step_config["backend"].present? ? step_config["backend"].to_s : Rails.application.config.generator_backend
+    req_body = { prompt: job.prompt, backend: backend }
+
     req = Net::HTTP::Post.new(url)
     req["Content-Type"] = "application/json"
     req["Accept"] = "application/json"
-    req.body = { prompt: job.prompt }.to_json
+    req.body = req_body.to_json
     set_correlation_header(req, job)
 
     res = with_http_retries(job, "Generator", max_retries) do
@@ -64,8 +74,8 @@ module GenerationPipeline
       return nil
     end
 
-    unless data.is_a?(Hash) && data["image_base64"].present? && data.key?("seed") && data["model"].present?
-      job.mark_failed("Invalid JSON response: missing image_base64, seed, or model")
+    unless data.is_a?(Hash) && data["image_base64"].present? && data.key?("seed") && data["model"].present? && data["backend"].present? && data.key?("duration_ms")
+      job.mark_failed("Invalid JSON response: missing image_base64, seed, model, backend, or duration_ms")
       return nil
     end
 
@@ -80,7 +90,9 @@ module GenerationPipeline
       image_bytes: image_bytes,
       content_type: "image/png",
       seed: data["seed"],
-      model: data["model"].to_s
+      model: data["model"].to_s,
+      backend: data["backend"].to_s,
+      duration_ms: data["duration_ms"].to_i
     }
   rescue StandardError => e
     job.mark_failed("Generator error: #{e.message}")
@@ -94,6 +106,8 @@ module GenerationPipeline
     content_type = payload[:content_type].presence || "image/png"
     seed = payload[:seed]
     model = payload[:model].to_s.presence
+    backend = payload[:backend].to_s.presence
+    duration_ms = payload[:duration_ms]
 
     asset = Asset.new(
       user_id: job.user_id,
@@ -103,7 +117,12 @@ module GenerationPipeline
       byte_size: image_bytes.bytesize
     )
     asset.metadata = {}
-    asset.metadata["generator"] = { "seed" => seed, "model" => model } if seed.present? || model.present?
+    generator_meta = {}
+    generator_meta["seed"] = seed if seed.present?
+    generator_meta["model"] = model if model.present?
+    generator_meta["backend"] = backend if backend.present?
+    generator_meta["duration_ms"] = duration_ms if duration_ms.is_a?(Integer)
+    asset.metadata["generator"] = generator_meta if generator_meta.present?
 
     asset.file.attach(
       io: StringIO.new(image_bytes),
@@ -117,10 +136,10 @@ module GenerationPipeline
     nil
   end
 
-  def call_media_service(job, asset)
+  def call_media_service(job, asset, profile: nil)
     base_url = Rails.application.config.cpp_media_url.presence
     if base_url.present?
-      call_media_service_http(job, asset, base_url)
+      call_media_service_http(job, asset, base_url, profile: profile)
       return
     end
 
@@ -143,15 +162,13 @@ module GenerationPipeline
     job.mark_failed("Media service error: #{e.message}")
   end
 
-  def call_media_service_http(job, asset, base_url)
+  def call_media_service_http(job, asset, base_url, profile: nil)
     process_url = URI.join(base_url, MEDIA_PROCESS_PATH)
     image_bytes = asset.file.blob.download
+    profile = profile.presence || MEDIA_PROFILE_DEFAULT
     body = {
       image_base64: Base64.strict_encode64(image_bytes),
-      thumbnail_size: 256,
-      resize_max: 1200,
-      output_format: "jpg",
-      operations: "thumbnail,resize"
+      profile: profile
     }.to_json
 
     open_t = Rails.application.config.media_open_timeout
@@ -207,8 +224,29 @@ module GenerationPipeline
     asset.thumbnail.attach(
       io: StringIO.new(thumb_bytes),
       filename: "thumb-#{asset.id}.#{ext}",
-      content_type: thumb_ct
+      content_type: thumb_ct,
+      metadata: { "role" => "thumbnail", "profile" => profile }
     )
+
+    if data["processed_base64"].present? && data["processed_content_type"].present?
+      proc_ct = data["processed_content_type"].to_s.strip
+      if ALLOWED_IMAGE_CONTENT_TYPES.include?(proc_ct)
+        proc_bytes = begin
+          Base64.strict_decode64(data["processed_base64"].to_s)
+        rescue ArgumentError => e
+          job.mark_failed("Media service invalid processed_base64: #{e.message}")
+          return
+        end
+
+        proc_ext = proc_ct.include?("png") ? "png" : "jpg"
+        asset.processed_files.attach(
+          io: StringIO.new(proc_bytes),
+          filename: "processed-#{asset.id}-#{profile}.#{proc_ext}",
+          content_type: proc_ct,
+          metadata: { "role" => "processed", "profile" => profile }
+        )
+      end
+    end
   rescue StandardError => e
     job.mark_failed("Media service error: #{e.message}")
   end

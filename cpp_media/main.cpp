@@ -4,8 +4,10 @@
  */
 
 #include <algorithm>
+#include <chrono>
 #include <cstdlib>
 #include <cstring>
+#include <iomanip>
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -14,6 +16,8 @@
 #include <functional>
 
 #include "httplib.h"
+#include "profiles.hpp"
+#include "request_parser.hpp"
 #include <vips/vips8>
 
 namespace {
@@ -21,7 +25,49 @@ namespace {
 const int DEFAULT_PORT = 8080;
 const int DEFAULT_THUMBNAIL_SIZE = 256;
 const int DEFAULT_RESIZE_MAX = 1200;
-const char* DEFAULT_OUTPUT_FORMAT = "jpg";
+
+/* Structured log: one JSON object per line to stderr with timestamp, service, level, correlation_id, message, optional error_code. */
+void log_json(const std::string& level,
+              const std::string& correlation_id,
+              const std::string& message,
+              const std::string& error_code = "") {
+  auto now = std::chrono::system_clock::now();
+  auto t = std::chrono::system_clock::to_time_t(now);
+  std::ostringstream ts;
+  ts << std::put_time(std::gmtime(&t), "%Y-%m-%dT%H:%M:%S");
+  auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()) % 1000;
+  ts << '.' << std::setfill('0') << std::setw(3) << ms.count() << 'Z';
+
+  std::ostringstream out;
+  out << "{\"timestamp\":\"" << ts.str() << "\",\"service\":\"cpp_media\",\"level\":\"" << level << "\"";
+  if (!correlation_id.empty()) out << ",\"correlation_id\":\"";
+  for (char c : correlation_id) {
+    if (c == '"' || c == '\\') out << '\\';
+    out << c;
+  }
+  if (!correlation_id.empty()) out << "\"";
+  out << ",\"message\":\"";
+  for (unsigned char c : message) {
+    if (c == '"') out << "\\\"";
+    else if (c == '\\') out << "\\\\";
+    else if (c == '\n') out << "\\n";
+    else if (c == '\r') out << "\\r";
+    else if (c == '\t') out << "\\t";
+    else if (c >= 32 && c < 127) out << static_cast<char>(c);
+    else out << " ";
+  }
+  out << "\"";
+  if (!error_code.empty()) {
+    out << ",\"error_code\":\"";
+    for (char c : error_code) {
+      if (c == '"' || c == '\\') out << '\\';
+      out << c;
+    }
+    out << "\"";
+  }
+  out << "}\n";
+  std::cerr << out.str();
+}
 
 /* Simple base64 encode (for JSON response). */
 std::string base64_encode(const unsigned char* data, size_t len) {
@@ -37,31 +83,6 @@ std::string base64_encode(const unsigned char* data, size_t len) {
     out += tbl[(n >> 12) & 63];
     out += (i + 1 < len) ? tbl[(n >> 6) & 63] : '=';
     out += (i + 2 < len) ? tbl[n & 63] : '=';
-  }
-  return out;
-}
-
-/* Simple base64 decode (for JSON request image_base64). */
-std::vector<unsigned char> base64_decode(const std::string& in) {
-  std::vector<unsigned char> out;
-  if (in.empty()) return out;
-  out.reserve((in.size() * 3) / 4);
-  int buf = 0, bits = 0;
-  for (unsigned char c : in) {
-    if (c == '=') break;
-    int v = -1;
-    if (c >= 'A' && c <= 'Z') v = c - 'A';
-    else if (c >= 'a' && c <= 'z') v = c - 'a' + 26;
-    else if (c >= '0' && c <= '9') v = c - '0' + 52;
-    else if (c == '+') v = 62;
-    else if (c == '/') v = 63;
-    if (v < 0) continue;
-    buf = (buf << 6) | v;
-    bits += 6;
-    if (bits >= 8) {
-      out.push_back(static_cast<unsigned char>((buf >> (bits - 8)) & 0xff));
-      bits -= 8;
-    }
   }
   return out;
 }
@@ -112,18 +133,10 @@ void set_error_response(httplib::Response& res,
   res.set_content(json.str(), "application/json");
 }
 
-struct ProcessParams {
-  int thumbnail_size = DEFAULT_THUMBNAIL_SIZE;
-  int resize_max = DEFAULT_RESIZE_MAX;
-  std::string output_format = DEFAULT_OUTPUT_FORMAT;
-  bool want_thumbnail = true;
-  bool want_resize = true;
-};
-
 /* Process image bytes: produce thumbnail and optionally resized image. */
 bool process_image(const unsigned char* data,
                   size_t size,
-                  const ProcessParams& params,
+                  const cpp_media::ProcessParams& params,
                   std::string& thumbnail_base64,
                   std::string& thumbnail_content_type,
                   std::string& processed_base64,
@@ -132,6 +145,10 @@ bool process_image(const unsigned char* data,
   using namespace vips;
   const std::string suffix = suffix_for_format(params.output_format);
   const std::string ct = content_type_for_suffix(suffix);
+  std::string write_suffix = suffix;
+  if (params.jpeg_quality > 0 && (suffix == ".jpg" || suffix == ".jpeg")) {
+    write_suffix = ".jpg[Q=" + std::to_string(params.jpeg_quality) + "]";
+  }
 
   try {
     VImage img = VImage::new_from_buffer(
@@ -146,7 +163,7 @@ bool process_image(const unsigned char* data,
           VImage::option()->set("height", params.thumbnail_size));
       void* thumb_buf = nullptr;
       size_t thumb_len = 0;
-      thumb.write_to_buffer(suffix.c_str(), &thumb_buf, &thumb_len);
+      thumb.write_to_buffer(write_suffix.c_str(), &thumb_buf, &thumb_len);
       if (thumb_buf && thumb_len > 0) {
         thumbnail_base64 = base64_encode(static_cast<unsigned char*>(thumb_buf),
                                         thumb_len);
@@ -160,15 +177,17 @@ bool process_image(const unsigned char* data,
       VImage out = img;
       int w = img.width();
       int h = img.height();
-      if (w > params.resize_max || h > params.resize_max) {
+      int max_w = params.resize_width > 0 ? params.resize_width : params.resize_max;
+      int max_h = params.resize_height > 0 ? params.resize_height : params.resize_max;
+      if (w > max_w || h > max_h) {
         double scale = std::min(
-            static_cast<double>(params.resize_max) / static_cast<double>(w),
-            static_cast<double>(params.resize_max) / static_cast<double>(h));
+            static_cast<double>(max_w) / static_cast<double>(w),
+            static_cast<double>(max_h) / static_cast<double>(h));
         out = img.resize(scale);
       }
       void* proc_buf = nullptr;
       size_t proc_len = 0;
-      out.write_to_buffer(suffix.c_str(), &proc_buf, &proc_len);
+      out.write_to_buffer(write_suffix.c_str(), &proc_buf, &proc_len);
       if (proc_buf && proc_len > 0) {
         processed_base64 = base64_encode(static_cast<unsigned char*>(proc_buf),
                                          proc_len);
@@ -181,16 +200,6 @@ bool process_image(const unsigned char* data,
   } catch (const VError& e) {
     error_msg = e.what();
     return false;
-  }
-}
-
-/* Parse optional int from string. */
-int parse_int(const std::string& s, int default_val) {
-  if (s.empty()) return default_val;
-  try {
-    return std::stoi(s);
-  } catch (...) {
-    return default_val;
   }
 }
 
@@ -240,118 +249,33 @@ int main(int argc, char* argv[]) {
 
     std::string corr = req.get_header_value("X-Correlation-Id");
     if (corr.empty()) corr = req.get_header_value("X-Request-Id");
-    if (!corr.empty()) {
-      std::cerr << "[cpp_media] correlation_id=" << corr << " processing /process" << std::endl;
+    log_json("info", corr, "request path=/process");
+
+    cpp_media::ParsedRequest parsed = cpp_media::parse_process_request(req);
+    if (!parsed.parse_ok) {
+      set_error_response(res, 400, parsed.error_code, parsed.error_message, corr);
+      return;
     }
-
-    ProcessParams params;
-    const unsigned char* image_data = nullptr;
-    size_t image_size = 0;
-    std::vector<unsigned char> decoded;
-
-    /* Multipart form */
-    if (req.form.has_file("file")) {
-      const auto& file = req.form.get_file("file");
-      image_data = reinterpret_cast<const unsigned char*>(file.content.data());
-      image_size = file.content.size();
-      if (req.form.has_field("thumbnail_size")) {
-        params.thumbnail_size = parse_int(req.form.get_field("thumbnail_size"),
-                                          DEFAULT_THUMBNAIL_SIZE);
-      }
-      if (req.form.has_field("resize_max")) {
-        params.resize_max = parse_int(req.form.get_field("resize_max"),
-                                     DEFAULT_RESIZE_MAX);
-      }
-      if (req.form.has_field("output_format")) {
-        params.output_format = req.form.get_field("output_format");
-      }
-      if (req.form.has_field("operations")) {
-        parse_operations(req.form.get_field("operations"),
-                        params.want_thumbnail,
-                        params.want_resize);
-      }
-    } else {
-      /* JSON body */
-      if (req.get_header_value("Content-Type").find("application/json") ==
-          std::string::npos) {
-        set_error_response(res, 400, "invalid_request",
-            "Missing file or JSON body; use multipart file= or "
-            "application/json with image_base64",
-            corr);
-        return;
-      }
-      /* Minimal JSON parse for image_base64 and options */
-      const std::string& body = req.body;
-      size_t pos = body.find("\"image_base64\"");
-      if (pos == std::string::npos) {
-        set_error_response(res, 400, "invalid_request",
-            "Missing image_base64 in JSON", corr);
-        return;
-      }
-      pos = body.find(':', pos);
-      if (pos == std::string::npos) {
-        set_error_response(res, 400, "invalid_request", "Invalid JSON", corr);
-        return;
-      }
-      pos = body.find('"', pos + 1);
-      if (pos == std::string::npos) {
-        set_error_response(res, 400, "invalid_request", "Invalid JSON", corr);
-        return;
-      }
-      size_t start = pos + 1;
-      size_t end = body.find('"', start);
-      if (end == std::string::npos) end = body.size();
-      std::string b64 = body.substr(start, end - start);
-      decoded = base64_decode(b64);
-      if (decoded.empty()) {
-        set_error_response(res, 400, "invalid_request",
-            "Invalid or empty image_base64", corr);
-        return;
-      }
-      image_data = decoded.data();
-      image_size = decoded.size();
-
-      /* Optional JSON fields (simple string search) */
-      auto get_json_int = [&body](const char* key, int def) {
-        std::string needle = std::string("\"") + key + "\":";
-        size_t p = body.find(needle);
-        if (p == std::string::npos) return def;
-        p += needle.size();
-        while (p < body.size() && (body[p] == ' ' || body[p] == '\t')) p++;
-        if (p >= body.size()) return def;
-        size_t q = p;
-        while (q < body.size() && body[q] >= '0' && body[q] <= '9') q++;
-        if (q == p) return def;
-        try {
-          return std::stoi(body.substr(p, q - p));
-        } catch (...) {
-          return def;
-        }
-      };
-      auto get_json_str = [&body](const char* key, const char* def) {
-        std::string needle = std::string("\"") + key + "\":\"";
-        size_t p = body.find(needle);
-        if (p == std::string::npos) return std::string(def);
-        p += needle.size();
-        size_t q = body.find('"', p);
-        if (q == std::string::npos) return std::string(def);
-        return body.substr(p, q - p);
-      };
-      params.thumbnail_size = get_json_int("thumbnail_size", DEFAULT_THUMBNAIL_SIZE);
-      params.resize_max = get_json_int("resize_max", DEFAULT_RESIZE_MAX);
-      params.output_format = get_json_str("output_format", DEFAULT_OUTPUT_FORMAT);
-      std::string ops = get_json_str("operations", "thumbnail,resize");
-      parse_operations(ops, params.want_thumbnail, params.want_resize);
-    }
-
-    if (!image_data || image_size == 0) {
+    if (parsed.image_bytes.empty()) {
       set_error_response(res, 400, "invalid_request", "No image data", corr);
       return;
     }
 
+    cpp_media::ProcessParams params = cpp_media::resolve_profile(parsed.profile);
+    std::string profile_used = parsed.profile.empty() ? "web_optimized" : parsed.profile;
+    if (parsed.thumbnail_size >= 0) params.thumbnail_size = parsed.thumbnail_size;
+    if (parsed.resize_max >= 0) params.resize_max = parsed.resize_max;
+    if (parsed.width > 0) params.resize_width = parsed.width;
+    if (parsed.height > 0) params.resize_height = parsed.height;
+    if (parsed.quality > 0) params.jpeg_quality = parsed.quality;
+    if (!parsed.output_format.empty()) params.output_format = parsed.output_format;
+    if (!parsed.operations.empty()) {
+      parse_operations(parsed.operations, params.want_thumbnail, params.want_resize);
+    }
+
     std::string thumb_b64, thumb_ct, proc_b64, proc_ct, err;
-    bool ok = process_image(image_data,
-                           image_size,
+    bool ok = process_image(parsed.image_bytes.data(),
+                           parsed.image_bytes.size(),
                            params,
                            thumb_b64,
                            thumb_ct,
@@ -371,6 +295,13 @@ int main(int argc, char* argv[]) {
       else out << c;
     }
     out << "\",\"thumbnail_content_type\":\"" << thumb_ct << "\"";
+    out << ",\"profile_used\":\"";
+    for (char c : profile_used) {
+      if (c == '"') out << "\\\"";
+      else if (c == '\\') out << "\\\\";
+      else out << c;
+    }
+    out << "\"";
     if (!proc_b64.empty()) {
       out << ",\"processed_base64\":\"";
       for (char c : proc_b64) {
@@ -392,9 +323,9 @@ int main(int argc, char* argv[]) {
     set_error_response(res, 500, "internal_error", "An unexpected error occurred", corr);
   });
 
-  std::cout << "cpp_media listening on port " << port << std::endl;
+  log_json("info", "", "listening on port " + std::to_string(port));
   if (!svr.listen("0.0.0.0", port)) {
-    std::cerr << "Failed to listen on port " << port << std::endl;
+    log_json("error", "", "Failed to listen on port " + std::to_string(port));
     vips_shutdown();
     return 1;
   }

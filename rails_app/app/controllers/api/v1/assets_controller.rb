@@ -7,12 +7,19 @@ module Api
       def index
         search_query = params[:search].to_s.strip
         index_service_url = Rails.application.config.index_service_url.presence
+        correlation_id = request.request_id.presence || SecureRandom.uuid
 
-        assets = if search_query.present? && index_service_url.present?
-                   fetch_assets_via_search(search_query, index_service_url)
-                 else
-                   api_user.assets.order(created_at: :desc)
-                 end
+        if search_query.present? && index_service_url.present?
+          if index_service_ready?(index_service_url, correlation_id)
+            assets = fetch_assets_via_search(search_query, index_service_url, correlation_id)
+            response.headers["X-Search-Status"] = "ok"
+          else
+            assets = api_user.assets.order(created_at: :desc)
+            response.headers["X-Search-Status"] = "starting_up"
+          end
+        else
+          assets = api_user.assets.order(created_at: :desc)
+        end
 
         render json: assets.map { |a| asset_json(a) }
       end
@@ -29,12 +36,27 @@ module Api
 
       private
 
-      def fetch_assets_via_search(query, base_url)
+      def index_service_ready?(base_url, correlation_id = nil)
+        ready_url = URI.join(base_url, "/ready")
+        req = Net::HTTP::Get.new(ready_url)
+        req["Accept"] = "application/json"
+        req["X-Correlation-Id"] = correlation_id if correlation_id.present?
+        res = nil
+        Net::HTTP.start(ready_url.host, ready_url.port, open_timeout: 2, read_timeout: 2) do |http|
+          res = http.request(req)
+        end
+        res.is_a?(Net::HTTPSuccess)
+      rescue StandardError
+        false
+      end
+
+      def fetch_assets_via_search(query, base_url, correlation_id = nil)
         search_url = URI.join(base_url, "/search")
         search_url.query = URI.encode_www_form(q: query)
 
         req = Net::HTTP::Get.new(search_url)
         req["Accept"] = "application/json"
+        req["X-Correlation-Id"] = correlation_id if correlation_id.present?
 
         res = nil
         Net::HTTP.start(search_url.host, search_url.port, open_timeout: 5, read_timeout: 5) do |http|
@@ -64,12 +86,30 @@ module Api
           download_url = base.present? ? "#{base.chomp('/')}#{path}" : path
         end
 
+        thumbnail_url = nil
+        if asset.thumbnail.attached?
+          base = Rails.application.config.host_for_blob_urls.presence
+          path = Rails.application.routes.url_helpers.rails_blob_path(asset.thumbnail)
+          thumbnail_url = base.present? ? "#{base.chomp('/')}#{path}" : path
+        end
+
+        processed_files = asset.processed_files.attached? ? asset.processed_files.map { |blob|
+          base = Rails.application.config.host_for_blob_urls.presence
+          path = Rails.application.routes.url_helpers.rails_blob_path(blob, disposition: "attachment")
+          {
+            profile: blob.metadata["profile"].presence || "processed",
+            download_url: base.present? ? "#{base.chomp('/')}#{path}" : path
+          }
+        } : []
+
         {
           id: asset.id,
           created_at: asset.created_at.iso8601,
           prompt: prompt,
           metadata: asset.metadata || {},
           download_url: download_url,
+          thumbnail_url: thumbnail_url,
+          processed_files: processed_files,
         }
       end
     end

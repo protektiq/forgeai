@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class WorkflowRunStep < ApplicationRecord
-  STATUSES = %w[pending running completed failed].freeze
+  STATUSES = %w[queued running completed failed].freeze
 
   belongs_to :workflow_run
   belongs_to :workflow_step

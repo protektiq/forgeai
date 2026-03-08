@@ -16,7 +16,7 @@ bundle exec rails db:migrate
 bundle exec rails db:seed
 ```
 
-Ensure Redis is running (e.g. `redis-server`) if you use Sidekiq. Default Redis URL: `redis://localhost:6379/0`. Override with `REDIS_URL` if needed. **Seeds** create three workflow presets: `generate_only`, `generate_thumbnail`, `generate_process_index` (default for dashboard/API when no workflow is specified).
+Ensure Redis is running (e.g. `redis-server`) if you use Sidekiq. Default Redis URL: `redis://localhost:6379/0`. Override with `REDIS_URL` if needed. **Seeds** create three workflow presets: `generate_only`, `generate_thumbnail`, `generate_process_index` (default for dashboard/API when no workflow is specified). Seeds also create **demo users** (`demo@example.com` / `api@example.com`) and sample workflow runs and assets. To use the .NET gateway with the API user, set `API_USER_ID` to the id of `api@example.com` (printed in seed output).
 
 ## Run
 
@@ -43,8 +43,8 @@ Server listens on **http://localhost:3000**.
 The worker (GenerateAssetJob or OrchestrateWorkflowJob):
 
 1. Marks the job `running`
-2. Calls the **Python generator** (HTTP POST to `GENERATOR_URL/generate` with `{ "prompt": "..." }`; expects image bytes in the response)
-3. Stores the image in Active Storage and creates an `Asset` linked to the job
+2. Calls the **Python generator** (HTTP POST to `GENERATOR_URL/generate` with `{ "prompt": "..." }` and optional `"backend"`; expects JSON with `image_base64`, `seed`, `model`, `backend`, `duration_ms` when using `Accept: application/json`)
+3. Stores the image in Active Storage and creates an `Asset` linked to the job (with generator metadata: seed, model, backend, duration_ms). Workflow generate steps can pass a step `config["backend"]` to override the default backend for that run.
 4. Optionally calls the **C++ media** service:
    - **HTTP** (when `CPP_MEDIA_URL` is set): POSTs the image to `CPP_MEDIA_URL/process`, receives thumbnail (and optionally processed) in JSON, and attaches the thumbnail to the Asset. The asset library and asset detail pages then show thumbnails when present.
    - **CLI** (when `MEDIA_SERVICE_COMMAND` is set and `CPP_MEDIA_URL` is blank): runs the command with env `INPUT_PATH`, `ASSET_ID`, `PROMPT` (no thumbnail attachment)
@@ -59,6 +59,7 @@ The worker (GenerateAssetJob or OrchestrateWorkflowJob):
 |----------|---------|-------------|
 | `REDIS_URL` | `redis://localhost:6379/0` | Redis connection for Sidekiq |
 | `GENERATOR_URL` | `http://localhost:5000` | Base URL of the Python generator service (e.g. Flask on port 5000) |
+| `GENERATOR_BACKEND` | `pillow_mock` | Generator backend id used when the request does not override it (e.g. from workflow step config). Options: `pillow_mock` (default), `local_model` (stub), `test_stub` (tests). |
 | `CPP_MEDIA_URL` | (blank) | Base URL of the C++ media HTTP service (e.g. `http://localhost:8080`). When set, the job POSTs the image to `/process` and attaches the returned thumbnail to the Asset; thumbnails are shown in the asset library and asset detail. |
 | `MEDIA_SERVICE_COMMAND` | (blank) | Fallback: command to run for C++ post-processing when `CPP_MEDIA_URL` is not set; skipped if blank |
 | `INDEX_SERVICE_URL` | (blank) | Base URL of the Rust index HTTP service (e.g. `http://localhost:3132`). When set, the job POSTs to `/index` after each asset creation and the asset library search box uses GET `/search?q=...` to filter assets by prompt/metadata. |
@@ -68,7 +69,7 @@ The worker (GenerateAssetJob or OrchestrateWorkflowJob):
 | `INDEX_OPEN_TIMEOUT`, `INDEX_READ_TIMEOUT`, `INDEX_RETRIES` | 10, 10, 2 | Timeouts and retries for Rust index HTTP. |
 | `RACK_ATTACK_THROTTLE_LIMIT` | 30 | Max prompt-create requests per IP per minute (dashboard and API). |
 
-The Python service must implement `POST /generate` returning image bytes (e.g. `Content-Type: image/png`). If the generator is not running or returns an error, the job is marked `failed` with an error message. When `CPP_MEDIA_URL` is set, start the cpp_media service (see `cpp_media/README.md`); the job will send the generated image there and attach the returned thumbnail to the Asset. The asset library displays thumbnails when attached; the asset detail page shows both the original image and the thumbnail. When `INDEX_SERVICE_URL` is set, start the Rust index service (see `rust_index/README.md`); the job will POST each new asset to `/index`, and the asset library search box will call GET `/search?q=...` to show matching assets. C++ CLI and Rust CLI steps are used only when their URL is not set but their command is set.
+The Python service must implement `POST /generate` and return JSON (when requested with `Accept: application/json`) containing `image_base64`, `seed`, `model`, `backend`, and `duration_ms`. If the generator is not running or returns an error, the job is marked `failed` with an error message. When `CPP_MEDIA_URL` is set, start the cpp_media service (see `cpp_media/README.md`); the job will send the generated image there and attach the returned thumbnail to the Asset. The asset library displays thumbnails when attached; the asset detail page shows both the original image and the thumbnail. When `INDEX_SERVICE_URL` is set, start the Rust index service (see `rust_index/README.md`); the job will POST each new asset to `/index`, and the asset library search box will call GET `/search?q=...` to show matching assets. C++ CLI and Rust CLI steps are used only when their URL is not set but their command is set.
 
 ## Usage
 
@@ -101,3 +102,13 @@ Default port is 3000. To use another port:
 ```bash
 bundle exec rails s -p 3001
 ```
+
+## Test instructions
+
+From `rails_app/`:
+
+```bash
+bundle exec rspec spec/requests/api/v1/generate_controller_spec.rb
+```
+
+For contract/malformed and full test layout, see [docs/testing.md](../docs/testing.md).

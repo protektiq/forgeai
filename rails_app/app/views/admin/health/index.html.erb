@@ -1,0 +1,49 @@
+<% content_for :title, "Service health – ForgeAI" %>
+
+<div class="card">
+  <h1>Service health</h1>
+  <p>Last checked: <time datetime="<%= @checked_at.iso8601 %>"><%= @checked_at.strftime("%Y-%m-%d %H:%M:%S %Z") %></time></p>
+
+  <table class="health-table" role="table" aria-label="Service health status">
+    <thead>
+      <tr>
+        <th scope="col">Service</th>
+        <th scope="col">Status</th>
+        <th scope="col">Details</th>
+        <th scope="col">Response time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @results.each do |name, r| %>
+        <tr>
+          <td><strong><%= name.to_s.titleize %></strong></td>
+          <td>
+            <% case r[:status]
+               when :ok %>
+              <span class="health-ok" aria-label="OK">OK</span>
+            <% when :error, :unreachable %>
+              <span class="health-error" role="alert"><%= r[:status].to_s.titleize %></span>
+            <% when :not_configured %>
+              <span class="health-muted">Not configured</span>
+            <% else %>
+              <span><%= r[:status] %></span>
+            <% end %>
+          </td>
+          <td><%= r[:message] %></td>
+          <td><%= r[:response_time_ms].present? ? "#{r[:response_time_ms]} ms" : "—" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <p><%= link_to "Back to dashboard", dashboard_path, class: "btn" %></p>
+</div>
+
+<style>
+  .health-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+  .health-table th, .health-table td { padding: 0.5rem 0.75rem; text-align: left; border-bottom: 1px solid #eee; }
+  .health-table th { font-weight: 600; }
+  .health-ok { color: #155724; font-weight: 500; }
+  .health-error { color: #721c24; font-weight: 500; }
+  .health-muted { color: #666; }
+</style>

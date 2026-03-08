@@ -10,9 +10,23 @@
   <% end %>
   <% if @asset.thumbnail.attached? %>
     <p>
-      <span class="asset-show-thumb-label">Thumbnail:</span>
+      <span class="asset-show-thumb-label">Thumbnail<%= @asset.thumbnail.blob.metadata["profile"].present? ? " (#{@asset.thumbnail.blob.metadata['profile']})" : "" %>:</span>
       <%= image_tag @asset.thumbnail, alt: "Thumbnail for #{@asset.filename.presence || @asset.id}", class: "asset-show-thumb" %>
     </p>
+  <% end %>
+
+  <% if @asset.processed_files.attached? %>
+    <p class="asset-show-processed-label"><strong>Processed variants:</strong></p>
+    <ul class="asset-show-processed-list">
+      <% @asset.processed_files.blobs.each do |blob| %>
+        <li>
+          <% profile_label = (blob.metadata["profile"].presence || "Processed").to_s.humanize %>
+          <%= image_tag blob, alt: profile_label, class: "asset-show-processed-thumb" %>
+          <span class="asset-show-processed-name"><%= profile_label %></span>
+          <%= link_to "Download", rails_blob_path(blob, disposition: "attachment"), class: "btn btn-sm" %>
+        </li>
+      <% end %>
+    </ul>
   <% end %>
 
   <p><strong>Created:</strong> <time datetime="<%= @asset.created_at.iso8601 %>"><%= @asset.created_at.strftime("%Y-%m-%d %H:%M") %></time></p>
@@ -37,7 +51,7 @@
   <% end %>
 
   <p>
-    <%= link_to "Download", download_asset_path(@asset), class: "btn" %>
+    <%= link_to "Download original", download_asset_path(@asset), class: "btn" %>
     <%= link_to "Back to library", assets_path %>
   </p>
 </div>

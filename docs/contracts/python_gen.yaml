@@ -16,6 +16,7 @@ endpoints:
     request_schema:
       body:
         prompt: string  # required, min length 1, max 10000; no control characters
+        backend: string  # optional; override backend for this request (else GENERATOR_BACKEND env or pillow_mock)
     response_schema:
       default:
         description: binary PNG
@@ -24,4 +25,6 @@ endpoints:
         image_base64: string
         seed: number
         model: string
-    error_schema: error-response.md  # 422 validation_error
+        backend: string
+        duration_ms: number
+    error_schema: error-response.md  # 422 validation_error, 400 unknown backend, 501 backend not implemented

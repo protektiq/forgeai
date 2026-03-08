@@ -1,37 +1,70 @@
 """
-Python generation service (FastAPI + Pillow MVP).
+Python generation service (FastAPI + pluggable backends).
 
 Run: uvicorn main:app --host 0.0.0.0 --port 5000
 
 Endpoints:
   GET  /health   -> { "status": "ok", "service": "python_gen" }
-  POST /generate -> raw PNG (default) or JSON { image_base64, seed, model } when Accept: application/json
+  POST /generate -> raw PNG (default) or JSON { image_base64, seed, model, backend, duration_ms } when Accept: application/json
 """
 
 import base64
+import json
 import logging
 import re
-import secrets
-from io import BytesIO
+from contextvars import ContextVar
+from datetime import datetime, timezone
+from typing import Optional
 
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import Response, JSONResponse
 from fastapi.exceptions import RequestValidationError
 from pydantic import BaseModel, Field
 
+from backends import resolve_backend
+from backends.base import NormalizedResult
+
 # ---------------------------------------------------------------------------
-# Logging
+# Structured logging: JSON lines with timestamp, service, level, correlation_id, message
 # ---------------------------------------------------------------------------
 
-logging.basicConfig(level=logging.INFO)
+CORRELATION_ID_CTX: ContextVar[str] = ContextVar("correlation_id", default="")
+
+
+class JsonLogFormatter(logging.Formatter):
+    """Emit one JSON object per log record with timestamp, service, level, correlation_id, message, and optional error_code."""
+
+    def format(self, record: logging.LogRecord) -> str:
+        payload = {
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "service": "python_gen",
+            "level": record.levelname,
+            "message": record.getMessage(),
+        }
+        cid = CORRELATION_ID_CTX.get()
+        if cid:
+            payload["correlation_id"] = cid
+        if hasattr(record, "error_code") and record.error_code:
+            payload["error_code"] = record.error_code
+        return json.dumps(payload)
+
+
+def configure_logging() -> None:
+    logger = logging.getLogger("python_gen")
+    logger.setLevel(logging.INFO)
+    logger.handlers.clear()
+    handler = logging.StreamHandler()
+    handler.setFormatter(JsonLogFormatter())
+    logger.addHandler(handler)
+
+
+configure_logging()
 logger = logging.getLogger("python_gen")
 
 # ---------------------------------------------------------------------------
 # Constants
 # ---------------------------------------------------------------------------
 
-MODEL_NAME = "pillow-mvp"
-IMAGE_SIZE = 512
 PROMPT_MAX_LENGTH = 10_000
 # Control chars and other characters we reject in prompt (basic sanitization)
 CONTROL_CHAR_PATTERN = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]")
@@ -50,14 +83,20 @@ class GenerateRequest(BaseModel):
         max_length=PROMPT_MAX_LENGTH,
         description="Text prompt for image generation.",
     )
+    backend: Optional[str] = Field(
+        default=None,
+        description="Override backend for this request (else GENERATOR_BACKEND env or pillow_mock).",
+    )
 
 
 class GenerateResponseJson(BaseModel):
-    """JSON response when Accept: application/json."""
+    """JSON response when Accept: application/json. Normalized schema for all backends."""
 
     image_base64: str = Field(..., description="PNG image encoded as base64.")
     seed: int = Field(..., description="Seed used for generation.")
     model: str = Field(..., description="Model name (e.g. pillow-mvp).")
+    backend: str = Field(..., description="Backend id that produced the image.")
+    duration_ms: int = Field(..., description="Generation duration in milliseconds.")
 
 
 # Standard error response shape (see docs/contracts/error-response.md)
@@ -92,79 +131,21 @@ def _status_to_code(status_code: int) -> str:
     return "invalid_request"
 
 
-# ---------------------------------------------------------------------------
-# Image generation (Pillow placeholder)
-# ---------------------------------------------------------------------------
-
-try:
-    from PIL import Image, ImageDraw, ImageFont
-except ImportError:
-    Image = None  # type: ignore
-    ImageDraw = None  # type: ignore
-    ImageFont = None  # type: ignore
-
-
-def generate_placeholder_png(prompt: str, seed: int) -> bytes:
-    """
-    Create a placeholder image with the prompt text drawn on it.
-    Returns PNG bytes.
-    """
-    if Image is None or ImageDraw is None or ImageFont is None:
-        raise RuntimeError("Pillow (PIL) is not installed")
-
-    img = Image.new("RGB", (IMAGE_SIZE, IMAGE_SIZE), color=(240, 240, 245))
-    draw = ImageDraw.Draw(img)
-
-    # Try a default font; fall back to default if no TTF available
-    try:
-        font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 24)
-    except (OSError, IOError):
-        try:
-            font = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf", 24)
-        except (OSError, IOError):
-            font = ImageFont.load_default()
-
-    # Simple text wrap: split into lines that fit width (approximate char width 14)
-    max_chars_per_line = (IMAGE_SIZE - 40) // 14
-    lines: list[str] = []
-    words = prompt.split()
-    current_line: list[str] = []
-    current_len = 0
-    for w in words:
-        if current_len + len(w) + 1 <= max_chars_per_line:
-            current_line.append(w)
-            current_len += len(w) + 1
-        else:
-            if current_line:
-                lines.append(" ".join(current_line))
-            current_line = [w]
-            current_len = len(w)
-    if current_line:
-        lines.append(" ".join(current_line))
-
-    if not lines:
-        lines = [prompt[:max_chars_per_line]]
-
-    line_height = 32
-    total_height = len(lines) * line_height
-    y_start = max(20, (IMAGE_SIZE - total_height) // 2)
-    for i, line in enumerate(lines):
-        # Approximate text bbox for centering (left-aligned block, centered vertically)
-        bbox = draw.textbbox((0, 0), line, font=font)
-        text_width = bbox[2] - bbox[0]
-        x = (IMAGE_SIZE - text_width) // 2
-        y = y_start + i * line_height
-        draw.text((x, y), line, fill=(40, 40, 50), font=font)
-
-    buf = BytesIO()
-    img.save(buf, format="PNG")
-    return buf.getvalue()
-
-
 def validate_prompt_no_control_chars(prompt: str) -> None:
     """Raise ValueError if prompt contains disallowed control characters."""
     if CONTROL_CHAR_PATTERN.search(prompt):
         raise ValueError("Prompt must not contain control characters")
+
+
+def _result_to_response_json(result: NormalizedResult) -> GenerateResponseJson:
+    """Convert NormalizedResult to JSON response model."""
+    return GenerateResponseJson(
+        image_base64=base64.b64encode(result.image_bytes).decode("ascii"),
+        seed=result.seed,
+        model=result.model,
+        backend=result.backend,
+        duration_ms=result.duration_ms,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -173,7 +154,7 @@ def validate_prompt_no_control_chars(prompt: str) -> None:
 
 app = FastAPI(
     title="Python Gen",
-    description="Image generation service (Pillow placeholder MVP).",
+    description="Image generation service (pluggable backends; Pillow MVP default).",
     version="0.1.0",
 )
 
@@ -223,14 +204,18 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 
 @app.middleware("http")
 async def log_correlation_id(request: Request, call_next):
-    """Log X-Correlation-Id or X-Request-Id for request tracing."""
+    """Log X-Correlation-Id or X-Request-Id for request tracing; set context for structured logs."""
     correlation_id = (
         request.headers.get("X-Correlation-Id") or request.headers.get("X-Request-Id") or ""
-    )
-    if correlation_id:
-        logger.info("python_gen request correlation_id=%s path=%s", correlation_id, request.url.path)
-    response = await call_next(request)
-    return response
+    ).strip()
+    token = CORRELATION_ID_CTX.set(correlation_id)
+    try:
+        if correlation_id:
+            logger.info("request path=%s", request.url.path)
+        response = await call_next(request)
+        return response
+    finally:
+        CORRELATION_ID_CTX.reset(token)
 
 
 @app.get("/health")
@@ -245,31 +230,33 @@ def generate(request: Request, body: GenerateRequest) -> Response | GenerateResp
     Generate an image for the given prompt.
 
     - Default: returns raw PNG bytes (Content-Type: image/png). Compatible with Rails worker.
-    - If Accept header is application/json: returns JSON { image_base64, seed, model }.
+    - If Accept header is application/json: returns JSON { image_base64, seed, model, backend, duration_ms }.
     """
     try:
         validate_prompt_no_control_chars(body.prompt)
     except ValueError as e:
         raise HTTPException(status_code=422, detail=str(e)) from e
-    seed = secrets.randbelow(2**31)
-    png_bytes = generate_placeholder_png(body.prompt, seed)
+
+    try:
+        backend_instance = resolve_backend(body.backend)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e)) from e
+    try:
+        result = backend_instance.generate(body.prompt)
+    except NotImplementedError as e:
+        raise HTTPException(status_code=501, detail=str(e)) from e
 
     accept = (request.headers.get("Accept") or "").strip().lower()
     if "application/json" in accept:
-        return GenerateResponseJson(
-            image_base64=base64.b64encode(png_bytes).decode("ascii"),
-            seed=seed,
-            model=MODEL_NAME,
-        )
+        return _result_to_response_json(result)
 
     return Response(
-        content=png_bytes,
+        content=result.image_bytes,
         media_type="image/png",
         headers={"Content-Disposition": 'inline; filename="generated.png"'},
     )
 
 
-# Optional: keep a simple root for quick checks (not required by plan)
 @app.get("/")
 def index() -> dict[str, str]:
     """Root route; points to health and generate."""

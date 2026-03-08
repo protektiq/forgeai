@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class WorkflowStep < ApplicationRecord
-  STEP_TYPES = %w[generate store thumbnail index].freeze
+  STEP_TYPES = %w[generate thumbnail process index].freeze
 
   belongs_to :workflow
 

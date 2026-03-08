@@ -54,7 +54,7 @@ module Api
           correlation_id: correlation_id
         )
         workflow.workflow_steps.order(:execution_order).each do |step|
-          run.workflow_run_steps.create!(workflow_step: step, status: "pending")
+          run.workflow_run_steps.create!(workflow_step: step, status: "queued")
         end
         OrchestrateWorkflowJob.perform_later(run.id)
         render json: { workflow_run_id: run.id, status: "queued" }, status: :created
@@ -75,7 +75,7 @@ module Api
           correlation_id: correlation_id
         )
         workflow.workflow_steps.order(:execution_order).each do |step|
-          run.workflow_run_steps.create!(workflow_step: step, status: "pending")
+          run.workflow_run_steps.create!(workflow_step: step, status: "queued")
         end
 
         job = api_user.generation_jobs.build(

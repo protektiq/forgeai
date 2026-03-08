@@ -13,8 +13,34 @@ class GenerateAssetJob < ApplicationJob
     job = GenerationJob.find_by(id: generation_job_id, status: "queued")
     return unless job
 
+    Thread.current[:correlation_id] = job.correlation_id
+    begin
+      if job.workflow_run_id?
+        run = WorkflowRun.find_by(id: job.workflow_run_id)
+        return unless run
+
+        Workflows::RunWorkflow.call(run)
+        run.reload
+        job.reload
+        sync_job_from_run(job, run)
+        return
+      end
+
+      run_legacy_pipeline(job)
+    rescue StandardError => e
+      job = GenerationJob.find_by(id: generation_job_id) if job.nil?
+      mark_job_failed(job, e.message)
+      update_workflow_run_on_failure(job)
+    ensure
+      Thread.current[:correlation_id] = nil
+    end
+  end
+
+  private
+
+  def run_legacy_pipeline(job)
     job.update!(status: "running", started_at: Time.current, error_message: nil)
-    Rails.logger.info("[GenerateAssetJob] job_id=#{job.id} correlation_id=#{job.correlation_id}")
+    Rails.logger.info("[GenerateAssetJob] job_id=#{job.id} started")
 
     image_body = call_python_generator(job)
     return if job.reload.status == "failed"
@@ -30,13 +56,20 @@ class GenerateAssetJob < ApplicationJob
 
     job.update!(status: "completed", completed_at: Time.current, error_message: nil)
     update_workflow_run_on_success(job, asset)
-  rescue StandardError => e
-    job = GenerationJob.find_by(id: generation_job_id) if job.nil?
-    mark_job_failed(job, e.message)
-    update_workflow_run_on_failure(job)
   end
 
-  private
+  def sync_job_from_run(job, run)
+    if run.status == "completed"
+      job.update!(status: "completed", completed_at: Time.current, error_message: nil)
+    elsif run.status == "failed"
+      error_message = run.workflow_run_steps.where(status: "failed").order(:id).last&.error_message
+      job.update!(
+        status: "failed",
+        completed_at: Time.current,
+        error_message: error_message.to_s.truncate(MAX_ERROR_MESSAGE_LENGTH).presence || "Workflow failed"
+      )
+    end
+  end
 
   def mark_job_failed(job, message)
     return unless job

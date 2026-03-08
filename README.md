@@ -1,6 +1,26 @@
 # forgeai
 
-Multi-language repo: each service is built and run independently. This document gives prerequisites, repository layout, startup order, required env vars, health endpoints, and how to run everything locally. For architecture and operations, see [docs/architecture.md](docs/architecture.md) and [docs/runbook.md](docs/runbook.md). API error responses follow a [standard shape](docs/contracts/error-response.md) (`error.code`, `error.message`, `error.correlation_id`) across all services.
+Multi-language repo: each service is built and run independently. This document gives prerequisites, repository layout, **first-time setup**, startup order, required env vars, health endpoints, and how to run everything locally. For architecture and operations, see [docs/architecture.md](docs/architecture.md) and [docs/runbook.md](docs/runbook.md). API error responses follow a [standard shape](docs/contracts/error-response.md) (`error.code`, `error.message`, `error.correlation_id`) across all services.
+
+## First-time setup
+
+To get the whole platform running without hunting through each service's README:
+
+1. **Bootstrap** (install deps, create DB, copy `.env` if missing):
+   ```bash
+   ./scripts/bootstrap.sh
+   ```
+2. **Start Redis** if you use Sidekiq: `redis-server` (or skip and use Rails async job adapter in development).
+3. **Run the stack** (all services in the background, logs under `logs/`):
+   ```bash
+   ./scripts/run_all.sh
+   ```
+   To stop: `./scripts/run_all.sh stop`. For debugging, run each service in a separate terminal (see [Startup order](#startup-order) and [docs/runbook.md](docs/runbook.md)).
+4. **Health-only smoke check** (quick “are services up?”):
+   ```bash
+   ./scripts/smoke_test.sh
+   ```
+   For a **full E2E** test (create job → generate → process → index → verify asset and search), use: `E2E=1 ./scripts/e2e_smoke.sh`. See [docs/testing.md](docs/testing.md).
 
 ## Repository layout
 
@@ -146,6 +166,8 @@ Rails does not expose a health endpoint today.
 - **Build failures** — Check prerequisites (Ruby, Python, g++, Rust, .NET SDK) and each service’s README in its folder.
 
 For full runbook and E2E verification steps, see [docs/runbook.md](docs/runbook.md).
+
+**Optional — Docker:** After the non-container flow is stable, you can run the stack with Docker Compose: `docker compose -f docker-compose.dev.yml up --build`. This requires a Dockerfile in each service directory (see [docker-compose.dev.yml](docker-compose.dev.yml)); prefer the scripts above if you are still changing the local setup.
 
 ## Docs
 

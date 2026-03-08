@@ -1,6 +1,11 @@
-# .NET API – external API surface (proxies to Rails)
-# Source: dotnet_api/Program.cs, dotnet_api/README.md
+# .NET API – public gateway and contract pointer
+# Implementation: dotnet_api/Program.cs, dotnet_api/README.md
 # Error responses: see error-response.md (standard shape: error.code, error.message, error.correlation_id)
+#
+# Canonical public API contract: public-api-v1.yaml (OpenAPI 3.0)
+# That spec defines all /api/v1 endpoints, request/response schemas, and security.
+
+canonical_contract: public-api-v1.yaml
 
 endpoints:
   - endpoint: /health
@@ -11,7 +16,7 @@ endpoints:
       service: string
     error_schema: null
 
-  - endpoint: /api/generate
+  - endpoint: /api/v1/generate
     method: POST
     request_schema:
       headers:
@@ -19,12 +24,23 @@ endpoints:
       body:
         prompt: string  # required, non-empty, max 10000
     response_schema:
-      job_id: number
+      job_id: number  # or workflow_run_id
       status: string
     response_status: "201"
     error_schema: error-response.md  # 400 invalid_request, 401 unauthorized, 502 bad_gateway
 
-  - endpoint: /api/assets
+  - endpoint: /api/v1/jobs/{id}
+    method: GET
+    request_schema:
+      headers:
+        X-Api-Key: string  # required when ApiKey configured
+      path:
+        id: string  # required
+    response_schema:
+      description: job object (job_id, status, created_at, started_at, completed_at, error_message?, asset_id?)
+    error_schema: error-response.md  # 400 invalid_request, 401 unauthorized, 404 not_found, 502 bad_gateway
+
+  - endpoint: /api/v1/assets
     method: GET
     request_schema:
       headers:
@@ -35,13 +51,25 @@ endpoints:
       description: array of asset objects (proxied from Rails)
     error_schema: error-response.md  # 401 unauthorized, 502 bad_gateway
 
-  - endpoint: /api/assets/{id}
+  - endpoint: /api/v1/search
+    method: GET
+    request_schema:
+      headers:
+        X-Api-Key: string  # required when ApiKey configured
+      query:
+        q: string  # optional (or search=)
+        search: string  # optional
+    response_schema:
+      description: array of asset objects (same as GET /api/v1/assets with search)
+    error_schema: error-response.md  # 401 unauthorized, 502 bad_gateway
+
+  - endpoint: /api/v1/assets/{id}
     method: GET
     request_schema:
       headers:
         X-Api-Key: string  # required when ApiKey configured
       path:
-        id: string  # number or valid id
+        id: string  # required
     response_schema:
       description: single asset object (proxied from Rails)
     error_schema: error-response.md  # 400 invalid_request, 401 unauthorized, 404 not_found, 502 bad_gateway

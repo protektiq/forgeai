@@ -23,9 +23,11 @@ module RailsApp
 
     # External pipeline services (configurable via ENV for deployment)
     config.generator_url = ENV.fetch("GENERATOR_URL", "http://localhost:5000")
+    config.generator_backend = ENV.fetch("GENERATOR_BACKEND", "pillow_mock")
     config.media_service_command = ENV.fetch("MEDIA_SERVICE_COMMAND", "")
     config.cpp_media_url = ENV.fetch("CPP_MEDIA_URL", "").strip.presence
     config.index_service_url = ENV.fetch("INDEX_SERVICE_URL", "").strip.presence
+    config.dotnet_api_url = ENV.fetch("DOTNET_API_URL", "").strip.presence
 
     # Timeouts (seconds) and retry counts for outbound HTTP calls
     config.generator_open_timeout = ENV.fetch("GENERATOR_OPEN_TIMEOUT", "10").to_i

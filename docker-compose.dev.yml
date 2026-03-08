@@ -1,0 +1,119 @@
+# Optional local dev stack. Use when you want to run the platform in containers.
+# Requires Dockerfiles in each service directory (rails_app, python_gen, cpp_media, rust_index, dotnet_api).
+# Prefer ./scripts/bootstrap.sh and ./scripts/run_all.sh if your local non-container flow is still changing.
+#
+# Usage: docker compose -f docker-compose.dev.yml up --build
+# Stop:  docker compose -f docker-compose.dev.yml down
+
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+
+  python_gen:
+    build:
+      context: ./python_gen
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:5000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+  cpp_media:
+    build:
+      context: ./cpp_media
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  rust_index:
+    build:
+      context: ./rust_index
+      dockerfile: Dockerfile
+    ports:
+      - "3132:3132"
+    environment:
+      - PORT=3132
+      - INDEX_DATA_PATH=/data/index.db
+    volumes:
+      - rust_index_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:3132/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  rails:
+    build:
+      context: ./rails_app
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - GENERATOR_URL=http://python_gen:5000
+      - CPP_MEDIA_URL=http://cpp_media:8080
+      - INDEX_SERVICE_URL=http://rust_index:3132
+    depends_on:
+      redis:
+        condition: service_healthy
+      python_gen:
+        condition: service_healthy
+
+  sidekiq:
+    build:
+      context: ./rails_app
+      dockerfile: Dockerfile
+    command: bundle exec sidekiq
+    env_file:
+      - .env
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - GENERATOR_URL=http://python_gen:5000
+      - CPP_MEDIA_URL=http://cpp_media:8080
+      - INDEX_SERVICE_URL=http://rust_index:3132
+    depends_on:
+      redis:
+        condition: service_healthy
+      rails:
+        condition: service_started
+
+  dotnet_api:
+    build:
+      context: ./dotnet_api
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    env_file:
+      - .env
+    environment:
+      - Rails__BaseUrl=http://rails:3000
+    depends_on:
+      - rails
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:5001/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  rust_index_data:

@@ -1,6 +1,11 @@
 # cpp_media – image processing (resize, thumbnail, format conversion)
-# Source: cpp_media/main.cpp
+# Source: cpp_media/main.cpp, cpp_media/profiles.hpp
 # Error responses: see error-response.md (standard shape: error.code, error.message, error.correlation_id)
+
+# Processing profiles (named presets)
+# - thumbnail_square: square thumbnail only (256px, jpg)
+# - web_optimized: thumbnail + resize to max 1200px, jpg Q=85
+# - high_quality_jpg: thumbnail + resize to max 2400px, jpg Q=92
 
 endpoints:
   - endpoint: /health
@@ -15,20 +20,29 @@ endpoints:
     method: POST
     request_schema:
       option_a_multipart:
-        file: binary  # required
-        thumbnail_size: number  # optional, default 256
-        resize_max: number     # optional, default 1200
-        output_format: string  # optional, e.g. jpg, png
-        operations: string     # optional, e.g. thumbnail,resize
+        file: binary          # required
+        profile: string       # optional: thumbnail_square | web_optimized | high_quality_jpg
+        thumbnail_size: number # optional override
+        resize_max: number    # optional override
+        width: number         # optional override (max width)
+        height: number        # optional override (max height)
+        quality: number      # optional override (JPEG Q)
+        output_format: string # optional override
+        operations: string    # optional override
       option_b_json:
-        image_base64: string   # required
+        image_base64: string  # required
+        profile: string       # optional
         thumbnail_size: number # optional
-        resize_max: number     # optional
-        output_format: string  # optional
-        operations: string     # optional
+        resize_max: number    # optional
+        width: number         # optional
+        height: number        # optional
+        quality: number       # optional
+        output_format: string # optional
+        operations: string    # optional
     response_schema:
       thumbnail_base64: string
       thumbnail_content_type: string
-      processed_base64: string      # optional; present when resize requested
+      processed_base64: string      # optional
       processed_content_type: string # optional
-    error_schema: error-response.md  # 400 invalid_request, 422 validation_error
+      profile_used: string         # profile name applied
+    error_schema: error-response.md

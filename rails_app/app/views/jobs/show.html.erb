@@ -23,6 +23,9 @@
   <% if @job.status == "completed" && @job.asset.present? %>
     <p><%= link_to "View asset", asset_path(@job.asset), class: "btn" %></p>
   <% end %>
+  <% if @job.workflow_run_id.present? %>
+    <p><%= link_to "Workflow run details", workflow_run_path(@job.workflow_run_id), class: "btn" %></p>
+  <% end %>
 
   <p><%= link_to "Back to dashboard", dashboard_path %></p>
 </div>

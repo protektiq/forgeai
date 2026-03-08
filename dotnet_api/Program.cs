@@ -12,6 +12,10 @@ const int PromptMaxLength = 10_000;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Structured logging: one JSON object per line with timestamp, category, level, message, and structured properties (e.g. CorrelationId).
+builder.Logging.ClearProviders();
+builder.Logging.AddJsonConsole();
+
 // 2. SERVICE CONFIGURATION
 builder.Services.AddHttpClient("Rails", (sp, client) =>
 {
@@ -33,7 +37,7 @@ if (string.IsNullOrWhiteSpace(configuredApiKey))
 
 app.Use(async (context, next) =>
 {
-    if (!context.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase))
+    if (!context.Request.Path.StartsWithSegments("/api/v1", StringComparison.OrdinalIgnoreCase))
     {
         await next();
         return;
@@ -57,10 +61,10 @@ app.Use(async (context, next) =>
 });
 
 // 4. ENDPOINTS
-app.MapGet("/", () => Results.Ok(new { service = "dotnet_api", health = "/health", api = "/api" }));
+app.MapGet("/", () => Results.Ok(new { service = "dotnet_api", health = "/health", api = "/api/v1" }));
 app.MapGet("/health", () => Results.Ok(new { status = "ok", service = "dotnet_api" }));
 
-app.MapPost("/api/generate", async (HttpContext context, IHttpClientFactory httpClientFactory) =>
+app.MapPost("/api/v1/generate", async (HttpContext context, IHttpClientFactory httpClientFactory) =>
 {
     var correlationId = GetCorrelationId(context);
     var logger = context.RequestServices.GetRequiredService<ILogger<Program>>();
@@ -104,7 +108,30 @@ app.MapPost("/api/generate", async (HttpContext context, IHttpClientFactory http
     }
 });
 
-app.MapGet("/api/assets", async (HttpContext context, string? search, IHttpClientFactory httpClientFactory) =>
+app.MapGet("/api/v1/jobs/{id}", async (HttpContext context, string id, IHttpClientFactory httpClientFactory) =>
+{
+    var correlationId = GetCorrelationId(context);
+    if (string.IsNullOrWhiteSpace(id))
+        return ApiErrorResult("invalid_request", "Job id is required", correlationId, 400);
+
+    var rails = httpClientFactory.CreateClient("Rails");
+    try
+    {
+        var response = await rails.GetAsync("api/v1/jobs/" + Uri.EscapeDataString(id.Trim()));
+        var content = await response.Content.ReadAsStringAsync();
+        return Results.Json(JsonSerializer.Deserialize<JsonElement>(content.Length > 0 ? content : "{}"), statusCode: (int)response.StatusCode);
+    }
+    catch (HttpRequestException ex)
+    {
+        return ApiErrorResult("bad_gateway", "Rails service unavailable: " + ex.Message, correlationId, 502);
+    }
+    catch (TaskCanceledException)
+    {
+        return ApiErrorResult("bad_gateway", "Rails service timeout", correlationId, 502);
+    }
+});
+
+app.MapGet("/api/v1/assets", async (HttpContext context, string? search, IHttpClientFactory httpClientFactory) =>
 {
     var correlationId = GetCorrelationId(context);
     var rails = httpClientFactory.CreateClient("Rails");
@@ -114,7 +141,9 @@ app.MapGet("/api/assets", async (HttpContext context, string? search, IHttpClien
     {
         var response = await rails.GetAsync(url);
         var content = await response.Content.ReadAsStringAsync();
-        return Results.Json(JsonSerializer.Deserialize<JsonElement>(content.Length > 0 ? content : "{}"), statusCode: (int)response.StatusCode);
+        if (response.Headers.TryGetValues("X-Search-Status", out var searchStatusValues))
+            context.Response.Headers["X-Search-Status"] = searchStatusValues.FirstOrDefault() ?? "";
+        return Results.Json(JsonSerializer.Deserialize<JsonElement>(content.Length > 0 ? content : "[]"), statusCode: (int)response.StatusCode);
     }
     catch (Exception ex)
     {
@@ -122,7 +151,28 @@ app.MapGet("/api/assets", async (HttpContext context, string? search, IHttpClien
     }
 });
 
-app.MapGet("/api/assets/{id}", async (HttpContext context, string id, IHttpClientFactory httpClientFactory) =>
+app.MapGet("/api/v1/search", async (HttpContext context, string? q, string? search, IHttpClientFactory httpClientFactory) =>
+{
+    var correlationId = GetCorrelationId(context);
+    var query = (!string.IsNullOrWhiteSpace(q) ? q! : search ?? "").Trim();
+    var rails = httpClientFactory.CreateClient("Rails");
+    string url = "api/v1/assets" + (query.Length > 0 ? "?search=" + Uri.EscapeDataString(query) : "");
+    
+    try
+    {
+        var response = await rails.GetAsync(url);
+        var content = await response.Content.ReadAsStringAsync();
+        if (response.Headers.TryGetValues("X-Search-Status", out var searchStatusValues))
+            context.Response.Headers["X-Search-Status"] = searchStatusValues.FirstOrDefault() ?? "";
+        return Results.Json(JsonSerializer.Deserialize<JsonElement>(content.Length > 0 ? content : "[]"), statusCode: (int)response.StatusCode);
+    }
+    catch (Exception ex)
+    {
+        return ApiErrorResult("bad_gateway", "Rails request failed: " + ex.Message, correlationId, 502);
+    }
+});
+
+app.MapGet("/api/v1/assets/{id}", async (HttpContext context, string id, IHttpClientFactory httpClientFactory) =>
 {
     var correlationId = GetCorrelationId(context);
     if (string.IsNullOrWhiteSpace(id))
@@ -149,7 +199,7 @@ static IResult ApiErrorResult(string code, string message, string correlationId,
 
 static string GetCorrelationId(HttpContext context) =>
     context.Request.Headers["X-Correlation-Id"].FirstOrDefault()
-    ?? context.Request.Headers["X-Request-Id"].FirstOrDefault()
+    ?? context.Request.Headers[RequestIdHeader].FirstOrDefault()
     ?? Guid.NewGuid().ToString();
 
 record ErrorPart(

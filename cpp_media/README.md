@@ -73,6 +73,20 @@ Accepts an image and returns a thumbnail and optionally a resized/converted imag
 make clean
 ```
 
+## Environment / port
+
+Port is passed as the first argument (default **8080**). No other environment variables are required.
+
+## Test instructions
+
+With **cpp_media** running on port 8080, from repo root:
+
+```bash
+CPP_MEDIA_URL=http://localhost:8080 python_gen/.venv/bin/pytest contract_tests -v
+```
+
+See [docs/testing.md](../docs/testing.md) for contract and malformed input tests.
+
 ## Rails integration
 
 Set `CPP_MEDIA_URL` (e.g. `http://localhost:8080`) in the Rails app. The generation job will POST the generated image to `CPP_MEDIA_URL/process` and attach the returned thumbnail (and optionally processed image) to the Asset.

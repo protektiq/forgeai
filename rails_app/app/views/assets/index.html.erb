@@ -12,6 +12,10 @@
     <p class="search-unavailable" role="status">Search is not configured; showing all assets.</p>
   <% end %>
 
+  <% if @search_starting_up && @search_query.present? %>
+    <p class="search-starting-up" role="status">Search is starting up; showing all assets.</p>
+  <% end %>
+
   <% if @assets.any? %>
     <ul class="asset-grid">
       <% @assets.each do |asset| %>

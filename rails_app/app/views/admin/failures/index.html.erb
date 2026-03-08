@@ -1,0 +1,58 @@
+<% content_for :title, "Recent failures – ForgeAI" %>
+
+<div class="card">
+  <h1>Recent failures</h1>
+  <p>Failed workflow runs and failed jobs (legacy path) for debugging. Use the correlation ID to trace logs across services.</p>
+</div>
+
+<div class="card">
+  <h2>Failed workflow runs</h2>
+  <% if @failed_runs.any? %>
+    <ul class="failure-list">
+      <% @failed_runs.each do |run| %>
+        <% error_summary = run.workflow_run_steps.where(status: "failed").order(:id).first&.error_message %>
+        <li>
+          <%= link_to "Run ##{run.id}", workflow_run_path(run) %> — <%= run.workflow.name %>
+          — <code><%= run.correlation_id.presence || "—" %></code>
+          — <time datetime="<%= run.created_at.iso8601 %>"><%= run.created_at.strftime("%Y-%m-%d %H:%M") %></time>
+          <% if error_summary.present? %>
+            — <span role="alert"><%= error_summary.truncate(80) %></span>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No failed workflow runs.</p>
+  <% end %>
+</div>
+
+<div class="card">
+  <h2>Failed jobs (legacy)</h2>
+  <p class="muted">Jobs that failed without a workflow run (older or direct job path).</p>
+  <% if @failed_jobs_legacy.any? %>
+    <ul class="failure-list">
+      <% @failed_jobs_legacy.each do |job| %>
+        <li>
+          <%= link_to "Job ##{job.id}", job_path(job) %>
+          — <code><%= job.correlation_id.presence || "—" %></code>
+          — <time datetime="<%= job.created_at.iso8601 %>"><%= job.created_at.strftime("%Y-%m-%d %H:%M") %></time>
+          — <strong><%= job.prompt.truncate(50) %></strong>
+          <% if job.error_message.present? %>
+            — <span role="alert"><%= job.error_message.truncate(80) %></span>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No failed legacy jobs.</p>
+  <% end %>
+</div>
+
+<p><%= link_to "Back to dashboard", dashboard_path %> | <%= link_to "Service health", admin_health_index_path %></p>
+
+<style>
+  .failure-list { list-style: none; padding: 0; margin: 0; }
+  .failure-list li { padding: 0.5rem 0; border-bottom: 1px solid #eee; }
+  .failure-list li:last-child { border-bottom: none; }
+  .muted { color: #666; font-size: 0.9rem; margin-bottom: 0.5rem; }
+</style>

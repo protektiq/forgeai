@@ -10,8 +10,13 @@ module Api
 
       before_action :authenticate_internal_api!
       before_action :set_api_user!
+      before_action :set_request_correlation_id
 
       protected
+
+      def set_request_correlation_id
+        Thread.current[:correlation_id] = request.request_id.presence || SecureRandom.uuid
+      end
 
       # Renders a JSON error response with the standard shape. Use for all API error responses.
       def render_api_error(message, status:)

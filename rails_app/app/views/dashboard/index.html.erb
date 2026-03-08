@@ -30,6 +30,9 @@
         <li>
           <strong><%= job.prompt.truncate(80) %></strong>
           — <%= link_to "View job", job_path(job) %>
+          <% if job.workflow_run_id.present? %>
+            — <%= link_to "Workflow run", workflow_run_path(job.workflow_run_id) %>
+          <% end %>
           — <span><%= job.status %></span>
           <% if job.status == "failed" && job.error_message.present? %>
             — <span role="alert"><%= job.error_message.truncate(100) %></span>

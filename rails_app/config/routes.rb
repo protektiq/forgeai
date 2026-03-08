@@ -16,7 +16,13 @@ Rails.application.routes.draw do
   get "dashboard", to: "dashboard#index"
   post "dashboard", to: "dashboard#create"
 
+  namespace :admin do
+    get "health", to: "health#index"
+    get "failures", to: "failures#index"
+  end
+
   get "jobs/:id", to: "jobs#show", as: :job
+  resources :workflow_runs, only: [:show], path: "workflow_runs"
 
   resources :assets, only: [:index, :show] do
     get "download", on: :member

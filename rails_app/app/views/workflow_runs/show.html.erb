@@ -1,0 +1,68 @@
+<% content_for :title, "Workflow run ##{@workflow_run.id} – ForgeAI" %>
+
+<div class="card">
+  <h1>Workflow run #<%= @workflow_run.id %></h1>
+
+  <p><strong>Workflow:</strong> <%= @workflow_run.workflow.name %></p>
+  <p><strong>Status:</strong> <span><%= @workflow_run.status %></span></p>
+  <p><strong>Correlation ID:</strong> <code><%= @workflow_run.correlation_id.presence || "—" %></code></p>
+  <p><strong>Prompt:</strong></p>
+  <p class="job-prompt"><%= @workflow_run.prompt %></p>
+  <p><strong>Created:</strong> <time datetime="<%= @workflow_run.created_at.iso8601 %>"><%= @workflow_run.created_at.strftime("%Y-%m-%d %H:%M") %></time></p>
+  <% if @workflow_run.asset_id? %>
+    <p><%= link_to "View asset", asset_path(@workflow_run.asset_id), class: "btn" %></p>
+  <% end %>
+  <% if @workflow_run.generation_job_id? %>
+    <p><%= link_to "View job", job_path(@workflow_run.generation_job_id), class: "btn" %></p>
+  <% end %>
+</div>
+
+<div class="card">
+  <h2>Steps</h2>
+  <table class="steps-table" role="table" aria-label="Workflow run steps">
+    <thead>
+      <tr>
+        <th scope="col">Step</th>
+        <th scope="col">Type</th>
+        <th scope="col">Status</th>
+        <th scope="col">Started</th>
+        <th scope="col">Completed</th>
+        <th scope="col">Duration</th>
+        <th scope="col">Output / Error</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @run_steps.each do |run_step| %>
+        <% step = run_step.workflow_step %>
+        <% duration = (run_step.started_at.present? && run_step.completed_at.present?) ? (run_step.completed_at - run_step.started_at).round(2) : nil %>
+        <tr>
+          <td><%= step.execution_order + 1 %></td>
+          <td><%= step.step_type %></td>
+          <td><%= run_step.status %></td>
+          <td><%= run_step.started_at&.strftime("%H:%M:%S") || "—" %></td>
+          <td><%= run_step.completed_at&.strftime("%H:%M:%S") || "—" %></td>
+          <td><%= duration ? "#{duration}s" : "—" %></td>
+          <td>
+            <% if run_step.status == "failed" && run_step.error_message.present? %>
+              <pre class="step-error" role="alert"><%= run_step.error_message %></pre>
+            <% elsif run_step.output.present? && run_step.output.is_a?(Hash) && run_step.output.any? %>
+              <pre class="step-output"><%= run_step.output.to_json %></pre>
+            <% else %>
+              —
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<p><%= link_to "Back to dashboard", dashboard_path %> | <%= link_to "Recent failures", admin_failures_index_path %></p>
+
+<style>
+  .steps-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+  .steps-table th, .steps-table td { padding: 0.5rem 0.75rem; text-align: left; border-bottom: 1px solid #eee; }
+  .steps-table th { font-weight: 600; }
+  .step-error { margin: 0; font-size: 0.8rem; background: #f8d7da; color: #721c24; padding: 0.5rem; border-radius: 4px; white-space: pre-wrap; word-break: break-word; max-width: 100%; }
+  .step-output { margin: 0; font-size: 0.8rem; background: #f5f5f5; padding: 0.5rem; border-radius: 4px; white-space: pre-wrap; word-break: break-word; max-width: 100%; }
+</style>

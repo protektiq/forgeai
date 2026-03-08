@@ -34,7 +34,7 @@ class DashboardController < ApplicationController
       correlation_id: correlation_id
     )
     workflow.workflow_steps.order(:execution_order).each do |step|
-      run.workflow_run_steps.create!(workflow_step: step, status: "pending")
+      run.workflow_run_steps.create!(workflow_step: step, status: "queued")
     end
 
     @job = current_user.generation_jobs.build(
